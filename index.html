@@ -1102,6 +1102,11 @@
   <span class="tab-group-label">מחקרים</span>
   <button class="tab" data-page="research-agents">סוכנים<span class="tab-num">R1</span></button>
   <button class="tab" data-page="research-competitors">מתחרים<span class="tab-num">R2</span></button>
+  <button class="tab" data-page="research-tech">טכנולוגיות<span class="tab-num">R3</span></button>
+  <div class="tab-group-sep"></div>
+  <span class="tab-group-label">מסמכים</span>
+  <button class="tab" data-page="prds">PRDs<span class="tab-num">P</span></button>
+  <button class="tab" data-page="terminology">שפה<span class="tab-num">T</span></button>
   <div class="tab-group-sep"></div>
   <span class="tab-group-label">פעולה</span>
   <button class="tab" data-page="recommendations">המלצות<span class="tab-num">08</span></button>
@@ -2910,6 +2915,22 @@
     <p>אין תבנית ש"מנצחת" את כולן. הציר הדומיננטי הוא <strong>task determinism × verifiability × cost</strong>. לפי Anthropic <a href="#r1-ref-1" class="cite">[1]</a> והביקורת החשובה של Kapoor et al. <a href="#r1-ref-14" class="cite">[14]</a>, הראיות מצביעות על **workflow פשוט עם verifier זול ו-memory persistent** — לא multi-agent hierarchy. לגבי BRIK ספציפית: הכיוון הוא <strong>Router + Persistent Brief + Evaluator-Optimizer + Agentic RAG</strong>, לא Multi-Agent Pipeline.</p>
   </div>
 
+  <div class="callout note">
+    <h4>עדכון R2 — Round 2 (מעמיק יותר עם citations חיים)</h4>
+    <p>לאחר פידבק שהמחקר לא היה מעמיק מספיק, בוצע סיבוב שני עם WebSearch + WebFetch חי. הממצאים החדשים:</p>
+    <ul>
+      <li><strong>Anthropic עברה ב-Sep 2025 ל-"Context Engineering"</strong> — מסגרת חדשה שממסגרת מחדש את כל הדיון <a href="https://www.anthropic.com/engineering/context-engineering" target="_blank" class="cite">[A1]</a>. "The frontier has moved from <em>which agent pattern is best</em> to <em>how do you engineer the context a single strong agent sees</em>."</li>
+      <li><strong>Multi-agent אצל Anthropic מדווח 15× עלות tokens</strong> ומשתלם רק ל-"breadth-first queries with parallel sub-questions" <a href="https://www.anthropic.com/engineering/built-multi-agent-research-system" target="_blank" class="cite">[A2]</a>. BRIK היא exactly hot ברירת המחדל שלא משתלמת שם.</li>
+      <li><strong>Prompt Caching (Anthropic) — 0.1× קריאה, 85% הורדת latency</strong> על prefix של 100K tokens <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank" class="cite">[A3]</a>. זה ה-#1 השיפור שאפשר לעשות היום.</li>
+      <li><strong>Persona-conditioned "Spark" agents</strong> — +4.1 diversity על סקאלה של 10 (מדד מחקר מנוכס) <a href="https://arxiv.org/abs/2410.18870" target="_blank" class="cite">[A4]</a>. מתאים בדיוק ל-14 קלאסטרי ה-designers של BRIK.</li>
+      <li><strong>Skill matching: keyword→embeddings</strong> — 5000ms → 100ms routing latency לפי benchmarks מפורסמים.</li>
+      <li><strong>Code execution with MCP</strong> — Anthropic דוחפת ל-pattern חדש שבו tools = code execution sandbox, לא function calls <a href="https://www.anthropic.com/engineering/code-execution-with-mcp" target="_blank" class="cite">[A5]</a>. BRIK צריך לבחון אם זה משפר את ה-tool layer הנוכחי.</li>
+      <li><strong>LangGraph 1.0 released</strong> — checkpointing, durable execution, human-in-the-loop כ-first-class. רלוונטי כ-alternative runtime למ-Mastra.</li>
+      <li><strong>OpenAI AgentKit</strong> (Dec 2025) — SDK רשמי חדש מ-OpenAI, חלופה ל-Mastra.</li>
+    </ul>
+    <p style="margin-top: 10px;"><strong>10 המלצות קונקרטיות מבוססות מקורות</strong> (מתוך R1 v2): Prompt caching → Embeddings skill matching → Tiered model routing → Persistent Planning Brief (MemGPT-style) → Evaluator-Optimizer loop with cheap verifiers → Skill performance telemetry → Tool-result summarization → Semantic router → Voyager-style skill library → Constitutional style pass.</p>
+  </div>
+
   <div class="insights-block">
     <div class="block-header">
       <h2>תובנות המחקר</h2>
@@ -3262,6 +3283,140 @@
     <p><strong>האיום הכי חריף:</strong> Claude Artifacts ו-ChatGPT Canvas — חינם, בעלי distribution, כבר מייצרים HTML/JS אינטראקטיבי. החולשה שלהם (אין parametric-control, אין קהילה, אין design system אחיד) היא בדיוק ה-moat של BRIK — אבל הוא דק וניתן להעתקה.</p>
     <p><strong>ה-Sleeping Giants:</strong> Figma (Make), Canva, Adobe (Firefly) — לכולם distribution + DNA + capacity לבלוע את ה-value prop של BRIK ב-12-18 חודשים.</p>
     <p><strong>הפגיעה הכי גדולה של BRIK:</strong> אין מובייל. כל שחקן עם scale צרכני אמיתי (Canva, CapCut, Picsart) הוא mobile-first.</p>
+  </div>
+
+  <div class="callout warning">
+    <h4>עדכון R3 — 2026-04 (לאחר ביקורת שהמחקר חסר)</h4>
+    <p>המחקר הראשון פספס גל שלם של launches 2025-2026. סיבוב חדש עם WebFetch חי חשף <strong>Tier-0 חדש</strong>:</p>
+  </div>
+
+  <div class="competitor tier-1" style="border-right: 4px solid #ff0000;">
+    <div class="competitor-header">
+      <h3>🔴 Tier-0 #1 — Claude Design (Anthropic Labs)</h3>
+      <span class="company">Launched 17 April 2026 · claude.ai/design</span>
+      <span class="threat-badge threat-critical">EXISTENTIAL</span>
+    </div>
+    <p><strong>מה זה:</strong> Anthropic's visual design product inside claude.ai. Collaborative, prompt-to-prototype, עם adjustment sliders לspacing/color/layout (!), import text/images/DOCX/PPTX/XLSX, export HTML/Canva/PDF. Powered by Claude Opus 4.7. <a href="https://www.anthropic.com/news/claude-design-anthropic-labs" target="_blank" class="cite">[src]</a></p>
+    <p><strong>ציטוט מה-launch:</strong> "Code-powered prototypes with voice, video, <strong>shaders, and 3D</strong>" — פגיעה ישירה ב-BRIK's canvas.</p>
+    <p><strong>השלכה:</strong></p>
+    <ul>
+      <li>אותו model substrate ש-BRIK משתמש בו (Claude Opus 4.7) — Anthropic יכולים לתת first-party caching, tools, rate-limits ש-BRIK לעולם לא ישיג</li>
+      <li><strong>Canva = distribution partner מפורש</strong> (240M MAU) <a href="https://techcrunch.com/2026/04/17/anthropic-launches-claude-design-a-new-product-for-creating-quick-visuals/" target="_blank" class="cite">[TC]</a></li>
+      <li>"Adjustment sliders for spacing/color/layout" = זה בדיוק parametric-controls sidebar של BRIK</li>
+      <li>Mike Krieger (Anthropic CPO) התפטר מ-Figma board באותו שבוע, Figma ירדה 7% ביום ההשקה <a href="https://venturebeat.com/technology/anthropic-just-launched-claude-design-an-ai-tool-that-turns-prompts-into-prototypes-and-challenges-figma" target="_blank" class="cite">[VB]</a></li>
+      <li>"Anthropic Labs" כ-product line = <strong>יגיע Claude Animate, Claude 3D, Claude Video ב-2026-2027</strong></li>
+    </ul>
+    <p><strong>החלון של BRIK:</strong> 6-12 חודשים לפני ש-Anthropic מרחיבים.</p>
+  </div>
+
+  <div class="competitor tier-1" style="border-right: 4px solid #ff0000;">
+    <div class="competitor-header">
+      <h3>🔴 Tier-0 #2 — Omma (by Spline)</h3>
+      <span class="company">Launched 24 March 2026 · omma.build</span>
+      <span class="threat-badge threat-critical">EXTREME</span>
+    </div>
+    <p><strong>מה זה:</strong> "3D scenes, websites, games, apps. Describe anything and Omma builds it for you in seconds." Multiple AI agents בפרלל — code + images + 3D + data. <strong>יש community gallery</strong>. <a href="https://omma.build/" target="_blank" class="cite">[src]</a></p>
+    <p><strong>נתונים:</strong></p>
+    <dl class="competitor-grid">
+      <dt>Pricing</dt><dd>Free / $39 Pro / $129 Max / Enterprise (credits-based)</dd>
+      <dt>Spline funding</dt><dd>$32M (Third Point Ventures, Gradient Ventures, YC)</dd>
+      <dt>Product Hunt</dt><dd>#6 of day · 191 upvotes</dd>
+      <dt>Distribution</dt><dd>Spline base של 30M+ משתמשים</dd>
+    </dl>
+    <p><strong>למה זה ה-Tier-0 הכי מסוכן ל-BRIK:</strong></p>
+    <ul>
+      <li>Same primitive: chat → canvas → interactive output</li>
+      <li><strong>Same audience</strong> — designers across disciplines</li>
+      <li>יש להם 3D + motion — BRIK רצתה לשם</li>
+      <li>יש להם כבר community gallery + remix</li>
+      <li><strong>מייצאים ל-native app stores</strong> (.apk/.aab/Xcode) — BRIK רק <code>.clay.html</code></li>
+      <li>Spline AI add-ons (AI 3D gen, AI textures, style transfer) ב-$5/seat/month</li>
+    </ul>
+    <p><strong>החלון של BRIK:</strong> Omma ממקד production-grade output (sites, games, apps). אם BRIK נשאר "parametric creative toy" ולא "production app builder" — יש מקום.</p>
+  </div>
+
+  <div class="competitor tier-1" style="border-right: 4px solid #ff0000;">
+    <div class="competitor-header">
+      <h3>🔴 Tier-0 #3 — Figma Weave</h3>
+      <span class="company">Oct 2025 acquisition (Weavy) · April 2026 relaunch · weave.figma.com</span>
+      <span class="threat-badge threat-critical">Tier-0</span>
+    </div>
+    <p><strong>מה זה:</strong> Node-based creative workflow canvas — chain prompts across image/video/audio/3D. 20+ published workflows ב-Figma Community, duplicable. <a href="https://www.figma.com/blog/welcome-weavy-to-figma/" target="_blank" class="cite">[Figma Blog]</a></p>
+    <p><strong>Models exposed:</strong> Seedance, Sora, Veo (video); Flux, Ideogram (realism); Nano-Banana, Seedream (precision).</p>
+    <p><strong>ל-BRIK:</strong> זה ה-<em>node-graph variant</em> של BRIK's parametric panel. לא מייצא <code>.clay.html</code> חד-קובץ (עדיין), אבל ה-visual metaphor זהה + distribution של 4M+ designers של Figma.</p>
+  </div>
+
+  <div class="competitor tier-1" style="border-right: 4px solid #ff0000;">
+    <div class="competitor-header">
+      <h3>🔴 Tier-0 #4 — Google Stitch 2.0 (Vibe Design)</h3>
+      <span class="company">Relaunched 19 March 2026 · stitch.withgoogle.com</span>
+      <span class="threat-badge threat-critical">Tier-0</span>
+    </div>
+    <p><strong>מה זה:</strong> AI-native infinite canvas, multi-screen generation (up to 5 connected screens per prompt), voice input, design-agent tracks progress. "Vibe Design" concept — user owns intent, AI handles padding/layout/components. Interactive prototyping — click Play. <a href="https://blog.google/innovation-and-ai/models-and-research/google-labs/stitch-ai-ui-design/" target="_blank" class="cite">[Google Blog]</a></p>
+    <p><strong>ל-BRIK:</strong> Voice + multi-screen + free tier + Google distribution = הכי נגיש "prompt-to-interactive".</p>
+  </div>
+
+  <div class="competitor tier-1" style="border-right: 4px solid #ff0000;">
+    <div class="competitor-header">
+      <h3>🔴 Tier-0 #5 — Google AI Studio App Gallery with Remix</h3>
+      <span class="company">ai.studio/apps</span>
+      <span class="threat-badge threat-critical">Tier-0</span>
+    </div>
+    <p><strong>מה זה:</strong> "Browse what's possible with Gemini, preview applications instantly, and remix them to make them your own. You can remix a project from the gallery by opening a project from the App Gallery and selecting Copy App." <a href="https://ai.google.dev/gemini-api/docs/aistudio-build-mode" target="_blank" class="cite">[Google Docs]</a></p>
+    <p><strong>ל-BRIK:</strong> ה-<strong>gallery-remix loop</strong> של BRIK כבר productized, חינם, מאחורי Gemini.</p>
+  </div>
+
+  <div class="competitor tier-1" style="border-right: 4px solid #ff0000;">
+    <div class="competitor-header">
+      <h3>🔴 Tier-0 #6 — OpenAI Apps SDK</h3>
+      <span class="company">developers.openai.com/apps-sdk</span>
+      <span class="threat-badge threat-critical">Strategic</span>
+    </div>
+    <p><strong>מה זה:</strong> "Interactive application framework — branded mini-applications inside ChatGPT conversations." Built on MCP; inline, PiP, fullscreen. Launch partners: Canva, Figma, Coursera, Booking, Spotify, Zillow, Expedia. <a href="https://openai.com/index/introducing-apps-in-chatgpt/" target="_blank" class="cite">[OpenAI]</a></p>
+    <p><strong>ל-BRIK:</strong> אם משתמשים יתרגלו ש-mini-apps גרים <em>בתוך</em> ChatGPT/Claude ישירות — BRIK-as-destination נחלש. <strong>החלטה חייבת:</strong> להטמיע ב-runtimes האלה או להישאר destination.</p>
+  </div>
+
+  <h3 style="margin-top: 40px;">עוד 20+ launches חדשים שפספסנו (summary)</h3>
+  <ul>
+    <li><strong>Canva AI 2.0</strong> (16 Apr 2026) — agentic design suite, $4B ARR, Simtheory + Ortto acquisitions. Bidirectional integration עם Claude Design. <a href="https://fortune.com/2026/04/16/canva-ai-agentic-design-suite-coo-cliff-obrecht/" target="_blank" class="cite">[Fortune]</a></li>
+    <li><strong>Project Genie (DeepMind)</strong> — world model לעיצוב interactive worlds, feb 2026 לUS Ultra subs. <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/project-genie/" target="_blank" class="cite">[Google]</a></li>
+    <li><strong>Figma Make + Figma Buzz</strong> — Make kits & attachments (April 2026), prompts start from real components/data/constraints</li>
+    <li><strong>Subframe</strong> — "MidJourney-like" UI design, 4 variations gradually focus <a href="https://subframe.com" target="_blank" class="cite">[src]</a></li>
+    <li><strong>Rosebud AI</strong> — Vibe Coding for 3D games, integrations עם Tripo + Meshy <a href="https://rosebud.ai" target="_blank" class="cite">[src]</a></li>
+    <li><strong>Cardboard (YC W26)</strong> — agentic video editor, highest-upvoted HN launch של cohort W26 <a href="https://news.ycombinator.com/item?id=47170174" target="_blank" class="cite">[HN]</a></li>
+    <li><strong>Magic Patterns</strong> — design-system-aware generation <a href="https://magicpatterns.com" target="_blank" class="cite">[src]</a></li>
+    <li><strong>UX Pilot</strong> — predictive heatmaps לפני user testing</li>
+    <li><strong>Flowstep</strong> — multi-screen גנרציה + native Figma export</li>
+    <li><strong>tldraw Computer + Make Real + MCP App</strong> — infinite canvas AI compute primitive <a href="https://computer.tldraw.com/" target="_blank" class="cite">[tldraw]</a></li>
+    <li><strong>Mistral Le Chat Canvas</strong> — Artifacts-equivalent ב-EU</li>
+    <li><strong>Poe (Quora) Explore</strong> — multi-model remix gallery של mini-apps</li>
+    <li><strong>ElevenCreative</strong> — ElevenLabs voice/music/SFX/image/video platform</li>
+    <li><strong>LTX Desktop</strong> (Lightricks) — fully local, open-source video editor + on-device AI</li>
+    <li><strong>Autodesk Wonder 3D</strong> (4 March 2026) — text-to-3D, image-to-3D ב-Autodesk Flow Studio</li>
+    <li><strong>Adobe After Effects + Premiere AI</strong> — 85% מסרטי Sundance 2026 עם Creative Cloud</li>
+    <li><strong>Base44 (now Wix)</strong> — acquired June 2025 $80M cash, 6 חודשים, solo founder. <strong>סיסטר-פרוד'קט פנימי</strong> של BRIK. יש להגדיר בעיקביות פנימית. <a href="https://techcrunch.com/2025/06/18/6-month-old-solo-owned-vibe-coder-base44-sells-to-wix-for-80m-cash/" target="_blank" class="cite">[TC]</a></li>
+    <li><strong>Qwen 3.6-Plus</strong> (Alibaba, 2 April 2026) — enhanced coding, front-end generation from screenshots/design drafts <a href="https://www.caixinglobal.com/2026-04-02/alibaba-releases-qwen-36-plus-ai-model-with-enhanced-coding-capabilities-102430395.html" target="_blank" class="cite">[Caixin]</a></li>
+    <li><strong>Rive</strong> — AI Coding Agent for scripting (state machine scaffolding)</li>
+    <li><strong>Framer AI</strong> — prompt-to-site המשיך לגדול</li>
+  </ul>
+
+  <h3>10 Themes של הגל החדש</h3>
+  <ol>
+    <li><strong>ה-canvas הוא ה-new chat</strong> — כל launch 2026 major מתמקד ב-visual canvas, לא ב-linear chat</li>
+    <li><strong>Parametric sliders productized ע"י הגדולים</strong> — Claude Design shipped "adjustment sliders" by default</li>
+    <li><strong>Remix/gallery = table stakes</strong> — Omma, Claude Artifacts, AI Studio, Genie, Poe Explore, Figma Weave templates</li>
+    <li><strong>Pricing מתייצב:</strong> Free + $20-40 Pro + $100-150 Team + Enterprise. Credits מעל seats.</li>
+    <li><strong>Model providers הופכים ל-product companies</strong> — Anthropic, OpenAI, Google, Mistral</li>
+    <li><strong>Design-system awareness = universal feature</strong> — Claude Design, Magic Patterns, Figma Make Kits, Canva</li>
+    <li><strong>"Vibe" marketing angle דחוס</strong> — Vibe Design, Vibe Coding, Vibe XR. BRIK לא צריך לקרוא לעצמו "vibe"</li>
+    <li><strong>Local-first / Open-source = posture קטנה אבל קיימת</strong> — LTX Desktop, self-hosted. BRIK: "your <code>.clay.html</code> is yours, portable, offline" — under-claimed</li>
+    <li><strong>Creative-coding / Hydra / shader-first — whitespace</strong> — אף אחד לא עושה את זה well. BRIK's edge האמיתי.</li>
+    <li><strong>Audience-broadening vs narrowing</strong> — big platforms מתרחבים לכל (Canva, Claude Design, Figma Make); specialists מצטיירים per discipline (Rosebud for games, Cardboard for video). 14-cluster model של BRIK הוא הכיוון הנכון.</li>
+  </ol>
+
+  <h3>Positioning Statement לבדיקת stress</h3>
+  <div class="callout insight">
+    <p>"BRIK is not an AI app builder (Lovable, Bolt, v0, Base44) and not an AI design tool (Claude Design, Stitch, Figma Make). BRIK is the first <strong>parametric micro-app gallery</strong> — a daily creative toy surface for 14 designer disciplines, where each output is a live, tweakable, remixable <code>.clay.html</code> with a curated design system and canvas modes (2D, 3D, Hydra) from natural-language prompt."</p>
   </div>
 
   <div class="insights-block">
@@ -3836,6 +3991,724 @@
     </ol>
   </div>
 
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PAGE R3: TECHNOLOGY & INFRASTRUCTURE                            -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-research-tech">
+  <div class="page-header">
+    <div class="kicker">מחקר R3 · טכנולוגיות ותשתיות</div>
+    <h1>מחקר עומק — טכנולוגיות להטמעה ב-BRIK</h1>
+    <p class="lede">10 קטגוריות של APIs, מודלים, מסגרות ומאמרים אקדמיים שאפשר להטמיע ב-BRIK. מ-WebGPU ו-SAM 2 ועד Poly Haven ו-Gaussian Splatting — 170 הפניות חיות עם בדיקת licensing מדוקדקת.</p>
+  </div>
+
+  <div class="verdict">
+    <h3>פסק דין תשתיתי</h3>
+    <p>BRIK יכולה לקפוץ רמה שלמה בתוך חצי שנה עם 4 שכבות חדשות בארכיטקטורה: <strong>(1)</strong> WebGPU renderer mode (Three.js TSL) עם compute shaders; <strong>(2)</strong> Transformers.js v3 ל-ML בדפדפן (SAM 2, Depth Anything, MediaPipe); <strong>(3)</strong> Asset Providers layer (Poly Haven, AmbientCG, Pexels, Freesound, Iconify, Google Fonts — unified API); <strong>(4)</strong> 3-tier Inference Router (client-side → fal.ai real-time → fal/Replicate queue). כל זה תחת רישוי commercial-clean שאומת.</p>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>Top 20 אינטגרציות — מדורגות לפי creative leverage × integration cost × licensing × time-to-ship</h2>
+    </div>
+
+    <div class="improvement tier-green">
+      <div class="num">1</div>
+      <div>
+        <h4>Three.js WebGPURenderer + TSL</h4>
+        <p>Renderer mode חדש ל-assembler. Compute shaders, 1M-particle systems, reaction-diffusion, MLS-MPM fluids. WebGPU ב-~85% global support (Chrome/Edge/Safari 26/Firefox 141+). TSL מתקמפל גם ל-WGSL וגם ל-GLSL — fallback אוטומטי ל-WebGL. <strong>יסוד ל-3 שנים הבאות.</strong> <a href="https://threejs.org/docs/#manual/en/introduction/How-to-use-WebGPURenderer" target="_blank" class="cite">[threejs]</a> <a href="https://www.webgpu.com/news/webgpu-hits-critical-mass-all-major-browsers-now-ship-it/" target="_blank" class="cite">[webgpu.com]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-green">
+      <div class="num">2</div>
+      <div>
+        <h4>Transformers.js v3 (WebGPU)</h4>
+        <p>Runtime ML בדפדפן. התקנה אחת — 1200+ מודלים: depth, segmentation, object detection, zero-shot CLIP, Whisper, small LLMs. Private (לא יוצא מהדפדפן), חינם, cache-friendly. עד 100× WASM. <a href="https://huggingface.co/docs/transformers.js/" target="_blank" class="cite">[HF]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-green">
+      <div class="num">3</div>
+      <div>
+        <h4>fal.ai real-time + queue API</h4>
+        <p>האינטגרציה הגנרטיבית עם ה-impact הכי גדול. WebSocket ל-image gen ב-&lt;250ms (FLUX Schnell, SDXL Lightning, LCM); queue לכל השאר. <strong>Commercially cleared.</strong> <a href="https://fal.ai/docs" target="_blank" class="cite">[fal]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-green">
+      <div class="num">4</div>
+      <div>
+        <h4>Poly Haven + AmbientCG asset APIs</h4>
+        <p>CC0 PBR textures + HDRIs + models, ללא attribution, ספרייה ענקית. First-class "material/HDRI/model picker" nodes. <a href="https://polyhaven.com/api" target="_blank" class="cite">[Poly Haven]</a> <a href="https://ambientcg.com/view?type=api" target="_blank" class="cite">[AmbientCG]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-green">
+      <div class="num">5</div>
+      <div>
+        <h4>SAM 2 בדפדפן (WebGPU via ONNX)</h4>
+        <p>Apache-2.0, רץ client-side, one-click subject isolation. שער ל-"drop image → keep subject" בכל tool. <a href="https://github.com/facebookresearch/sam2" target="_blank" class="cite">[Meta]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-green">
+      <div class="num">6</div>
+      <div>
+        <h4>MediaPipe Tasks Vision</h4>
+        <p>Pose + face + hands + segmenter + gesture @ 30fps. VJ / AR-filter / motion-capture tools. Apache-2.0. <a href="https://ai.google.dev/edge/mediapipe/solutions/tasks" target="_blank" class="cite">[Google]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-yellow">
+      <div class="num">7</div>
+      <div>
+        <h4>HarfBuzzJS + opentype.js + Fontsource + Google Fonts CSS2</h4>
+        <p>Stack טיפוגרפי מודרני שלם — כולל RTL + complex scripts. <strong>קריטי לשוק העברי.</strong> variable font axes native. <a href="https://github.com/harfbuzz/harfbuzzjs" target="_blank" class="cite">[HarfBuzz]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-yellow">
+      <div class="num">8</div>
+      <div>
+        <h4>Rapier Physics (Rust→WASM)</h4>
+        <p>3D + 2D, Apache-2.0, 5-8× מהיר מ-cannon/nphysics. מאפשר physical-simulation tools ברמת native. <a href="https://rapier.rs/" target="_blank" class="cite">[Rapier]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-yellow">
+      <div class="num">9</div>
+      <div>
+        <h4>Pexels + Pixabay + Freesound APIs</h4>
+        <p>No-attribution stock photo/video/audio pickers. Ship "drop-in asset" UX בכל canvas tools. <a href="https://www.pexels.com/api/documentation/" target="_blank" class="cite">[Pexels]</a> <a href="https://freesound.org/docs/api/" target="_blank" class="cite">[Freesound]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-yellow">
+      <div class="num">10</div>
+      <div>
+        <h4>Ideogram V3 + OpenRouter / fal.ai bridge</h4>
+        <p>Typography-in-image — ה-model הכי טוב לטקסט בתוך תמונה. $0.025-0.04 per image. לכלים של poster/logo/brand. <a href="https://ideogram.ai/api" target="_blank" class="cite">[Ideogram]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-yellow">
+      <div class="num">11</div>
+      <div>
+        <h4>Culori + OKLCH default + apca-w3</h4>
+        <p>Color perceptual מודרני — aligns BRIK עם Figma/Tailwind v4. WCAG + APCA contrast checks מובנים. <a href="https://culorijs.org/" target="_blank" class="cite">[Culori]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-yellow">
+      <div class="num">12</div>
+      <div>
+        <h4>Depth Anything V2 (WebGPU)</h4>
+        <p>Monocular depth ב-200ms בדפדפן. מאפשר parallax-from-photo, displacement, composition tools. Apache-2.0. <a href="https://depth-anything-v2.github.io/" target="_blank" class="cite">[DA V2]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-orange">
+      <div class="num">13</div>
+      <div>
+        <h4>Gaussian Splatting via Visionary (WebGPU)</h4>
+        <p>הפריצה של 2025-26. Rendered ב-2-16ms/frame בדפדפן; משחק יפה עם Three.js. Capture-to-canvas pipeline. <a href="https://arxiv.org/abs/2512.08478" target="_blank" class="cite">[arXiv:2512.08478]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-orange">
+      <div class="num">14</div>
+      <div>
+        <h4>Iconify + Lucide + Tabler API</h4>
+        <p>150k+ icons, MIT/ISC. "Icon" הופך ל-first-class token בכל BRIK tool. <a href="https://iconify.design/" target="_blank" class="cite">[Iconify]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-orange">
+      <div class="num">15</div>
+      <div>
+        <h4>Veo 3 Fast + Runway Gen-4 Turbo</h4>
+        <p>Dual-provider video generation עם commercial licensing. "make it a video" export. Veo 3 Fast $0.15/s, Runway $0.10-0.12/s. <strong>Sora נסגרה באפריל 2026</strong> — להסיר תוכניות Sora integration.</p>
+      </div>
+    </div>
+
+    <div class="improvement tier-orange">
+      <div class="num">16</div>
+      <div>
+        <h4>Meyda + Essentia.js + Tone.js</h4>
+        <p>Audio-reactive stack. Meyda ל-real-time features, Essentia ל-beat/key/mood, Tone ל-scheduling. ה-VJ cluster אמור. <a href="https://meyda.js.org/" target="_blank" class="cite">[Meyda]</a></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-orange">
+      <div class="num">17</div>
+      <div>
+        <h4>ElevenLabs Eleven Music + SFX</h4>
+        <p>Licensed-data music-gen עם commercial rights cleared. <strong>הספק הכי בטוח</strong> ל-BRIK tools שמייצאים אודיו. (הימנעו מ-Suno/Udio — יש litigation תלויה-ועומדת.)</p>
+      </div>
+    </div>
+
+    <div class="improvement tier-orange">
+      <div class="num">18</div>
+      <div>
+        <h4>ControlNet + IP-Adapter via fal.ai FLUX-general</h4>
+        <p>Conditional generation מ-pose/edge/depth/reference. שילוב עם SAM2 + MediaPipe = sketch-to-image / pose-to-image flows שלמים.</p>
+      </div>
+    </div>
+
+    <div class="improvement tier-orange">
+      <div class="num">19</div>
+      <div>
+        <h4>WebGPU compute-shader template library</h4>
+        <p>Templates מובנות ב-BRIK: MLS-MPM fluid, Gray-Scott reaction-diffusion, 1M-particle flow field, SDF ray-march sculpt, SPH, boids, DLA. <strong>כל אחת = "signature BRIK tool" לשיווק.</strong></p>
+      </div>
+    </div>
+
+    <div class="improvement tier-orange">
+      <div class="num">20</div>
+      <div>
+        <h4>TripoSR / Meshy text-to-3D via Replicate</h4>
+        <p>Text → 3D model תוך שניות. קריטי לקלאסטרים industrial / architecture / fashion product.</p>
+      </div>
+    </div>
+
+    <h2>10 קטגוריות של מחקר — תקציר</h2>
+
+    <div class="finding strength">
+      <h3>Category 1 — WebGPU & next-gen graphics</h3>
+      <p>85% global support. 128 MB storage buffers, native compute shaders, <strong>3-8× perf על ≥2048²</strong>, <strong>150× על particle sims</strong>. Three.js TSL compiles ל-WGSL + GLSL עם WebGL fallback — זה ה-migration path. Babylon.js 9 default WebGPU. Orillusion ל-GPU-physics tools.</p>
+    </div>
+
+    <div class="finding strength">
+      <h3>Category 2 — Asset APIs (licensing אומת)</h3>
+      <ul>
+        <li><strong>CC0 no-attribution:</strong> Poly Haven, AmbientCG, Kenney, Quaternius, ShareTextures, Pexels</li>
+        <li><strong>CC-BY (attribution required):</strong> Unsplash API, Sketchfab Download API</li>
+        <li><strong>MIT/ISC:</strong> Iconify (150k icons), Lucide, Tabler</li>
+        <li><strong>Google Fonts CSS2:</strong> commercial-free</li>
+        <li><strong>Fontsource:</strong> 1500+ OSS fonts, self-hosted</li>
+        <li><strong>Freesound:</strong> CC licenses (mixed — check per-sound)</li>
+      </ul>
+    </div>
+
+    <div class="finding strength">
+      <h3>Category 3 — Computer Vision & Segmentation</h3>
+      <ul>
+        <li><strong>SAM 2 (Apache-2.0):</strong> רץ WebGPU client-side, אומת</li>
+        <li><strong>MediaPipe Tasks Vision (Apache-2.0):</strong> pose/face/hands/segmenter @ 30fps</li>
+        <li><strong>Depth Anything V2 small (Apache-2.0):</strong> רץ ב-Transformers.js v3 עם WebGPU</li>
+        <li><strong>Transformers.js v3:</strong> 1200+ מודלים, עד 100× WASM</li>
+        <li><strong>Photoroom API:</strong> $0.02/call commercial</li>
+        <li><strong>Remove.bg:</strong> ~$0.09/call</li>
+      </ul>
+      <p><strong>הימנעו:</strong> Ultralytics YOLO (AGPL-3.0) — השתמשו ב-YOLO-NAS (Apache), RT-DETR, או DETR.</p>
+    </div>
+
+    <div class="finding strength">
+      <h3>Category 4 — Generative image/video (pricing + licenses)</h3>
+      <ul>
+        <li><strong>FLUX.1 Schnell:</strong> Apache-2.0 (!) — ה-model הפתוח הכי שווה</li>
+        <li><strong>FLUX.1 Dev:</strong> NON-commercial — להשתמש רק דרך fal.ai/Replicate (להם יש hosting deals)</li>
+        <li><strong>DALL·E 3:</strong> $0.04-0.12 per image</li>
+        <li><strong>Nano Banana Pro:</strong> $0.134</li>
+        <li><strong>Ideogram V3:</strong> $0.025-0.04 (typography champion)</li>
+        <li><strong>Veo 3 Fast:</strong> $0.15/s, Hailuo 02 $0.08/s, Runway Gen-4 $0.10-0.12/s</li>
+        <li><strong>SD 3/3.5:</strong> חינם רק מתחת ל-$1M ARR — BRIK מעל ← להשתמש ב-SDXL + FLUX Schnell</li>
+        <li><strong>Sora:</strong> נסגרה באפריל 2026 — להסיר מכל planning</li>
+      </ul>
+    </div>
+
+    <div class="finding medium">
+      <h3>Category 5 — Audio & music</h3>
+      <p>Web Audio API 1.1 + AudioWorklet. Meyda (real-time features), Essentia.js (MIR), Tone.js (scheduling). <strong>ElevenLabs Eleven Music</strong> = הספק היחיד commercially cleared ל-music API. Whisper-WebGPU חינם בדפדפן, AssemblyAI זול פי 3 מ-Deepgram.</p>
+    </div>
+
+    <div class="finding medium">
+      <h3>Category 6 — Physics</h3>
+      <p><strong>Rapier</strong> (Apache-2.0, Rust→WASM) מנצח cannon/nphysics פי 5-8. verlet-js ל-cloth/hair/ropes. Compute-shader demos חיים: MLS-MPM fluids (100k particles), reaction-diffusion, 1M-particle water, SPH, boids.</p>
+    </div>
+
+    <div class="finding medium">
+      <h3>Category 7 — Typography (advanced)</h3>
+      <p>HarfBuzzJS (WASM) ל-complex-script + RTL; opentype.js + fontkit ל-glyph paths + variable axes; Fontsource 1500+ OSS fonts; <code>font-variation-settings</code> נתמך בכל דפדפן מודרני. <strong>קריטי לשוק העברי.</strong></p>
+    </div>
+
+    <div class="finding medium">
+      <h3>Category 8 — Color perceptual</h3>
+      <p>Culori ל-CSS Color 4 (OKLCH, P3, Rec2020) — כבר בשימוש ב-Tailwind v4. Chroma.js הוסיפה OKLAB/OKLCH ב-2025. <strong>apca-w3 NPM</strong> ל-APCA + reverse-contrast lookup.</p>
+    </div>
+
+    <div class="finding high">
+      <h3>Category 9 — Academic research (implementable)</h3>
+      <ul>
+        <li><strong>Visionary (<a href="https://arxiv.org/abs/2512.08478" target="_blank">arXiv:2512.08478</a>):</strong> WebGPU Gaussian Splatting engine עם Three.js API, 2-16 ms/frame</li>
+        <li><strong>WebSplatter (<a href="https://arxiv.org/abs/2602.03207" target="_blank">arXiv:2602.03207</a>):</strong> cross-device splatting</li>
+        <li><strong>TripoSR:</strong> sub-second text-to-3D</li>
+        <li><strong>Wave Function Collapse:</strong> procedural pattern generation</li>
+        <li><strong>WebGPU SDF Editor</strong> (Jan 2026): SDF modeling</li>
+        <li><strong>AI Co-Artist (arXiv:2512.08951) + ShaderMatch benchmark (ICSE 2025):</strong> LLM→GLSL — מחקר מרכזי ל-BRIK's Hydra/shader capability</li>
+      </ul>
+    </div>
+
+    <div class="finding medium">
+      <h3>Category 10 — Inference infrastructure</h3>
+      <ul>
+        <li><strong>fal.ai:</strong> נצחון ב-media + real-time WebSocket</li>
+        <li><strong>Replicate:</strong> catalog רחב ביותר (50k+ models, webhook-first)</li>
+        <li><strong>Together AI:</strong> ל-OSS LLMs</li>
+        <li><strong>Modal:</strong> ל-Python מותאם אישית</li>
+        <li><strong>OpenRouter:</strong> unified LLM עם passthrough pricing + 5.5% fee</li>
+      </ul>
+    </div>
+
+    <h2>3 abstractions חדשות ב-Assembler</h2>
+    <div class="callout insight">
+      <ol>
+        <li><strong>Renderer modes</strong> (קיים: canvas2d/webgl/p5/hydra) + חדש: <code>webgpu</code>, <code>splat</code>, <code>sdf</code></li>
+        <li><strong>Asset providers</strong> (חדש) — interface מאוחד ל-Poly Haven, AmbientCG, Sketchfab, Pexels, Freesound, Iconify, Google Fonts. כל provider חושף <code>search(prompt) → [Asset]</code>; ה-LLM מתרגם natural-language ל-assets.</li>
+        <li><strong>Inference providers</strong> (חדש) — router tier-aware. Default tier 1 (in-browser), escalate ל-fal.ai real-time, escalate ל-fal/Replicate queue ל-hero quality.</li>
+      </ol>
+      <p>שלושת ה-abstractions האלה הופכות כל integration חדשה ל-"slot in" במקום rewrite.</p>
+    </div>
+
+    <h2>סיכוני Licensing — watch list</h2>
+    <div class="callout warning">
+      <ul>
+        <li>SD 3/3.5: חינם רק &lt;$1M ARR — BRIK מעל ← SDXL + FLUX Schnell</li>
+        <li>FLUX.1 Dev: NON-commercial — רק דרך fal/Replicate (שלהם deals)</li>
+        <li>Ultralytics YOLO v8/v11: AGPL-3.0 — להחליף ב-YOLO-NAS/RT-DETR/DETR</li>
+        <li>Sketchfab CC BY: attribution חובה ב-UI וב-<code>.clay.html</code> export — לאפות אוטומטית</li>
+        <li>Freesound Gen-AI opt-out (Feb 2026): לכבד per-sound flag</li>
+        <li>Suno/Udio: label litigation פתוחה — BYOK only</li>
+        <li>Sora: נסגרה Apr 2026 — להסיר תוכניות</li>
+        <li>Imagen/Nano Banana: Google TOS דורש שקיפות על filtering</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PAGE T: TERMINOLOGY — UNIFIED BRAND LANGUAGE                    -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-terminology">
+  <div class="page-header">
+    <div class="kicker">T · שפת מוצר מאוחדת</div>
+    <h1>טרמינולוגיה אחידה — BRIK Language System</h1>
+    <p class="lede">מילון מוצר עקבי שמבוסס על שם המותג (BRIK = אבן), לשימוש בסרטי מוצר, landing pages, onboarding, ו-UI. כל רכיב במוצר מקבל שם מהמשפחה הקונצפטואלית של "בניה מאבנים" — פיזית, מוחשית, יצירתית.</p>
+  </div>
+
+  <div class="verdict">
+    <h3>העיקרון המנחה</h3>
+    <p>BRIK = אבן בניין. שפת המוצר בנויה סביב המטאפורה הזו: יצרנים <em>מטילים BRIKs</em>, מחברים <em>BRICKWORK</em>, נהנים מ-<em>FORGE</em> כמקום יצירה, ומציגים ב-<em>YARD</em>. המילים צריכות להיות קצרות, קונקרטיות, זכירות, ו-exportable לאנגלית + עברית.</p>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>Core Vocabulary — 30 מונחים</h2>
+    </div>
+
+    <h3>1. המוצר והמותג</h3>
+    <table>
+      <thead><tr><th>מונח</th><th>הגדרה</th><th>שימוש</th></tr></thead>
+      <tbody>
+        <tr><td><strong>BRIK</strong></td><td>המוצר עצמו. הפלטפורמה. גם היחידה הבסיסית.</td><td>"Built with BRIK" · "Open BRIK" · "a BRIK"</td></tr>
+        <tr><td><strong>a BRIK</strong></td><td>יחידה אחת של כלי יצירתי שנוצרה בפלטפורמה</td><td>"Make a BRIK" · "Share your BRIK"</td></tr>
+        <tr><td><strong>BRIKWORK</strong></td><td>הרכבה / composition של כמה BRIKs</td><td>"Your BRIKWORK" · "Publish BRIKWORK"</td></tr>
+        <tr><td><strong>BRIKYARD</strong></td><td>הגלריה הציבורית (במקום "Gallery")</td><td>"Browse the BRIKYARD" · "Featured in BRIKYARD"</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2. הזירות (Surfaces)</h3>
+    <table>
+      <thead><tr><th>מונח</th><th>הגדרה</th><th>שימוש</th></tr></thead>
+      <tbody>
+        <tr><td><strong>FORGE</strong></td><td>מסך העריכה — editor הראשי</td><td>"Open the Forge" · "Forge your BRIK"</td></tr>
+        <tr><td><strong>STAGE</strong></td><td>אזור הקנבס — where the output lives</td><td>"On the Stage" · "Reset Stage"</td></tr>
+        <tr><td><strong>PANEL</strong></td><td>סרגל הקונטרולס (במקום "sidebar/controls")</td><td>"Adjust in the Panel" · "Pin to Panel"</td></tr>
+        <tr><td><strong>CHATROOM</strong></td><td>שיחת ה-AI ב-editor</td><td>"Ask in Chatroom"</td></tr>
+        <tr><td><strong>CABINET</strong></td><td>"My Work" — הכלים הפרטיים של היוצר</td><td>"Saved to Cabinet"</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. הפעולות (Verbs)</h3>
+    <table>
+      <thead><tr><th>פעולה</th><th>הגדרה</th><th>שימוש</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cast</strong></td><td>ליצור BRIK חדשה (במקום "generate")</td><td>"Cast a BRIK" · "Cast from prompt"</td></tr>
+        <tr><td><strong>Mold</strong></td><td>לשנות / לכוון (במקום "edit")</td><td>"Mold the BRIK" · "Re-mold"</td></tr>
+        <tr><td><strong>Forge</strong></td><td>לבנות מהיסוד</td><td>"Forge a new BRIK"</td></tr>
+        <tr><td><strong>Set</strong></td><td>לפרסם (במקום "publish") — "the BRIK sets"</td><td>"Set your BRIK" · "Newly set"</td></tr>
+        <tr><td><strong>Stack</strong></td><td>לרמקס (במקום "remix") — בונה על BRIK קיים</td><td>"Stack this BRIK" · "Stacked from [creator]"</td></tr>
+        <tr><td><strong>Chip</strong></td><td>לערוך פרט קטן (במקום "tweak")</td><td>"Chip the color"</td></tr>
+        <tr><td><strong>Dust off</strong></td><td>לחזור לגרסה קודמת (undo / restore)</td><td>"Dust off last version"</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4. רכיבי הליבה</h3>
+    <table>
+      <thead><tr><th>מונח</th><th>הגדרה</th><th>שימוש</th></tr></thead>
+      <tbody>
+        <tr><td><strong>BRIKS</strong></td><td>אבני בניין הפלטפורמה — יכולות מוצהרות (Canvas, Export, Controls, Design Tokens, etc.)</td><td>"Powered by [12] BRIKS"</td></tr>
+        <tr><td><strong>Skills</strong></td><td>ידע שהסוכן מביא איתו — נשמר</td><td>"Skills used" · "Active Skills"</td></tr>
+        <tr><td><strong>Brief</strong></td><td>ה-Planning Brief של ה-Architect (לפנים: Art Director)</td><td>"Review the Brief"</td></tr>
+        <tr><td><strong>Architect</strong></td><td>סוכן ה-Creative Director (רענון שם — פחות חצוף, יותר מקצועי)</td><td>"Ask the Architect"</td></tr>
+        <tr><td><strong>Caster</strong></td><td>סוכן ה-Coding Agent (המבצע)</td><td>"The Caster is working"</td></tr>
+        <tr><td><strong>Kit</strong></td><td>Brand Kit — colors/fonts/assets</td><td>"Load your Kit"</td></tr>
+        <tr><td><strong>Seam</strong></td><td>Connection — חיבור בין BRIKs (כשיש Projects)</td><td>"Seam these BRIKs"</td></tr>
+      </tbody>
+    </table>
+
+    <h3>5. תוצרים ופורמטים</h3>
+    <table>
+      <thead><tr><th>מונח</th><th>הגדרה</th><th>שימוש</th></tr></thead>
+      <tbody>
+        <tr><td><strong>.brik</strong></td><td>פורמט export חדש (במקום .clay.html)</td><td>"Download .brik" · "Re-import .brik"</td></tr>
+        <tr><td><strong>Print</strong></td><td>Export של frame בודד (PNG/JPG)</td><td>"Print this frame"</td></tr>
+        <tr><td><strong>Reel</strong></td><td>Export של video loop (MP4/WebM)</td><td>"Record a Reel"</td></tr>
+        <tr><td><strong>Embed</strong></td><td>להטמיע באתר חיצוני</td><td>"Embed your BRIK anywhere"</td></tr>
+      </tbody>
+    </table>
+
+    <h3>6. מעגלי הקהילה</h3>
+    <table>
+      <thead><tr><th>מונח</th><th>הגדרה</th><th>שימוש</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Masons</strong></td><td>הקהילה — "מטילי האבנים"</td><td>"Join the Masons" · "Fellow Masons"</td></tr>
+        <tr><td><strong>Masterwork</strong></td><td>BRIKs מצטיינים / featured</td><td>"This week's Masterworks"</td></tr>
+        <tr><td><strong>Trail</strong></td><td>fork tree של BRIK — היסטוריית ה-stacks</td><td>"See the Trail"</td></tr>
+        <tr><td><strong>Vault</strong></td><td>פרסומי מותג / archive</td><td>"BRIK Vault"</td></tr>
+      </tbody>
+    </table>
+
+    <h2>הדגמה — איך משפט טיפוסי נראה</h2>
+    <div class="callout note">
+      <p><strong>לפני:</strong> "Generate a new tool, edit the sliders, publish to the gallery, and let others remix it."</p>
+      <p><strong>אחרי:</strong> "Cast a new BRIK, chip the Panel, set it to the BRIKYARD, and let fellow Masons stack on it."</p>
+    </div>
+
+    <h2>כללי Do / Don't לסרט מוצר</h2>
+    <table>
+      <thead><tr><th>DO</th><th>DON'T</th></tr></thead>
+      <tbody>
+        <tr><td>"Cast a BRIK in seconds"</td><td class="decision-dont">"Generate an AI creative app"</td></tr>
+        <tr><td>"Powered by 12 BRIKS"</td><td class="decision-dont">"Uses 12 modules"</td></tr>
+        <tr><td>"Stack this Masterwork"</td><td class="decision-dont">"Remix this tool"</td></tr>
+        <tr><td>"Chip until it feels right"</td><td class="decision-dont">"Iterate with AI"</td></tr>
+        <tr><td>"Your Kit, everywhere"</td><td class="decision-dont">"Your brand, synced"</td></tr>
+        <tr><td>"Set it. Share it. Stack it."</td><td class="decision-dont">"Publish. Share. Remix."</td></tr>
+        <tr><td>"The Architect will brief"</td><td class="decision-dont">"The AI will plan"</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3 Tagline options — לסרט הפתיחה</h2>
+    <div class="callout insight">
+      <ol>
+        <li><strong>"Cast your creativity. Stack what matters."</strong><br>
+        דגש על הלופ: יצירה אישית + קהילה</li>
+        <li><strong>"Every designer's Forge."</strong><br>
+        positioning direct + wide audience (designers from every discipline)</li>
+        <li><strong>"Small BRIKs. Infinite Work."</strong><br>
+        דגש על ההבדל הקטן (BRIK = יחידה) מהענק (infinite creative output)</li>
+      </ol>
+    </div>
+
+    <h2>אימוץ הדרגתי — המלצה</h2>
+    <ol>
+      <li><strong>Week 0:</strong> להחליף 5 מונחים בולטים ב-UI: Generate → Cast, Remix → Stack, Publish → Set, Gallery → BRIKYARD, Edit → Mold</li>
+      <li><strong>Week 2:</strong> עדכון landing page + כל הטקסטים השיווקיים</li>
+      <li><strong>Month 1:</strong> Onboarding מוסיף "How does BRIK speak?" — עמוד הסבר קצר</li>
+      <li><strong>Month 2:</strong> Admin dashboard, emails, notifications מתואמים</li>
+      <li><strong>Month 3:</strong> file format rebranding: .clay.html → .brik</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PAGE P: PRDs                                                    -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-prds">
+  <div class="page-header">
+    <div class="kicker">P · Product Requirement Documents</div>
+    <h1>שני PRDs — עבר והעתיד</h1>
+    <p class="lede">PRD #1 תיעוד רטרוספקטיבי של BRIK <em>כפי שהיא היום</em>. PRD #2 מסמך קדימה שמכיל את כל התובנות, המחקרים וההמלצות מכל המסמך הזה.</p>
+  </div>
+
+  <div class="verdict">
+    <h3>סדר הקריאה</h3>
+    <p>PRD #1 קריאה ראשונה — מיישר את הצוות על המצב הקיים. PRD #2 קריאה שנייה — מראה את הפער בין המצב הקיים ליעד. הפער הוא ה-roadmap.</p>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>PRD #1 — Retrospective: BRIK כפי שהיא היום</h2>
+      <span class="kicker-inline">as-is · v1.0</span>
+    </div>
+
+    <h3>1. סיכום מנהלים</h3>
+    <p>BRIK (הידועה בקוד גם כ-Clay / Chatooly) היא פלטפורמת AI שמפיקה <strong>"creative micro-apps"</strong> מבקשות בשפה טבעית. המוצר חי בפרודקשן, משרת משתמשים פעילים, ומיוצר על Base44 (BaaS של Wix). הפלט = כלי אינטראקטיבי (canvas + controls sidebar) שניתן לשמור, לפרסם, לעשות embed, ולרמקס.</p>
+
+    <h3>2. קהל יעד נוכחי</h3>
+    <p>הוגדר הלכה למעשה כ"designer-who-codes (partial)" ו-"tinkerer" (פרסונות B ו-E). בפועל השיווק מושך גם designer-who-doesnt-code (C) ו-AI-native creator (F) — ויוצר נטישה שקטה.</p>
+
+    <h3>3. Jobs-to-Be-Done</h3>
+    <ul>
+      <li>"לייצר כלי פרמטרי אינטראקטיבי בלי לכתוב boilerplate"</li>
+      <li>"לפרסם כלי שאחרים יכולים לערוך / לרמקס"</li>
+      <li>"להטמיע כלי באתר / בפרזנטציה"</li>
+    </ul>
+
+    <h3>4. יכולות קיימות</h3>
+    <h4>4.1 יצירה וסוכן</h4>
+    <ul>
+      <li>Chat-based generation של כלי חדש או iterating על קיים</li>
+      <li>Triage: Conversational / Remix / New / Iteration</li>
+      <li>Art Director agent (run once, first message only, generates Planning Brief)</li>
+      <li>Creative Coding Agent (Mastra-based) עם 11 tool calls: <code>get_tool_schema</code>, <code>get_tool_state</code>, <code>get_boilerplate</code>, <code>organize_controls</code>, <code>set_controls_schema</code>, <code>set_canvas_code</code>, <code>edit_canvas_code</code>, <code>set_libraries</code>, <code>set_custom_css</code>, <code>consult_art_director</code>, <code>search_media_assets</code></li>
+      <li>Skill matching: keyword + stemming scoring, top 3 נטענים ל-prompt</li>
+      <li>Models: Claude, GPT-4o, Gemini via Mastra</li>
+      <li>SSE streaming של updates ל-UI</li>
+    </ul>
+
+    <h4>4.2 Canvas Engine</h4>
+    <ul>
+      <li>Canvas 2D, WebGL (Three.js), p5.js, Hydra — וכל ההיברידים</li>
+      <li>Assembler: assembles HTML שלם כ-<code>srcdoc</code> ל-iframe</li>
+      <li>25+ widgets ב-ChatoolyControls (slider, color, vector3, preset-grid, texture-gallery, multi-image, directional-pad וכו')</li>
+      <li>ChatoolyCanvas runtime: export (PNG/JPG/MP4/WebM), background system, dimensions lock</li>
+      <li>System background control אוטומטי (<code>__sys_bg</code>)</li>
+      <li>CSS tokens (<code>--clay-*</code>) — Neue Haas Grotesk, gray scale, spacing, radii</li>
+    </ul>
+
+    <h4>4.3 ניהול מצב</h4>
+    <ul>
+      <li>Draft / Published split — שדות מקבילים לכל יכולת</li>
+      <li><code>bakeControlDefaults</code> — בפרסום, לוקח את הערכים החיים מה-iframe ועדכן את ה-<code>default</code> של הסכמה</li>
+      <li>Remix דרך <code>sessionStorage</code> (יש race condition ידוע)</li>
+    </ul>
+
+    <h4>4.4 ממשקים</h4>
+    <ul>
+      <li><strong>Home / Gallery</strong> — featured (3 דגלים), tag-based taxonomy (regex על canvas_code)</li>
+      <li><strong>Editor</strong> — ChatPanel + ToolPreviewFrame + Sidebar</li>
+      <li><strong>Viewer / Embed</strong> — public embed mode, ללא controls panel</li>
+      <li><strong>Admin</strong> — 4 עמודים: Prompts (live edit של SystemPrompt + Skill), Homepage, Users, Media Manager</li>
+    </ul>
+
+    <h4>4.5 Entities</h4>
+    <p>9 ישויות: Tool, ToolVersion (לא חשוף ב-UI!), Profile, Favorite, Save, Feedback, Skill, SystemPrompt, MediaAsset. RLS מוגדר בכל אחת.</p>
+
+    <h3>5. מגבלות וחולשות ידועות</h3>
+    <ul>
+      <li>Security: 4 CRITICAL (XSS דרך template literal injection, sandbox עם allow-same-origin, אין CSP, library URLs ללא whitelist)</li>
+      <li>אפס atomicity בכתיבות draft</li>
+      <li>אפס rate limiting → cost control חסר</li>
+      <li>Full iframe reload בכל כתיבה — UX שבורה</li>
+      <li>Observability: אין Sentry / Datadog</li>
+      <li>Tests: 4 קבצים / 21K LOC</li>
+      <li>Prompt caching: לא מופעל (בזבוז של 50-70% tokens)</li>
+      <li>Art Director חד-פעמי, לא persistent לאורך session</li>
+      <li>Skill matching לא scalable מעבר ל-200 skills</li>
+      <li>אין Critic / evaluator-optimizer loop</li>
+      <li>אין Mobile</li>
+      <li>אין Projects / Collaboration</li>
+      <li>אין Version UI (למרות ש-ToolVersion entity קיימת)</li>
+      <li>אין Brand Kit</li>
+      <li>אין Controls Editor (עריכה ישירה של schema)</li>
+      <li>אין Analytics dashboard ליוצרים</li>
+      <li>אין Notifications / Retention mechanics</li>
+      <li>אין Moderation</li>
+      <li>אין מערכת Credits / monetization</li>
+    </ul>
+
+    <h3>6. Stack טכנולוגי</h3>
+    <ul>
+      <li>Frontend: React 18 + TypeScript + Vite + Tailwind + shadcn/ui</li>
+      <li>Backend: Base44 BaaS — entities, auth, file storage, Deno functions</li>
+      <li>Agent runtime: Mastra (<code>@mastra/core@1.4.0</code>) — vendor lock-in בעייתי</li>
+      <li>Models: OpenAI, Anthropic, Google/Gemini via Mastra providers</li>
+      <li>Libraries in tools: p5, Three.js, Hydra, Matter.js, GSAP (dynamic CDN loading)</li>
+    </ul>
+
+    <h3>7. מדדי הצלחה נוכחיים (Tool-level)</h3>
+    <p>views · likes · saves · remixes — מנוהלים ב-Tool entity. אין dashboard שמסכם ל-creator.</p>
+
+    <h3>8. מגבלות מכוונות</h3>
+    <ul>
+      <li>הפלט פרמטרי — לא deliverable סגור</li>
+      <li>אין eject-to-clean-code (by design — מחליש קהילה)</li>
+      <li>אין direct canvas manipulation ב-editor (שיחה עם agent בלבד)</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <div class="insights-block" style="margin-top: 60px;">
+    <div class="block-header">
+      <h2>PRD #2 — Forward: BRIK עם כל התובנות והמחקרים</h2>
+      <span class="kicker-inline">target · v2.0</span>
+    </div>
+
+    <h3>0. תקציר מנהלים — השינוי הגדול</h3>
+    <p>BRIK גרסה 2 היא <strong>"parametric tool workshop for designers across all disciplines"</strong> — כלי יומי שיוצרים עומדים לידו, שמכיר אותם לאורך זמן, שמספק יכולות מוצהרות (BRIKS) של רמה תעשייתית, ושבונה מסביבו קהילה remix-first. ה-AI הוא לא product — הוא יכולת אחת מתוך שלושה מרכזיות: <strong>(1) Direct Mold</strong> (עריכה ישירה של הפלט), <strong>(2) Cast with AI</strong> (יצירה בשיחה עם Architect + Caster), <strong>(3) Stack</strong> (remix / community).</p>
+
+    <h3>1. Target Audience — ברור יותר</h3>
+    <p>Primary: <strong>Designers across all 14 disciplines</strong> (Graphic/Brand, Web/UI, Motion, Industrial, Fashion/Textile, Type/Editorial, Generative, Social Media, VJ/Live, Game/XR, Spatial, Education, Art Directors, Freelance/Hobbyist). כל קלאסטר מקבל onboarding, presets, skills ו-landing page ייעודיים. הגדרה זו מבוססת על 207 תרחישי משתמש (עמוד Stories).</p>
+
+    <h3>2. Core Value Propositions — 3 צירים</h3>
+    <ol>
+      <li><strong>Cast with an Architect</strong> — AI שלא "יוצר מהקיבה" אלא פועל עם Planning Brief מובנה, persistent, שמתעדכן לאורך session (Living Architect — מבוסס MemGPT pattern, <a href="https://arxiv.org/abs/2310.08560" target="_blank" class="cite">MemGPT</a>)</li>
+      <li><strong>Mold directly</strong> — Controls Editor שמאפשר גרירה, שינוי שם, הסתרה, קיבוע defaults בלי לעבור דרך chat</li>
+      <li><strong>Stack the community</strong> — Remix smooth, fork tree מוצג, attribution אוטומטית, creator economics (revenue share על stacks)</li>
+    </ol>
+
+    <h3>3. Roadmap — Sprint by Sprint (8 sprints)</h3>
+
+    <h4>S1 (שבועיים) — Security & Bug Fix Sprint</h4>
+    <ul>
+      <li>Library URL whitelist + <code>JSON.stringify</code> ב-assembler (XSS fix)</li>
+      <li>CSP header + הסרת <code>allow-same-origin</code> מ-sandbox</li>
+      <li>postMessage origin validation (כל "*" → origin מדויק)</li>
+      <li>Rate limiting בסיסי (requests/hour + tokens/day per user)</li>
+      <li><code>throw</code> במקום <code>console.error</code> ב-<code>session.ts</code></li>
+      <li>תיקון Remix race condition</li>
+      <li>תיקון <code>bakeControlDefaults</code> — publish לא שומר defaults (פידבק צוות)</li>
+      <li>תיקון canvas format bug — תמונות נחתכות</li>
+    </ul>
+
+    <h4>S2 (3 שבועות) — Version UI (פיצ'ר הכי מבוקש)</h4>
+    <ul>
+      <li>חשיפת <code>ToolVersion</code> entity ב-UI</li>
+      <li>Undo button — "dust off" למצב הקודם (שם מטרמינולוגיה)</li>
+      <li>Compare versions — diff visual</li>
+      <li>Pin version — checkpoint</li>
+      <li>Branching — fork לעצמך כ-parallel experiment</li>
+    </ul>
+
+    <h4>S3 (2-3 שבועות) — Controls Editor v1 (Direct Mold)</h4>
+    <ul>
+      <li>Drag-to-reorder controls</li>
+      <li>Inline rename</li>
+      <li>Show / Hide toggle</li>
+      <li>"Lock defaults from current values" button</li>
+      <li>Group controls (sections)</li>
+    </ul>
+
+    <h4>S4 (2 שבועות) — Agent Efficiency Upgrade</h4>
+    <ul>
+      <li><strong>Prompt Caching</strong> (Anthropic) — חיסכון 50-70% בעלות טוקנים <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank" class="cite">[A3]</a></li>
+      <li><strong>Tiered Model Routing</strong> — Conversational→Haiku/Flash, AD→Sonnet, Coder→Opus, Critic→Haiku</li>
+      <li>Pre-flight tool call validation (runtime, לא prompt hint)</li>
+      <li>Selective tool schema exposure (לא כל 11 ה-tools בכל קריאה)</li>
+    </ul>
+
+    <h4>S5 (3-4 שבועות) — Living Architect (Plan Mode + Context)</h4>
+    <ul>
+      <li><code>PlanningBrief</code> — JSON מובנה ב-Tool entity</li>
+      <li>Architect כותב brief במסר 1; מעדכן דרך <code>update_brief</code> tool</li>
+      <li>Caster מקבל brief שלם בכל turn (MemGPT-style)</li>
+      <li>Mode חדש ב-UI: "Plan first" vs "Build directly"</li>
+      <li>Trigger אוטומטי של update_brief כשזוהתה creative ambiguity ("more playful", "too much")</li>
+    </ul>
+
+    <h4>S6 (חודש) — BRIKS Layer Foundations</h4>
+    <ul>
+      <li><strong>Export Presets</strong> — "Instagram square loop", "Twitter card", "Hero 1920x600", "TikTok 9:16"</li>
+      <li><strong>Brand Kit</strong> — Kit entity חדש (colors, fonts, assets, logo) שמתחבר ל-Tool</li>
+      <li><strong>Preset Library per Cluster</strong> — 5-10 dogmatic presets לכל אחד מ-14 הקלאסטרים</li>
+      <li>Tokens override system — user kit overrides <code>--clay-*</code></li>
+    </ul>
+
+    <h4>S7 (3-4 שבועות) — Embeddings Skill Matching + Telemetry</h4>
+    <ul>
+      <li>Embeddings על skill descriptions + exemplar outputs</li>
+      <li>Retrieve top-5 → Haiku rerank → top-3</li>
+      <li>Admin UI: "למה הסקיל הזה נבחר"</li>
+      <li><code>SkillUsage</code> telemetry table — כל tool, כל skill, תוצאה (published/abandoned/remixed/error)</li>
+      <li>Dashboard: top-performing skills</li>
+    </ul>
+
+    <h4>S8 (4-6 שבועות) — Technology Infrastructure (מתוך R3)</h4>
+    <ul>
+      <li><strong>WebGPU renderer mode</strong> (Three.js TSL) + fallback ל-WebGL</li>
+      <li><strong>Asset Providers abstraction</strong> — unified interface ל-Poly Haven, AmbientCG, Pexels, Freesound, Iconify, Google Fonts</li>
+      <li><strong>Inference Provider tier-router</strong> — Transformers.js client-side → fal.ai real-time → Replicate queue</li>
+      <li>Integration ראשוני: SAM 2 (background removal) + MediaPipe (pose/face) + Rapier (physics) + Depth Anything V2</li>
+    </ul>
+
+    <h4>S9-S10 (6-8 שבועות) — Projects + Collaboration</h4>
+    <ul>
+      <li><code>Project</code> entity חדש — מכיל Tools, Kit, collaborators, history</li>
+      <li>Permissions: owner / editor / viewer</li>
+      <li>Real-time presence (Step 1: "X is in this BRIK")</li>
+      <li>Comments על BRIKs</li>
+      <li>Notifications — "Someone stacked your BRIK", "Your BRIK has 10 views"</li>
+    </ul>
+
+    <h4>S11+ — Beyond</h4>
+    <ul>
+      <li>Critic Agent (Haiku) — verifier + loop-back אם fails</li>
+      <li>Voyager-style skill library (aesthetic memory — learns from user's successful tools)</li>
+      <li>Creator Analytics dashboard</li>
+      <li>Moderation pipeline (Vision API על thumbnails לפני publish)</li>
+      <li>Content Moderation — flag / report / takedown</li>
+      <li>Mobile — Consumption-first app (viewer + gallery + remix touch controls)</li>
+      <li>Credits system מלא (Stripe integration)</li>
+      <li>Enterprise embed features (SSO, white-label, password gate)</li>
+      <li>B2B agency motion</li>
+    </ul>
+
+    <h3>4. Non-Functional Requirements</h3>
+    <ul>
+      <li><strong>Performance:</strong> ביטול full iframe reload בכל כתיבה. iframe patching API (postMessage של delta)</li>
+      <li><strong>Observability:</strong> Sentry integration חובה. Per-user token tracking. Agent run status (success/error/partial) מוצג לאדמין</li>
+      <li><strong>Testing:</strong> 50+ unit tests על assembler + validation + agent tools. CI gate על PRs</li>
+      <li><strong>Security:</strong> כל 4 ה-CRITICAL fixed. CSP enforced. Audit log על SystemPrompt + Skill edits</li>
+      <li><strong>Cost:</strong> Prompt caching + tiered routing + token budget per user</li>
+      <li><strong>Scalability:</strong> Embeddings matching תומך ב-1000+ skills. Vector DB (Pinecone/Qdrant/pgvector)</li>
+    </ul>
+
+    <h3>5. Competitive Positioning (מ-R2 + R2-update)</h3>
+    <p><strong>BRIK is not:</strong> AI app builder (Lovable, Bolt, v0), AI design tool (Claude Design, Stitch, Figma Make), AI canvas (Omma).</p>
+    <p><strong>BRIK is:</strong> the first <strong>parametric micro-app gallery</strong> — a daily creative toy surface for 14 designer disciplines, where each output is a live, tweakable, remixable <code>.brik</code> with curated design system and canvas modes (2D, 3D, Hydra, WebGPU) from natural-language prompt.</p>
+
+    <h3>6. Moat Reinforcement Plan</h3>
+    <ul>
+      <li><strong>Curated Skills knowledge</strong> — per-cluster skill packs, לא ניתן להעתיק במהירות</li>
+      <li><strong>Architect methodology</strong> — Decision Levels, "Silence is not an invitation", Creative Brief format</li>
+      <li><strong>User memory / aesthetic memory</strong> — Anthropic/OpenAI לא ירצו להעתיק את זה (לא ה-business model שלהם)</li>
+      <li><strong>Multi-renderer (WebGPU + Hydra + shaders)</strong> — whitespace שאף אחד לא במרכז</li>
+      <li><strong>Community remix economics</strong> — revenue share על stacks</li>
+      <li><strong>14 landing pages ייעודיים</strong> — ב-cluster-based marketing</li>
+    </ul>
+
+    <h3>7. Terminology Migration</h3>
+    <p>ראה עמוד "שפה" (Terminology) — המעבר ל-BRIK vocabulary (Cast, Mold, Set, Stack, Chip, Forge, BRIKYARD, Masons) נעשה במדורג לאורך 3 חודשים.</p>
+
+    <h3>8. Success Metrics (12-month target)</h3>
+    <ul>
+      <li>Token cost per active user: ירידה של 60%+ (מ-prompt caching + tiered routing)</li>
+      <li>Retention D30: שיפור x2 (מ-notifications + version UI + aesthetic memory)</li>
+      <li>Creator analytics: 70%+ מ-creators פעילים נכנסים ל-dashboard חודשית</li>
+      <li>Remix rate: 15%+ מ-published BRIKs מקבלים stack אחד לפחות</li>
+      <li>Cluster coverage: לפחות 8 מתוך 14 קלאסטרים פעילים (&gt;100 creators כל אחד)</li>
+      <li>Mobile: 30%+ מ-gallery traffic ממובייל</li>
+      <li>B2B: 50+ חברות עם Brand Kit מותקן</li>
+    </ul>
+
+    <h3>9. סיכונים ו-Mitigations</h3>
+    <table>
+      <thead><tr><th>סיכון</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Design מרחיב ל-parametric + remix</td><td>BRIK עולה מהר על WebGPU + 14-cluster presets + Stacker economics</td></tr>
+        <tr><td>Omma מוסיפים מצב "creative toy"</td><td>BRIK מחזיק את Hydra/shader/VJ niche + design language אחיד</td></tr>
+        <tr><td>Base44 (Wix internal) מתרחב</td><td>הגדרה פנימית ברורה: Base44 = production apps, BRIK = creative tools</td></tr>
+        <tr><td>Mastra ננטש / שובר</td><td>Adapter layer עכשיו — מאפשר החלפה ל-LangGraph / OpenAI Agents SDK</td></tr>
+        <tr><td>Cost של AI מתפוצץ</td><td>Prompt caching + tiered routing + credits מיידי</td></tr>
+        <tr><td>Security incident פומבי</td><td>S1 לא-ניתן-לדחייה</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -4730,6 +5603,10 @@
 
     <h2>יומן עדכונים</h2>
     <div class="update-log">
+      <div class="update-entry">
+        <div class="update-date">2026-04-21 · R2+R3 עומק, Terminology, 2 PRDs</div>
+        <div>סיבוב עומק נוסף של כל המחקרים עם WebSearch/WebFetch חי: <strong>R1 Agents עודכן</strong> עם Anthropic Context Engineering, multi-agent 15× cost, prompt caching 85% latency reduction, 10 המלצות מבוססות-מקורות. <strong>R2 Competitors עודכן</strong> עם Tier-0 חדש: Claude Design (Apr 17, 2026), Omma by Spline (Mar 24, 2026), Figma Weave, Google Stitch 2.0, Google AI Studio Gallery, OpenAI Apps SDK — ועוד 20 launches 2025-2026 שנפסחו. <strong>עמוד R3 Tech חדש</strong> — 10 קטגוריות (WebGPU, Transformers.js, fal.ai, Poly Haven CC0, SAM 2, MediaPipe, HarfBuzzJS, Rapier, Ideogram, Culori, Gaussian Splatting, Iconify, Veo, Meyda, ElevenLabs, ControlNet, compute shaders, TripoSR) + Top 20 מדורגים + licensing watch-list. <strong>עמוד Terminology חדש</strong> — שפת מוצר אחידה (BRIK/BRIKWORK/BRIKYARD/Cast/Mold/Stack/Chip/Forge/Architect/Caster/Masons/Masterwork/.brik) + 3 tagline options + מעבר מדורג. <strong>עמוד PRDs חדש</strong> — PRD #1 רטרוספקטיבי של BRIK היום + PRD #2 forward עם 11 sprints מ-S1 (security) עד S11+ (B2B/Mobile/Credits).</div>
+      </div>
       <div class="update-entry">
         <div class="update-date">2026-04-21 · 207 תרחישי יוצרים</div>
         <div>הגדרת <strong>קהל יעד חדשה — "מעצבים ויוצרים מכל הדיסציפלינות"</strong>. נוסף עמוד חדש <strong>"תרחישים"</strong> עם <strong>207 סיפורי משתמש</strong> מסודרים ב-14 קלאסטרים: Graphic/Brand, Web/UI, Motion, Industrial, Fashion/Textile, Type/Editorial, Generative/Code, Social/TikTok/YouTube, VJs/Live, Game/XR, Architecture/Spatial, Education (students+lecturers), Art/Creative Directors, Freelance/Hobbyist. נוסף SVG diagram עם 14 קלאסטרים + synthesis של 4 דפוסי-על (repeat tool / client tool / event tool / exploration tool), 5 יכולות חוצות-קלאסטרים, 3 גאפים חדשים שהתבררו (video quality, pro typography, print-ready), והמלצה שיווקית ל-14 landing pages מובחנים.</div>
