@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRIK · פידבק מהצוות — פגישה</title>
+<style>
+  :root {
+    --bg: #0f0f10;
+    --surface: #17171a;
+    --surface-2: #1f1f23;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --text-muted: #9a9aa2;
+    --text-dim: #70707a;
+    --accent: #ff7a45;
+    --accent-soft: #ffb48f;
+    --green: #70a070;
+    --orange: #d68030;
+    --red: #c04040;
+    --cyan: #8de0e0;
+    --mono: "JetBrains Mono", "Fira Code", ui-monospace, Menlo, Consolas, monospace;
+    --sans: "Heebo", "Assistant", -apple-system, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  body { direction: rtl; text-align: right; padding: 40px 24px 80px; }
+  main { max-width: 920px; margin: 0 auto; }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 36px;
+  }
+  header .brand {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-left: 8px;
+    font-family: var(--mono);
+    font-weight: 700;
+  }
+  header h1 {
+    font-size: 32px;
+    margin: 16px 0 8px;
+    letter-spacing: -0.01em;
+  }
+  header .sub {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin: 0;
+  }
+  header .meta {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  h2 {
+    font-size: 22px;
+    margin: 44px 0 14px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 8px;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 24px 0 10px;
+    color: var(--accent-soft);
+  }
+  h4 {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 16px 0 8px;
+  }
+  code {
+    font-family: var(--mono);
+    background: #0b0b0d;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+    direction: ltr;
+    display: inline-block;
+  }
+
+  .section {
+    margin-bottom: 44px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .section-header h2 { margin: 0; border: none; padding: 0; }
+  .section-header .kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    background: rgba(255,122,69,0.1);
+    border-radius: 4px;
+  }
+
+  .item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-right: 3px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin: 10px 0;
+  }
+  .item.team { border-right-color: var(--accent); }
+  .item.added { border-right-color: var(--cyan); background: var(--surface-2); }
+  .item h4 {
+    margin: 0 0 6px;
+    color: var(--text);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .item p { margin: 4px 0; font-size: 14px; color: var(--text-muted); }
+  .item .tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+  }
+  .tag-critical { background: #6e1a1a; color: #ffb8b8; }
+  .tag-high { background: #5c3a12; color: #ffcc88; }
+  .tag-medium { background: #3a3a14; color: #f0e68c; }
+  .tag-bug { background: #2a1a2a; color: #ffa0ff; }
+  .tag-ux { background: #1a2a2a; color: #a0ffff; }
+  .tag-feature { background: #1e3a1e; color: #98d598; }
+  .tag-new { background: rgba(141,224,224,0.2); color: var(--cyan); border: 1px solid var(--cyan); }
+  .tag-team { background: rgba(255,122,69,0.15); color: var(--accent); }
+
+  .note {
+    background: rgba(141,224,224,0.08);
+    border: 1px solid rgba(141,224,224,0.35);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .note::before {
+    content: "💡 ";
+    font-size: 16px;
+  }
+
+  .divider {
+    text-align: center;
+    margin: 40px 0 20px;
+    font-family: var(--mono);
+    color: var(--text-dim);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+  .divider::before, .divider::after {
+    content: "";
+    display: inline-block;
+    height: 1px;
+    width: 80px;
+    background: var(--border);
+    vertical-align: middle;
+    margin: 0 12px;
+  }
+
+  .summary-counts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .summary-counts .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .summary-counts .stat .num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    font-family: var(--mono);
+  }
+  .summary-counts .stat .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .print-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .print-btn:hover { background: var(--accent-soft); }
+
+  @media print {
+    body { background: #fff; color: #000; padding: 20px; font-size: 12px; }
+    .item { border: 1px solid #999; background: #fff; page-break-inside: avoid; }
+    .item p, header .sub, .item .tags, .tag { color: #333 !important; }
+    .print-btn { display: none; }
+    h1, h2, h3, h4 { color: #000 !important; }
+    .tag { border: 1px solid #999; }
+    .note { background: #f5f5f5; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨️ הדפסה / PDF</button>
+
+<main>
+
+<header>
+  <div><span class="brand">BRIK</span> <span style="color: var(--text-muted); font-size: 14px;">· מסמך פנימי לפגישה</span></div>
+  <h1>בקשות ובעיות מהשטח — לעיון הצוות</h1>
+  <p class="sub">רשימת פריטים שעלו בעבודת צוות סרט ההשקה, עם תוספות של בעיות מוכרות מאותה מוטיבציה — <em>מה חוסם מעצב מלסיים את המשימה שלו</em>.</p>
+  <p class="meta">נוצר: 2026-04-21 · מקור: BRIK Wiki · מטרה: יישור לקראת פגישת roadmap</p>
+</header>
+
+<div class="summary-counts">
+  <div class="stat"><span class="num">17</span><div class="label">פריטים מהצוות</div></div>
+  <div class="stat"><span class="num">13</span><div class="label">תוספות של תובנות</div></div>
+  <div class="stat"><span class="num">30</span><div class="label">סה"כ פריטים</div></div>
+  <div class="stat"><span class="num">5</span><div class="label">קריטיים מיידיים</div></div>
+</div>
+
+<div class="note">
+  <strong>הבהרה מבנית:</strong> החלק הראשון (A) הוא ה-<em>רשימה המקורית</em> שעלתה מצוות סרט ההשקה — כמות שהיא, ללא עיבוד. החלק השני (B) הוא <em>תוספות</em> מאותה מוטיבציה (בעיות מוכרות / יכולות חסרות שחוסמות מעצבים) — מופרד ומסומן בבירור כ"🆕 תוספת".
+</div>
+
+<!-- ───────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="kicker">חלק A · רשימת הצוות</span>
+    <h2>בקשות ובעיות שעלו מעבודת הצוות על סרט ההשקה</h2>
+  </div>
+
+  <h3>🚨 קריטיים — הצוות סימן "חייב להיות"</h3>
+
+  <div class="item team">
+    <h4>#1 — Undo / חזרה למצב אחרון לפני שינוי</h4>
+    <p>המעצב מבקש מהסוכן שינוי, התוצאה לא טובה, רוצה לחזור אחורה. <strong>הצוות הדגיש: "הכי קריטי לדעתי זה undo".</strong></p>
+    <div class="tags"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#2 — Publish + שמירה לא שומרת על defaults</h4>
+    <p>המעצב מכוון ערכים מסוימים, מפרסם, ואז הכלי נפתח עם ערכים אחרים. שבירה של אמון המוצר.</p>
+    <div class="tags"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-bug">Bug</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#3 — Remix לא עובד הרבה פעמים</h4>
+    <p>בנסיון לרמקס כלי — פעולה נכשלת. לא עקבי.</p>
+    <div class="tags"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-bug">Bug</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#4 — שינוי פורמט canvas חותך תמונות</h4>
+    <p>כשמשנים פורמט של canvas — התמונות שבתוכו נחתכות. באג קריטי ב-UX של עיצוב.</p>
+    <div class="tags"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-bug">Bug</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <h3>🟠 חשובים — UX gaps</h3>
+
+  <div class="item team">
+    <h4>#5 — עריכת תפריטים (שמות/סדר של קונטרולרים)</h4>
+    <p>המעצב רוצה לשנות את שם הסליידר, לסדר מחדש, להסתיר. היום חייב לעשות דרך chat.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#6 — כפתור לקיבוע defaults hardcoded (ללא chat)</h4>
+    <p>אחרי שהמעצב מכוון את הסליידרים — הוא רוצה לקבוע את המצב הזה כ-default החדש, בלחיצה אחת.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#7 — חוסר היסטוריה (Version History)</h4>
+    <p>אין מעקב אחרי גרסאות. המעצב מאבד עבודה או לא יודע מה שונה.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#8 — חוסר Plan Mode</h4>
+    <p>המעצב רוצה להתייעץ עם הסוכן / לבנות תכנית <em>לפני</em> ביצוע. היום הכל מיידי.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#9 — חוסר Context — agent לא מכיר את הפרויקט</h4>
+    <p>בכל פנייה חוזרת הסוכן "קורא מחדש". לא-שקוף ליוזר אבל משפיע על איכות התשובות.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <h3>🟡 רצויים — שיפורים ו-UX</h3>
+
+  <div class="item team">
+    <h4>#10 — חלונות צפים (פופאפים) edit → publish</h4>
+    <p>המעבר בין edit ל-publish יכלול חלונות צפים לאישור/התאמה — לא בוטה.</p>
+    <div class="tags"><span class="tag tag-medium">MED</span><span class="tag tag-ux">UX</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#11 — רנדר / פריסטים</h4>
+    <p>שליטה על איכות הרנדר, פריסטים מוכנים לשימוש מהיר.</p>
+    <div class="tags"><span class="tag tag-medium">MED</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#12 — לגרור תמונה לצ'אט</h4>
+    <p>במקום לצרף דרך כפתור — drag-and-drop תמונה לצ'אט.</p>
+    <div class="tags"><span class="tag tag-medium">MED</span><span class="tag tag-ux">UX</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#13 — Canvas ריק דיפולטיבי ללא גבולות גזרה</h4>
+    <p>כש-canvas ריק ב-onboarding — אין bounds ויזואליים. המעצב לא יודע איפה הוא עובד.</p>
+    <div class="tags"><span class="tag tag-medium">MED</span><span class="tag tag-ux">UX</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#14 — זיכרון של canvas size אחרון + צבע רקע</h4>
+    <p>המעצב כוון size + background. פותח session חדש — הוא רוצה שהמערכת תזכור.</p>
+    <div class="tags"><span class="tag tag-medium">MED</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#15 — אקספורט וידאו איכותי — רנדר ברמה גבוהה</h4>
+    <p>אקספורט נוכחי לא-תעשייתי. מעצב צריך 4K, 60fps, איכות גבוהה להעברה לעריכה.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#16 — שיתוף עמיתים לעבודה</h4>
+    <p>קולבורציה — 2 מעצבים עובדים על אותו כלי.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+
+  <div class="item team">
+    <h4>#17 — סביבת עבודה — פרויקט</h4>
+    <p>קבוצת כלים שמתאגדים תחת "פרויקט" אחד. עם brand kit משותף, collaborators משותפים.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-feature">Feature</span><span class="tag tag-team">Team</span></div>
+  </div>
+</div>
+
+<div class="divider">— סוף רשימת הצוות · תחילת התוספות —</div>
+
+<!-- ───────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="kicker">חלק B · תוספות</span>
+    <h2>בעיות ויכולות חסרות נוספות מאותה מוטיבציה</h2>
+  </div>
+
+  <div class="note">
+    הבעיות הבאות לא עלו ישירות מהצוות אלא מניתוח של הקוד, השטח, ו-207 תרחישי שימוש שמיפינו. הן <em>באותה מוטיבציה</em> — "מה חוסם מעצב". מסומנות בטורקיז.
+  </div>
+
+  <h3>🚨 קריטיים — security + infrastructure שחוסמים צמיחה</h3>
+
+  <div class="item added">
+    <h4>🆕 #18 — Security: 4 חורי XSS פוטנציאליים</h4>
+    <p>ב-assembler יש template literal injection, אין CSP, sandbox עם allow-same-origin, library URLs ללא whitelist. משתמש זדוני אחד יכול לגנוב tokens של מעצבים אחרים דרך הגלריה.</p>
+    <div class="tags"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #19 — Rate Limiting — אין הגבלה על agent-chat</h4>
+    <p>ללא הגבלה של tokens/user, משתמש יכול לשרוף $10K בלילה. חוסם מונטיזציה ותכנון עלות.</p>
+    <div class="tags"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #20 — Atomicity בכתיבות agent (tool יכול להישבר)</h4>
+    <p>הסוכן כותב schema → code → libs בסדרה. אם timeout באמצע — ה-tool נשאר במצב שבור בלתי-ניתן-לשחזור.</p>
+    <div class="tags"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <h3>🟠 חשובים — חוויית מעצב ו-moat</h3>
+
+  <div class="item added">
+    <h4>🆕 #21 — Brand Kit (Colors + Fonts + Assets bundle)</h4>
+    <p>מעצב עובד עם לקוח → צריך צבעים וטיפוגרפיה שלו בכל כלי. היום אין — חוזרים על עצמם בכל פעם.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #22 — Full iframe reload בכל שינוי — UX שבורה</h4>
+    <p>כל פעם שהסוכן כותב, ה-canvas מתאפס — אנימציות נעצרות, state נמחק. "שיחה חיה" מרגישה הרוסה.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #23 — Analytics Dashboard ליוצר</h4>
+    <p>מעצב פרסם כלי — אין לו מושג כמה ראו, כמה remixed, מי. אין feedback loop להחליט "מה עובד".</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #24 — Notifications — Retention Driver</h4>
+    <p>"מישהו רימקס את הכלי שלך" / weekly digest — חסרים. אין סיבה ל-user לחזור.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #25 — Moderation — גלריה פומבית ללא flagging</h4>
+    <p>תוכן בעייתי (NSFW, brand abuse) — אין כלי דיווח, אין takedown. פצצה מתקתקת לגלריה פומבית.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #26 — Industry Format Support (SVG, GLB, Lottie)</h4>
+    <p>מעצב רוצה לייבא SVG מ-Figma או GLB מ-Blender. היום לא תומכים. חוסם את יעד ה-"BRIK ב-pipeline של כל פרויקט".</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #27 — After Effects Plugin</h4>
+    <p>Motion designer רוצה להמשיך עבודה ב-AE. ללא plugin — BRIK נשארת מחוץ ל-pipeline שלו.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <h3>🟡 רצויים — ecosystem ו-growth</h3>
+
+  <div class="item added">
+    <h4>🆕 #28 — Tool Composition / Node-based Flow</h4>
+    <p>Output של כלי A → input של כלי B. יוצר שרשראות workflow.</p>
+    <div class="tags"><span class="tag tag-medium">MED</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #29 — <code>.brik</code> Open Format — cross-platform</h4>
+    <p>פורמט פתוח שתוכנות אחרות יכולות לפתוח. Rive עשתה את זה עם <code>.riv</code> והפכה לסטנדרט. אסטרטגי.</p>
+    <div class="tags"><span class="tag tag-high">HIGH</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+
+  <div class="item added">
+    <h4>🆕 #30 — Mobile Consumption — viewer + gallery</h4>
+    <p>גלריית BRIK במובייל — אפילו רק לצפייה + remix פשוט. מעצבים מגלגלים feed במובייל.</p>
+    <div class="tags"><span class="tag tag-medium">MED</span><span class="tag tag-new">תוספת</span></div>
+  </div>
+</div>
+
+<!-- ───────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="kicker">סיכום</span>
+    <h2>3 תובנות-על לדיון</h2>
+  </div>
+
+  <div class="item team">
+    <h4>💡 תובנה 1 — ה"Undo" הקריטי הוא הטיפ של קרחון ה-Version UI</h4>
+    <p>מה שהצוות מבקש כ-"undo" (#1) = Version UI מלא. ה-entity כבר קיימת ב-Base44 (<code>ToolVersion</code>) — רק לא חשופה ב-UI. זה work של שבוע (לא חודש) כי הבסיס קיים. <strong>המלצה:</strong> להעלות את זה ל-P1 מיידי.</p>
+  </div>
+
+  <div class="item team">
+    <h4>💡 תובנה 2 — "Plan Mode" + "Context" = אותו פיצ'ר אחד</h4>
+    <p>בקשות #8 + #9 של הצוות הן שתי פנים של אותו פיצ'ר: <strong>Persistent Planning Brief</strong> (MemGPT-style). Art Director כותב brief במסר 1, Creative Coder מקבל אותו כל turn. בפועל זה משנה את איכות ה-iteration דרמטית.</p>
+  </div>
+
+  <div class="item team">
+    <h4>💡 תובנה 3 — "סביבת פרויקט" + "שיתוף עמיתים" = Projects entity + Collaboration</h4>
+    <p>בקשות #16 + #17 הן פיצ'ר אסטרטגי: פתיחת BRIK ל-<em>team workflow</em> מעבר ל-solo tool. זה שינוי data model משמעותי אבל פותח מונטיזציה B2B והופך את BRIK מ-"toy" ל-"platform".</p>
+  </div>
+</div>
+
+<!-- ───────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="kicker">למפגש</span>
+    <h2>שאלות לדיון עם הצוות</h2>
+  </div>
+
+  <div class="item">
+    <h4>שאלה 1 — אילו מ-17 הפריטים שלכם חוצים את העבודה היומיומית שלכם <em>עוד השבוע</em>?</h4>
+    <p>צריך לסנן מ-17 → 5 שבאמת חוסמים עבודה יומיומית. אלה יקבלו P1.</p>
+  </div>
+
+  <div class="item">
+    <h4>שאלה 2 — האם #16 Collaboration ו-#17 Projects נחוצים כ-"nice to have" או כ-blocker?</h4>
+    <p>זה שינוי ארכיטקטוני משמעותי. אם זה blocker → מתחילים עכשיו. אם nice to have → אחרי שיסודות יציבים (M2-M3).</p>
+  </div>
+
+  <div class="item">
+    <h4>שאלה 3 — איך מודדים "איכות אקספורט" (#15)?</h4>
+    <p>"ברמה גבוהה" סובייקטיבי. מה ספציפית חסר? 4K? 60fps? codec ספציפי? Transparency? זה קובע אם זה שבוע של עבודה או חודש.</p>
+  </div>
+
+  <div class="item">
+    <h4>שאלה 4 — #11 "פריסטים" — פריסטים של מה בדיוק?</h4>
+    <p>Export presets (גדלים)? Style presets (looks)? Library presets (מוכנים)? ההבנה קובעת priority וeffort.</p>
+  </div>
+</div>
+
+<footer style="margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 13px; text-align: center;">
+  BRIK Team Feedback Document · 2026-04-21 · לעיון פנימי בפגישה · מקור מלא: <a href="./index.html" style="color: var(--accent);">BRIK Wiki</a>
+</footer>
+
+</main>
+
+</body>
+</html>

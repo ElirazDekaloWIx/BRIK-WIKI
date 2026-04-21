@@ -26,8 +26,9 @@
     --code-bg: #0b0b0d;
     --mono: "JetBrains Mono", "Fira Code", ui-monospace, Menlo, Consolas, monospace;
     --sans: "Heebo", "Assistant", -apple-system, "Segoe UI", system-ui, sans-serif;
-    --nav-h: 64px;
-    --subnav-h: 48px;
+    --nav-h: 56px;
+    --subnav-h: 46px;
+    --subnav-sec-h: 42px;
   }
 
   * { box-sizing: border-box; }
@@ -48,6 +49,10 @@
     direction: rtl;
     text-align: right;
     padding-top: calc(var(--nav-h) + var(--subnav-h));
+    transition: padding-top 0.2s ease;
+  }
+  body.has-secondary {
+    padding-top: calc(var(--nav-h) + var(--subnav-h) + var(--subnav-sec-h));
   }
 
   /* ═══ Top Navigation ═══ */
@@ -105,7 +110,7 @@
 
   /* ═══ Subnav (tabs) ═══ */
 
-  .subnav {
+  .subnav-primary {
     position: fixed;
     top: var(--nav-h);
     left: 0;
@@ -122,13 +127,23 @@
     scrollbar-width: thin;
   }
 
-  .tab-group-sep {
-    width: 1px;
-    height: 24px;
-    background: var(--border);
-    margin: 0 8px;
-    flex-shrink: 0;
+  .subnav-secondary {
+    position: fixed;
+    top: calc(var(--nav-h) + var(--subnav-h));
+    left: 0;
+    right: 0;
+    height: var(--subnav-sec-h);
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+    z-index: 89;
+    display: none;
+    align-items: center;
+    overflow-x: auto;
+    padding: 0 20px;
+    gap: 4px;
+    scrollbar-width: thin;
   }
+  .subnav-secondary.visible { display: flex; }
 
   .tab {
     background: transparent;
@@ -143,27 +158,50 @@
     white-space: nowrap;
     transition: all 0.15s;
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
-  .tab:hover { background: var(--surface-2); color: var(--text); }
+  .tab:hover { background: var(--surface-3); color: var(--text); }
   .tab.active {
     background: var(--accent-dim);
     color: var(--accent);
   }
-  .tab .tab-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-dim);
-    margin-left: 6px;
+  .tab .chevron {
+    font-size: 10px;
+    opacity: 0.7;
+    transition: transform 0.2s;
   }
-  .tab.active .tab-num { color: var(--accent); }
+  .tab.active .chevron { transform: rotate(180deg); }
 
-  .tab-group-label {
+  .tab-sub {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .tab-sub:hover { background: var(--surface-3); color: var(--text); }
+  .tab-sub.active {
+    background: var(--accent);
+    color: #000;
+    font-weight: 600;
+  }
+
+  .subnav-secondary-label {
     font-size: 11px;
     color: var(--text-dim);
     font-family: var(--mono);
-    letter-spacing: 0.05em;
-    padding: 0 6px;
-    align-self: center;
+    letter-spacing: 0.04em;
+    padding: 0 8px;
+    text-transform: uppercase;
   }
 
   /* ═══ Pages ═══ */
@@ -1102,32 +1140,17 @@
 
 <div class="progress-bar" id="progressBar"></div>
 
-<nav class="subnav" id="subnav">
-  <span class="tab-group-label">תובנות</span>
-  <button class="tab active" data-page="overview">סקירה<span class="tab-num">01</span></button>
-  <button class="tab" data-page="architecture">ארכיטקטורה<span class="tab-num">02</span></button>
-  <button class="tab" data-page="agent">סוכן<span class="tab-num">03</span></button>
-  <button class="tab" data-page="briks">BRIKS<span class="tab-num">04</span></button>
-  <button class="tab" data-page="users">משתמשים<span class="tab-num">05</span></button>
-  <button class="tab" data-page="stories">תרחישים<span class="tab-num">5+</span></button>
-  <button class="tab" data-page="moat">בידול<span class="tab-num">06</span></button>
-  <button class="tab" data-page="risks">סיכונים<span class="tab-num">07</span></button>
-  <div class="tab-group-sep"></div>
-  <span class="tab-group-label">מחקרים</span>
-  <button class="tab" data-page="research-agents">סוכנים<span class="tab-num">R1</span></button>
-  <button class="tab" data-page="research-competitors">מתחרים<span class="tab-num">R2</span></button>
-  <button class="tab" data-page="research-tech">טכנולוגיות<span class="tab-num">R3</span></button>
-  <div class="tab-group-sep"></div>
-  <span class="tab-group-label">מסמכים</span>
-  <button class="tab" data-page="prds">PRDs<span class="tab-num">P</span></button>
-  <button class="tab" data-page="terminology">שפה<span class="tab-num">T</span></button>
-  <div class="tab-group-sep"></div>
-  <span class="tab-group-label">פעולה</span>
-  <button class="tab" data-page="recommendations">המלצות<span class="tab-num">08</span></button>
-  <button class="tab" data-page="questions">שאלות<span class="tab-num">09</span></button>
-  <button class="tab" data-page="backlog">Backlog<span class="tab-num">10</span></button>
-  <div class="tab-group-sep"></div>
-  <button class="tab" data-page="appendix">נספחים<span class="tab-num">11</span></button>
+<nav class="subnav-primary" id="subnav-primary">
+  <button class="tab active" data-group="overview" data-page="overview">סקירה</button>
+  <button class="tab" data-group="product">המוצר <span class="chevron">▾</span></button>
+  <button class="tab" data-group="research">מחקרים <span class="chevron">▾</span></button>
+  <button class="tab" data-group="strategy">אסטרטגיה <span class="chevron">▾</span></button>
+  <button class="tab" data-group="planning">תכנון <span class="chevron">▾</span></button>
+  <button class="tab" data-group="appendix" data-page="appendix">נספחים</button>
+</nav>
+
+<nav class="subnav-secondary" id="subnav-secondary">
+  <!-- populated dynamically by JS -->
 </nav>
 
 <main>
@@ -4802,18 +4825,486 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- PAGE P: PRDs                                                    -->
+<!-- PAGE: ROADMAP (user-first, parallel streams, vibe-coding-adjusted) -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="page" id="page-prds">
+<section class="page" id="page-roadmap">
   <div class="page-header">
-    <div class="kicker">P · Product Requirement Documents</div>
-    <h1>שני PRDs — עבר והעתיד</h1>
-    <p class="lede">PRD #1 תיעוד רטרוספקטיבי של BRIK <em>כפי שהיא היום</em>. PRD #2 מסמך קדימה שמכיל את כל התובנות, המחקרים וההמלצות מכל המסמך הזה.</p>
+    <div class="kicker">🗺️ Roadmap · User-First · Vibe-Coding Velocity</div>
+    <h1>Roadmap — מה ראשון, מה אחריו, מה במקביל</h1>
+    <p class="lede">מסדר העבודה לפי מה שהמשתמש צריך כדי לסיים את המשימה — לא לפי מה שנוח לפתח. Supporting tech נע במקביל לפיצ'רים שהוא תומך בהם. מותאם ל-vibe-coding velocity: ~4 streams במקביל, sprint = שבוע במקום שבועיים-שלושה.</p>
   </div>
 
   <div class="verdict">
-    <h3>סדר הקריאה</h3>
-    <p>PRD #1 קריאה ראשונה — מיישר את הצוות על המצב הקיים. PRD #2 קריאה שנייה — מראה את הפער בין המצב הקיים ליעד. הפער הוא ה-roadmap.</p>
+    <h3>עקרון העבודה — User-First</h3>
+    <p>כל פיצ'ר על הציר הזה עונה על השאלה: <strong>"מה בלוקר ליוזר לסיים את מה שהוא בא לעשות?"</strong> אם לא — הוא לא על הציר (אולי תומך בו, ונמצא בתשתית). התשתית נעה לשרת את ה-user experience, לא להפך.</p>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>1. היוזרים העיקריים</h2>
+      <span class="kicker-inline">who we build for</span>
+    </div>
+
+    <p>על פי ניתוח 207 תרחישים ו-6 פרסונות, היוזרים מקובצים ל-<strong>3 קהלים ראשיים</strong> (P1/P2/P3) + 2 אספקטורים (Aspirational/Aspirator):</p>
+
+    <div class="persona sweet-spot">
+      <h4><span class="fit">P1 · Sweet Spot · 60% מה-roadmap</span>Designer Who Codes (Partial)</h4>
+      <p><strong>מטרה:</strong> להכין כלי פרמטרי לפרויקט לקוח / לפורטפוליו, שאשתמש בו שוב ושוב.</p>
+      <p><strong>מה חוסם אותו כרגע:</strong></p>
+      <ul>
+        <li>Version UI חסר — לא יכול לחזור אם הסוכן פישל</li>
+        <li>Controls Editor חסר — כל עריכת שם/סדר של slider דורשת chat</li>
+        <li>Brand Kit חסר — אין איך לשמור צבעים/פונטים/לוגו של לקוח</li>
+        <li>Publish לא שומר defaults → כלי נפתח במצב אחר ממה שראו</li>
+        <li>iframe reload בכל שינוי שובר את "השיחה החיה"</li>
+      </ul>
+      <p><strong>מה יש לו:</strong> יכולת ליצור tool בסיסי דרך chat, לפרסם לגלריה, לקבל remix.</p>
+    </div>
+
+    <div class="persona sweet-spot">
+      <h4><span class="fit">P2 · High Fit · 25% מה-roadmap</span>Tinkerer / Hobbyist</h4>
+      <p><strong>מטרה:</strong> להכין דברים מגניבים, לשתף, לרמקס מה שאחרים עשו.</p>
+      <p><strong>מה חוסם:</strong></p>
+      <ul>
+        <li>Discovery בגלריה — "מה דומה לזה?" / "עוד מהיוצר הזה" חסר</li>
+        <li>Remix לפעמים לא עובד (race condition)</li>
+        <li>אין notifications כשמישהו רימקס את הכלי שלו</li>
+        <li>אין credits/score על contributions</li>
+      </ul>
+      <p><strong>מה יש:</strong> חוויית יצירה טובה במצב "התחל מאפס", gallery browsing עובד.</p>
+    </div>
+
+    <div class="persona">
+      <h4><span class="fit">P3 · Medium Fit · 15% מה-roadmap</span>Art/Creative Director (Agency)</h4>
+      <p><strong>מטרה:</strong> 3 קונספטים ב-15 דקות לפני פגישה עם לקוח, או להעביר ללקוח tool מוטמע בדק.</p>
+      <p><strong>מה חוסם:</strong></p>
+      <ul>
+        <li>אין "Published-but-Not-Public" — או ציבורי או פרטי</li>
+        <li>אין branded embed (להסיר BRIK branding)</li>
+        <li>אין batch export של variations</li>
+        <li>Art Director agent חד-פעמי — ב-iteration 5 הסוכן כבר לא מבין "mood"</li>
+      </ul>
+    </div>
+
+    <div class="persona mismatch">
+      <h4><span class="fit">Aspirator · זיהוי נטישה שקטה</span>No-code Designer + AI-native Creator</h4>
+      <p>מגיעים מה-landing (value prop מושך), אבל ה-UX דורש יכולת פרמטרית שאין להם. <strong>נוטשים בשקט.</strong> החלטה אסטרטגית חייבת: rescue flows (יקר) או שינוי שיווק (ימנע נטישה אבל יצמצם TAM).</p>
+    </div>
+
+    <div class="callout insight">
+      <h4>המסקנה — קצב הפיצ'רים נגזר מכאן</h4>
+      <p>Top 5 blockers של P1 (Designer Who Codes) מקבלים את המקום הראשון על הציר. הם מחוברים ישירות ל-B-01 (Controls Editor), B-24 (Versioning), Brand Kit (M-7), B-bakeDefaults-fix, iframe-patching (B-03). הכל השאר תומך.</p>
+    </div>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>2. 4 Streams במקביל · Vibe Coding Velocity</h2>
+      <span class="kicker-inline">parallel execution</span>
+    </div>
+
+    <p>בהנחה של צוות vibe-coding מצומצם אבל חזק (מפתחי Full-stack + מעצבי טכנולוגיה + טכנאים), אפשר להפעיל <strong>4 streams בו-זמנית</strong>. כל stream יכול לרוץ ברגע שהתלויות שלו הגיעו.</p>
+
+    <div class="diagram">
+      <div class="diagram-title">4 Parallel Streams · Vibe-Coding Adjusted</div>
+      <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .swim-lane { fill: #1f1f23; stroke: #2a2a30; stroke-width: 1.5; rx: 6; }
+          .lane-A { fill: rgba(192,64,64,0.08); stroke: #c04040; }
+          .lane-B { fill: rgba(255,122,69,0.08); stroke: #ff7a45; }
+          .lane-C { fill: rgba(141,224,224,0.08); stroke: #8de0e0; }
+          .lane-D { fill: rgba(112,160,112,0.08); stroke: #70a070; }
+          .lane-label { fill: #e8e8ea; font-family: -apple-system; font-size: 13px; font-weight: 700; }
+          .lane-sub { fill: #9a9aa2; font-family: ui-monospace, monospace; font-size: 10px; }
+          .item-box { fill: #17171a; stroke-width: 1.5; rx: 4; }
+          .item-text { fill: #e8e8ea; font-family: -apple-system; font-size: 11px; font-weight: 600; }
+          .item-sub { fill: #9a9aa2; font-family: ui-monospace, monospace; font-size: 9px; }
+          .week-mark { stroke: #3a3a42; stroke-width: 1; stroke-dasharray: 3 3; }
+          .week-label { fill: #70707a; font-family: ui-monospace, monospace; font-size: 10px; text-anchor: middle; }
+          .dep-arrow { stroke: #ffb48f; stroke-width: 1.2; fill: none; stroke-dasharray: 3 2; }
+        </style>
+
+        <!-- Week markers -->
+        <line class="week-mark" x1="220" y1="10" x2="220" y2="390"/>
+        <text class="week-label" x="220" y="22">W1-2</text>
+        <line class="week-mark" x1="360" y1="10" x2="360" y2="390"/>
+        <text class="week-label" x="360" y="22">W3-4</text>
+        <line class="week-mark" x1="500" y1="10" x2="500" y2="390"/>
+        <text class="week-label" x="500" y="22">M2</text>
+        <line class="week-mark" x1="640" y1="10" x2="640" y2="390"/>
+        <text class="week-label" x="640" y="22">M3</text>
+        <line class="week-mark" x1="780" y1="10" x2="780" y2="390"/>
+        <text class="week-label" x="780" y="22">Q2+</text>
+
+        <!-- Stream A: Security + Stability -->
+        <rect class="swim-lane lane-A" x="20" y="40" width="860" height="70"/>
+        <text class="lane-label" x="30" y="58">Stream A · Security &amp; Stability</text>
+        <text class="lane-sub" x="30" y="72">CSP · atomicity · rate limiting · tests</text>
+        <rect class="item-box lane-A" x="160" y="80" width="100" height="22"/>
+        <text class="item-text" x="210" y="94" text-anchor="middle">CSP+escape</text>
+        <rect class="item-box lane-A" x="280" y="80" width="90" height="22"/>
+        <text class="item-text" x="325" y="94" text-anchor="middle">Rate limit</text>
+        <rect class="item-box lane-A" x="400" y="80" width="100" height="22"/>
+        <text class="item-text" x="450" y="94" text-anchor="middle">Atomic writes</text>
+        <rect class="item-box lane-A" x="520" y="80" width="100" height="22"/>
+        <text class="item-text" x="570" y="94" text-anchor="middle">Test suite</text>
+
+        <!-- Stream B: User-facing BRIKS -->
+        <rect class="swim-lane lane-B" x="20" y="120" width="860" height="70"/>
+        <text class="lane-label" x="30" y="138">Stream B · User-Facing BRIKS</text>
+        <text class="lane-sub" x="30" y="152">Controls Editor · Version UI · Brand Kit · Export Presets</text>
+        <rect class="item-box lane-B" x="160" y="160" width="100" height="22"/>
+        <text class="item-text" x="210" y="174" text-anchor="middle">Bug fixes</text>
+        <rect class="item-box lane-B" x="280" y="160" width="120" height="22"/>
+        <text class="item-text" x="340" y="174" text-anchor="middle">Controls Editor</text>
+        <rect class="item-box lane-B" x="420" y="160" width="100" height="22"/>
+        <text class="item-text" x="470" y="174" text-anchor="middle">Version UI</text>
+        <rect class="item-box lane-B" x="540" y="160" width="100" height="22"/>
+        <text class="item-text" x="590" y="174" text-anchor="middle">Brand Kit</text>
+        <rect class="item-box lane-B" x="660" y="160" width="100" height="22"/>
+        <text class="item-text" x="710" y="174" text-anchor="middle">Presets</text>
+
+        <!-- Stream C: Agent Quality -->
+        <rect class="swim-lane lane-C" x="20" y="200" width="860" height="70"/>
+        <text class="lane-label" x="30" y="218">Stream C · Agent Quality (cost + brain)</text>
+        <text class="lane-sub" x="30" y="232">Prompt caching · Tiered routing · Embeddings · Living AD · Critic</text>
+        <rect class="item-box lane-C" x="160" y="240" width="110" height="22"/>
+        <text class="item-text" x="215" y="254" text-anchor="middle">Prompt Cache</text>
+        <rect class="item-box lane-C" x="290" y="240" width="100" height="22"/>
+        <text class="item-text" x="340" y="254" text-anchor="middle">Tiered route</text>
+        <rect class="item-box lane-C" x="410" y="240" width="110" height="22"/>
+        <text class="item-text" x="465" y="254" text-anchor="middle">Embed match</text>
+        <rect class="item-box lane-C" x="540" y="240" width="100" height="22"/>
+        <text class="item-text" x="590" y="254" text-anchor="middle">Living AD</text>
+        <rect class="item-box lane-C" x="660" y="240" width="90" height="22"/>
+        <text class="item-text" x="705" y="254" text-anchor="middle">Critic</text>
+
+        <!-- Stream D: Platform Extension -->
+        <rect class="swim-lane lane-D" x="20" y="280" width="860" height="70"/>
+        <text class="lane-label" x="30" y="298">Stream D · Platform Extension (moat)</text>
+        <text class="lane-sub" x="30" y="312">WebGPU · Asset Providers · Integrations · .brik format · Mobile</text>
+        <rect class="item-box lane-D" x="280" y="320" width="110" height="22"/>
+        <text class="item-text" x="335" y="334" text-anchor="middle">Asset Providers</text>
+        <rect class="item-box lane-D" x="410" y="320" width="100" height="22"/>
+        <text class="item-text" x="460" y="334" text-anchor="middle">WebGPU</text>
+        <rect class="item-box lane-D" x="530" y="320" width="110" height="22"/>
+        <text class="item-text" x="585" y="334" text-anchor="middle">Figma import</text>
+        <rect class="item-box lane-D" x="660" y="320" width="100" height="22"/>
+        <text class="item-text" x="710" y="334" text-anchor="middle">.brik spec</text>
+        <rect class="item-box lane-D" x="780" y="320" width="100" height="22"/>
+        <text class="item-text" x="830" y="334" text-anchor="middle">Mobile+AE</text>
+
+        <!-- Stream E: Growth -->
+        <rect class="swim-lane" x="20" y="360" width="860" height="30" style="fill: rgba(214,128,48,0.08); stroke: #d68030;"/>
+        <text class="lane-label" x="30" y="379">Stream E · Growth</text>
+        <text class="lane-sub" x="160" y="379">onboarding · notifications · analytics · moderation · B2B embed (runs throughout as small PRs)</text>
+      </svg>
+    </div>
+
+    <h3>Stream A — Security &amp; Stability 🔴</h3>
+    <p><strong>Trigger:</strong> P0, חסם לפרודקשן. בלי זה — כל גידול scale = סיכון. <strong>Team:</strong> דב מפתחים. <strong>Vibe-coding boost:</strong> Claude Code יכול לייצר CSP rules, escape functions, test suites.</p>
+    <ul>
+      <li>W1-2 · CSP + template-literal escape + URL whitelist</li>
+      <li>W3-4 · Rate limiting + token tracking per user</li>
+      <li>M2 · Atomic writes (staging entity + swap) + retry logic</li>
+      <li>M3 · Test suite — 30+ בסיס על assembler + validation</li>
+    </ul>
+
+    <h3>Stream B — User-Facing BRIKS (P1 driven) 🔥</h3>
+    <p><strong>Trigger:</strong> ישירות מ-P1 blockers. <strong>זה ה-stream של "users finishing their job".</strong> <strong>Team:</strong> טכנולוגי מעצב + פרונט-אנד. Small team, high leverage.</p>
+    <ul>
+      <li>W1-2 · <strong>Bug fixes מה-feedback:</strong> Remix race, bakeControlDefaults, canvas crop, B-03 keep tool active</li>
+      <li>W3-4 · <strong>Controls Editor v1</strong> (B-01) — drag reorder, rename inline, hide, lock defaults</li>
+      <li>M2 · <strong>Version UI</strong> (B-24) — חשיפה של ToolVersion שכבר קיים</li>
+      <li>M2 · <strong>Brand Kit</strong> v1 (צבעים + פונטים + אסטים)</li>
+      <li>M3 · <strong>Export Presets</strong> (R-18) — Instagram/Twitter/TikTok sizes + Loop (B-12) + GIF (B-11)</li>
+    </ul>
+
+    <h3>Stream C — Agent Quality (cost + brain) 🧠</h3>
+    <p><strong>Trigger:</strong> עלות + איכות תוצרים. <strong>Team:</strong> backend dev + AI engineer. <strong>Vibe-coding boost:</strong> רוב המהלכים = אפס UI, רק קוד + prompts — מהיר במיוחד.</p>
+    <ul>
+      <li>W1-2 · <strong>Prompt Caching</strong> (Anthropic) — חיסכון 50-70% מיד</li>
+      <li>W3-4 · <strong>Tiered Model Routing</strong> — conversational→Haiku, AD→Sonnet, Coder→Opus</li>
+      <li>M2 · <strong>Embeddings Skill Matching</strong> — מחליף keyword, סולב את ה-scale-past-200</li>
+      <li>M2-3 · <strong>Living Art Director</strong> (Persistent Brief) — פותר את "הסוכן לא מכיר את הפרויקט"</li>
+      <li>M3 · <strong>Critic Agent</strong> (Haiku) — Evaluator-Optimizer loop</li>
+    </ul>
+
+    <h3>Stream D — Platform Extension (moat) 🏰</h3>
+    <p><strong>Trigger:</strong> ה-moat לטווח ארוך. <strong>אין pressure מיידי — דוחפים לאחור במקרה של frustation ב-P1.</strong> <strong>Team:</strong> technical designers + platform engineer. Parallel work.</p>
+    <ul>
+      <li>M2 · <strong>Asset Providers</strong> abstraction — Poly Haven + AmbientCG + Pexels unified (CC0 = חינם)</li>
+      <li>M2-3 · <strong>WebGPU renderer mode</strong> (Three.js TSL) — fallback ל-WebGL</li>
+      <li>M3 · <strong>Figma import</strong> (phase 1: tokens → Brand Kit)</li>
+      <li>Q2 · <strong><code>.brik</code> format spec</strong> + core runtime NPM package</li>
+      <li>Q2+ · <strong>Mobile consumption-first</strong> + AE/Cavalry plugins</li>
+    </ul>
+
+    <h3>Stream E — Growth (continuous small PRs) 📈</h3>
+    <p><strong>Trigger:</strong> retention + moderation — סיכונים עסקיים. <strong>Team:</strong> growth-designer hybrid, ~20% capacity throughout. רצף קבוע של small PRs.</p>
+    <ul>
+      <li>W3+ · Notifications system (B-44)</li>
+      <li>M2 · Onboarding flow (B-21) — per-cluster</li>
+      <li>M2 · Moderation pipeline + report tool/user (B-31)</li>
+      <li>M3 · Creator analytics dashboard</li>
+      <li>Q2 · B2B embed features (SSO, branded, password-gate)</li>
+    </ul>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>3. תלויות קריטיות בין streams</h2>
+      <span class="kicker-inline">what blocks what</span>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Dependency Graph</div>
+      <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="dep-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#ffb48f"/>
+          </marker>
+        </defs>
+        <style>
+          .dep-node { fill: #17171a; stroke: #ff7a45; stroke-width: 1.5; rx: 6; }
+          .dep-node-done { fill: #17171a; stroke: #70a070; stroke-width: 1.5; rx: 6; }
+          .dep-node-lock { fill: #1f1f23; stroke: #c04040; stroke-width: 1.5; rx: 6; }
+          .dep-text { fill: #e8e8ea; font-family: -apple-system; font-size: 12px; font-weight: 600; text-anchor: middle; }
+          .dep-sub { fill: #9a9aa2; font-family: ui-monospace, monospace; font-size: 10px; text-anchor: middle; }
+          .dep-line { stroke: #ffb48f; stroke-width: 1.3; fill: none; }
+        </style>
+
+        <rect class="dep-node-lock" x="20" y="20" width="150" height="50"/>
+        <text class="dep-text" x="95" y="42">CSP + escape</text>
+        <text class="dep-sub" x="95" y="58">gate לכל public</text>
+
+        <rect class="dep-node" x="20" y="100" width="150" height="50"/>
+        <text class="dep-text" x="95" y="122">Rate limit</text>
+        <text class="dep-sub" x="95" y="138">gate למונטיזציה</text>
+
+        <rect class="dep-node" x="220" y="20" width="170" height="50"/>
+        <text class="dep-text" x="305" y="42">Prompt Caching</text>
+        <text class="dep-sub" x="305" y="58">cost base — כל השאר זול יותר</text>
+
+        <rect class="dep-node" x="220" y="100" width="170" height="50"/>
+        <text class="dep-text" x="305" y="122">Controls Editor</text>
+        <text class="dep-sub" x="305" y="138">P1 — users finishing job</text>
+
+        <rect class="dep-node" x="220" y="180" width="170" height="50"/>
+        <text class="dep-text" x="305" y="202">Version UI</text>
+        <text class="dep-sub" x="305" y="218">P1 · P2 retention</text>
+
+        <rect class="dep-node" x="440" y="20" width="170" height="50"/>
+        <text class="dep-text" x="525" y="42">Tiered Routing</text>
+        <text class="dep-sub" x="525" y="58">בונה על caching</text>
+
+        <rect class="dep-node" x="440" y="100" width="170" height="50"/>
+        <text class="dep-text" x="525" y="122">Brand Kit</text>
+        <text class="dep-sub" x="525" y="138">דורש Controls Editor</text>
+
+        <rect class="dep-node" x="440" y="180" width="170" height="50"/>
+        <text class="dep-text" x="525" y="202">Embeddings matching</text>
+        <text class="dep-sub" x="525" y="218">משותף עם Semantic Search</text>
+
+        <rect class="dep-node" x="660" y="60" width="170" height="50"/>
+        <text class="dep-text" x="745" y="82">Living AD</text>
+        <text class="dep-sub" x="745" y="98">Plan Mode — brief persistent</text>
+
+        <rect class="dep-node" x="660" y="140" width="170" height="50"/>
+        <text class="dep-text" x="745" y="162">Figma Integration</text>
+        <text class="dep-sub" x="745" y="178">צריך Brand Kit + Assets</text>
+
+        <!-- Dependency lines (reading arrow: right tail → left head, since RTL doc with LTR svg) -->
+        <path class="dep-line" d="M170 45 L220 45" marker-end="url(#dep-arr)"/>
+        <path class="dep-line" d="M390 45 L440 45" marker-end="url(#dep-arr)"/>
+        <path class="dep-line" d="M390 125 L440 115" marker-end="url(#dep-arr)"/>
+        <path class="dep-line" d="M390 125 L440 125" marker-end="url(#dep-arr)"/>
+        <path class="dep-line" d="M610 45 L660 75" marker-end="url(#dep-arr)"/>
+        <path class="dep-line" d="M610 125 L660 155" marker-end="url(#dep-arr)"/>
+        <path class="dep-line" d="M390 205 L440 205" marker-end="url(#dep-arr)"/>
+      </svg>
+    </div>
+
+    <h3>תלויות קריטיות</h3>
+    <ul>
+      <li><strong>CSP + escape → פותח scale public:</strong> כל הפיצ'רים הפומביים (B-08 Published-Not-Public, R-21 Embed SDK, H-05 Marketplace) תלויים בזה</li>
+      <li><strong>Controls Editor → Brand Kit:</strong> ברגע שיש עריכה ישירה של schema, אפשר להוסיף "save preset" — זה Brand Kit</li>
+      <li><strong>Prompt Caching → כל השאר:</strong> תשתית של cost, כל fix של agent זול יותר אחרי</li>
+      <li><strong>Embeddings matching (Skills + Semantic Search):</strong> אותו implementation, שתי תוצאות — לעשות פעם אחת</li>
+      <li><strong>Version UI עצמאי:</strong> אין dependency — יכול לרוץ ממש מהר (entity קיימת)</li>
+      <li><strong>Figma integration → דורש Brand Kit + Assets:</strong> אל תתחיל לפני M2</li>
+      <li><strong>.brik format → דורש מוכנות:</strong> רק אחרי Q2, כשה-core stable</li>
+    </ul>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>4. מענה אסטרטגי למתחרים — רוצים להוביל</h2>
+      <span class="kicker-inline">competitive pacing</span>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>איום</th><th>תגובת BRIK</th><th>חלון</th><th>Stream</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Claude Design מוסיף Gallery+Remix</td><td>Stream B: Controls Editor + Version UI + Brand Kit = UX שhem אין. Stream C: Living AD + Critic = איכות שהם לא עושים.</td><td>6-12 חודשים</td><td>B + C</td></tr>
+        <tr><td>Rive AI Agent משוחרר</td><td>Stream D: <code>.brik</code> format + mobile runtimes = moat של cross-platform. Plus: Hydra/shader/creative-coding שאין להם.</td><td>12 חודשים</td><td>D</td></tr>
+        <tr><td>Omma מרחיבה ל-creative toys</td><td>Stream B: 14-cluster presets + aesthetic memory (Voyager-style) = discipline-depth שאין לOmma.</td><td>Immediate</td><td>B + C</td></tr>
+        <tr><td>ByteDance Coze Global</td><td>Stream D: Mobile consumption-first Q2. Nothing we can do to compete with ByteDance's distribution.</td><td>24 חודשים</td><td>D</td></tr>
+        <tr><td>Figma Weave (node graph)</td><td>Stream D: BrikFlow (node composition) — מוצג בתוך BRIK, שונה מ-Figma concept</td><td>Q3</td><td>D</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <h4>המלצה אסטרטגית — חלוקת השקעה</h4>
+      <p><strong>60% של הכוח הפנוי → Stream B (User-first BRIKS).</strong> זה מה ש-users מבקשים, וזה מה שמונע נטישה.<br>
+      <strong>20% → Stream C (Agent Quality).</strong> קריטי לאיכות וגם לעלות — חיסכון כספי ישיר.<br>
+      <strong>15% → Stream D (Platform moat).</strong> השקעה לעתיד.<br>
+      <strong>5% → Stream E (Growth).</strong> small PRs continuously.<br>
+      Stream A (Security) — לא מספר, זה gate שחייב לקרות בשבוע-שבועיים הראשונים לפני כל דבר אחר בציבורי.</p>
+    </div>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>5. Vibe-Coding Velocity Adjustments</h2>
+      <span class="kicker-inline">small team, high output</span>
+    </div>
+
+    <p>המסגרת של "sprint = 2-3 שבועות" לא מתאימה לצוות vibe-coding. עם Claude Code / Cursor / AI-assisted dev, המספרים משתנים:</p>
+
+    <table>
+      <thead>
+        <tr><th>פיצ'ר</th><th>מסגרת קלאסית</th><th>Vibe-Coding מותאם</th><th>הערה</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Prompt Caching</td><td>2 ימים</td><td>חצי יום</td><td>CSS+backend — AI עושה בקלות</td></tr>
+        <tr><td>Tiered Routing</td><td>3 ימים</td><td>יום</td><td>מיפוי טבלה — טריוויאלי</td></tr>
+        <tr><td>Controls Editor v1</td><td>3 שבועות</td><td>שבוע</td><td>UI-heavy — cursor מאיץ ממש</td></tr>
+        <tr><td>Version UI</td><td>3 שבועות</td><td>שבוע</td><td>Entity קיימת — רק חשיפה</td></tr>
+        <tr><td>Brand Kit</td><td>חודש</td><td>שבוע-שבועיים</td><td>Entity חדשה + UI</td></tr>
+        <tr><td>CSP + escape</td><td>שבוע</td><td>2 ימים</td><td>Claude Code מכיר את התבנית</td></tr>
+        <tr><td>Atomic writes</td><td>שבוע</td><td>3-4 ימים</td><td>Design thinking דורש אדם</td></tr>
+        <tr><td>Embeddings matching</td><td>2 שבועות</td><td>שבוע</td><td>Vector DB + pgvector — solved patterns</td></tr>
+        <tr><td>Living AD</td><td>3-4 שבועות</td><td>שבועיים</td><td>Prompt engineering + state — דורש יישור אנושי</td></tr>
+        <tr><td>Critic Agent</td><td>2 שבועות</td><td>שבוע</td><td>Prompt + eval loop</td></tr>
+        <tr><td>WebGPU renderer</td><td>חודש</td><td>שבועיים-שלושה</td><td>Three.js TSL existing path</td></tr>
+        <tr><td>.brik format spec</td><td>2-3 חודשים</td><td>5-6 שבועות</td><td>Spec thinking, לא מאוצץ ב-AI</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout insight">
+      <h4>תובנת velocity — מה <em>לא</em> מתרחב</h4>
+      <ol>
+        <li><strong>Design decisions</strong> — "איך צריך להיראות ה-Controls Editor" — זה אדם, לא AI. תכנון לקוח זמן.</li>
+        <li><strong>Cross-team coordination</strong> — אם צריך להיפגש עם 3 אנשים להחליט על UX pattern — זה קלנדרי, לא טכני.</li>
+        <li><strong>User testing</strong> — אי אפשר לדחוס. אם רוצים feedback לפני ship, צריך זמן לייצר → לשלוח → לחכות.</li>
+        <li><strong>Security review</strong> — קוד של security חייב עין שנייה ולא מכונה.</li>
+      </ol>
+      <p>מה שכן מתרחב: implementation של דפוסים מוכרים, refactoring, UI iteration, tests, docs, migrations. <strong>כ-70% מהעבודה מתרחבת ב-vibe coding.</strong></p>
+    </div>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>6. Milestones — מה "Done" נראה בכל תחנה</h2>
+    </div>
+
+    <div class="finding strength">
+      <h3>Week 2 Done · "BRIK בטוח לצמיחה"</h3>
+      <ul>
+        <li>CSP הופעל, XSS בלוקרים על assembler</li>
+        <li>Rate limit enforced per user (עם quota ברור)</li>
+        <li>Prompt caching פועל — עלות-per-request ירדה 50%+</li>
+        <li>Bug fixes של remix + bakeDefaults + canvas crop בפרודקשן</li>
+      </ul>
+    </div>
+
+    <div class="finding strength">
+      <h3>Week 4 Done · "P1 Users Unblocked"</h3>
+      <ul>
+        <li>Controls Editor v1 — drag/rename/hide/lock עובדים</li>
+        <li>Tiered routing — conversational מהיר + זול</li>
+        <li>Remix stable — race condition פתורה</li>
+        <li>Tests baseline — 20+ על paths קריטיים</li>
+      </ul>
+    </div>
+
+    <div class="finding strength">
+      <h3>Month 2 Done · "Creator retention"</h3>
+      <ul>
+        <li>Version UI מלא — undo, diff, branch</li>
+        <li>Brand Kit v1 — Kit entity + UI + integration ל-tools</li>
+        <li>Atomic writes — tools לא נשברים בכשל</li>
+        <li>Notifications basic — "מישהו רימקס את שלך"</li>
+        <li>Embeddings skill matching — מחליף keyword-stemming</li>
+      </ul>
+    </div>
+
+    <div class="finding strength">
+      <h3>Month 3 Done · "Agent מכיר אותנו"</h3>
+      <ul>
+        <li>Living Art Director — brief persistent ב-session</li>
+        <li>Critic Agent — verifies compile + render + schema</li>
+        <li>Asset Providers layer — Poly Haven + AmbientCG + Pexels unified</li>
+        <li>Export Presets + GIF + Loop exports</li>
+        <li>Onboarding per-cluster (14 מסלולים)</li>
+      </ul>
+    </div>
+
+    <div class="finding strength">
+      <h3>Q2 Done · "Moat במקום"</h3>
+      <ul>
+        <li>WebGPU renderer mode — compute shaders זמינים</li>
+        <li>Figma integration — tokens → Brand Kit</li>
+        <li>Industry format support — SVG + GLB + Lottie</li>
+        <li>Mobile consumption-first app — gallery + remix touch</li>
+        <li>Creator analytics dashboard</li>
+      </ul>
+    </div>
+
+    <div class="finding strength">
+      <h3>Q3+ Done · "Cross-platform ecosystem"</h3>
+      <ul>
+        <li><code>.brik</code> open format spec v1.0</li>
+        <li>Core JS runtime ~100KB NPM package</li>
+        <li>AE plugin + Cavalry plugin</li>
+        <li>BrikFlow — node-based tool composition</li>
+        <li>Mobile authoring beta</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="actions-block">
+    <div class="block-header">
+      <h2>7. החלטות קריטיות שצריכות להיפתר לפני הרבעון הבא</h2>
+    </div>
+
+    <div class="callout warning">
+      <ul>
+        <li><strong>Q1 (Who)</strong> — האם ממקדים P1 (Designer-Coder) ומוותרים על no-code, או משקיעים ב-rescue flows? קובע איך Stream B נראה.</li>
+        <li><strong>H-07 (Intent Separation)</strong> — creator vs user experience — האם מפצלים UI? קובע roadmap ל-Q2.</li>
+        <li><strong>Timeline (H-03/R-04)</strong> — extension או pivot? קובע אם Stream D כולל timeline או לא.</li>
+        <li><strong>Base44 vendor strategy (Q7)</strong> — adapter layer עכשיו או התחייבות? קובע כמה גמישות יש בכל מהלך.</li>
+        <li><strong>.brik pricing model</strong> — open format פתוח לגמרי או tiered (open runtime, enterprise features paid)?</li>
+      </ul>
+    </div>
+
+    <div class="callout insight">
+      <h4>Bottom Line</h4>
+      <p>Roadmap זה בנוי כך שאם יש לחץ — Streams A + B (security + user-first) לא ויתור. Streams C + D ניתנים ל-flex. ברגע שP1 users נפתרים (week 4), ה-momentum של המוצר משתנה — retention עולה, stacks עולים, ומערכת ה-fed-back מתחילה לעבוד.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE: PRD PAST (Retrospective)                                  -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-prd-past">
+  <div class="page-header">
+    <div class="kicker">PRD · עבר</div>
+    <h1>PRD #1 — BRIK כפי שהיא היום</h1>
+    <p class="lede">תיעוד רטרוספקטיבי של המצב הקיים. מה יש, מה עובד, מה המגבלות הידועות. בסיס ליישור הצוות לפני כל שינוי.</p>
   </div>
 
   <div class="insights-block">
@@ -4917,17 +5408,40 @@
       <li>אין direct canvas manipulation ב-editor (שיחה עם agent בלבד)</li>
     </ul>
   </div>
+</section>
 
-  <hr>
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PAGE: PRD FUTURE (Forward — LIVING DOCUMENT)                    -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-prd-future">
+  <div class="page-header">
+    <div class="kicker">PRD · עתיד · LIVING DOC</div>
+    <h1>PRD #2 — BRIK v2 (מסמך חי)</h1>
+    <p class="lede">מסמך קדימה שמכיל את כל התובנות, המחקרים וההמלצות. <strong>מתעדכן כל הזמן</strong> עם תוכן חדש שצף בשיחה. הפער בין PRD #1 (עבר) ל-PRD #2 (עתיד) = ה-Roadmap.</p>
+  </div>
 
-  <div class="insights-block" style="margin-top: 60px;">
-    <div class="block-header">
-      <h2>PRD #2 — Forward: BRIK עם כל התובנות והמחקרים</h2>
-      <span class="kicker-inline">target · v2.0</span>
+  <div class="insights-block">
+
+    <div class="callout insight" style="border-right: 4px solid var(--accent);">
+      <h4>🎯 החזון האסטרטגי — BRIK כ-"default design software" של המעצב</h4>
+      <p><strong>המטרה:</strong> להגיע למוצר שהשימוש בו יוכל <em>להחליף כמעט כל צורך בתוכנת עיצוב אחרת</em>. במקרה הרע ביותר — להיות חלק מה-<strong>pipeline של המעצב בכל פרויקט</strong>, גם אם לא exclusive.</p>
+      <p style="margin-top: 10px;"><strong>מה זה אומר practically:</strong></p>
+      <ul>
+        <li><strong>ל-"replace" (החלטה אקסקלוסיבית):</strong> BRIK תצטרך לכסות 80%+ מה-workflow של המעצב — שזה <em>מעבר לגנרציה</em>. היא תצטרך תמיכה ב-brand kit, iteration, version control, export ל-formats תעשייתיים, collaboration, ו-production-grade output.</li>
+        <li><strong>ל-"be in pipeline" (החלטה ריאליסטית יותר):</strong> BRIK כשלב ביניים — מעצב יוצר hero asset או variation ב-BRIK, אז עובר ל-Figma/AE/Blender לתהליך produc'tion. זה דורש <strong>יצוא חד-כיווני מצוין</strong> + אינטגרציות (AE plugin, Figma integration, industry formats).</li>
+      </ul>
+      <p><strong>המשמעות ל-Roadmap:</strong> Stream D (Platform Extension) הוא <em>לא optional</em> — הוא חיוני לויז'ן ה-"pipeline". AE Plugin + Figma integration + <code>.brik</code> open format = ההוויה של BRIK בתור חלק של workflow. בלעדיהם, BRIK הוא "כלי מוזר שלא מתחבר לכלום" — ו-professional designers נוטשים.</p>
+      <p><strong>איך זה מגדיר focus:</strong></p>
+      <ol>
+        <li>"Replace" כחזון ארוך-טווח (2-3 שנים). דורש כיסוי מלא של designer workflow.</li>
+        <li>"Be in pipeline" כיעד קצר-טווח (12 חודשים). דורש exports + integrations חזקים.</li>
+        <li>Community/remix = חיזוק הלופ הזה — מעצב שמצא pipeline-placement יישאר וימליץ.</li>
+      </ol>
     </div>
 
     <h3>0. תקציר מנהלים — השינוי הגדול</h3>
     <p>BRIK גרסה 2 היא <strong>"parametric tool workshop for designers across all disciplines"</strong> — כלי יומי שיוצרים עומדים לידו, שמכיר אותם לאורך זמן, שמספק יכולות מוצהרות (BRIKS) של רמה תעשייתית, ושבונה מסביבו קהילה remix-first. ה-AI הוא לא product — הוא יכולת אחת מתוך שלושה מרכזיות: <strong>(1) Direct Mold</strong> (עריכה ישירה של הפלט), <strong>(2) Cast with AI</strong> (יצירה בשיחה עם Architect + Caster), <strong>(3) Stack</strong> (remix / community).</p>
+    <p><strong>החזון המורחב (חדש):</strong> BRIK לא עוד "כלי AI generative" — היא <strong>workspace שמחליף או משתלב ב-pipeline של designer ב-כל פרויקט</strong>. <em>Replace-or-Pipeline</em>. כל פיצ'ר על ה-roadmap נמדד מול השאלה: <em>האם זה מקרב את BRIK להחלפת תוכנה, או להשתלבות ב-workflow?</em></p>
 
     <h3>1. Target Audience — ברור יותר</h3>
     <p>Primary: <strong>Designers across all 14 disciplines</strong> (Graphic/Brand, Web/UI, Motion, Industrial, Fashion/Textile, Type/Editorial, Generative, Social Media, VJ/Live, Game/XR, Spatial, Education, Art Directors, Freelance/Hobbyist). כל קלאסטר מקבל onboarding, presets, skills ו-landing page ייעודיים. הגדרה זו מבוססת על 207 תרחישי משתמש (עמוד Stories).</p>
@@ -5536,6 +6050,34 @@
     <p class="lede">מיפוי ה-backlog מול הניתוח שבמסמך. העמוד הזה מתעדכן עם פירוט ה-backlog מה-Google Sheets שסיפקת.</p>
   </div>
   <div id="content-backlog">
+
+    <div class="callout insight" style="border-right: 4px solid var(--cyan);">
+      <h4>🎥 איפה ה-Backlog פוגש את השטח — צוות סרט ההשקה</h4>
+      <p>הצוות שעבד על סרט ההשקה (פידבק מצוין — Persona D) העלה 17 פריטים מהשטח. <strong>70% מהם מופיעים גם ב-Backlog הרשמי.</strong> 5 פריטים חדשים שהצוות חשף:</p>
+      <table>
+        <thead><tr><th>פריט מהצוות</th><th>ב-Backlog?</th><th>פערי עדיפות</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Undo קריטי</strong> (הצוות סימן "הכי חשוב")</td><td>B-24 Tool Versioning</td><td class="decision-stop">⚠ Backlog P3 → בפועל P1</td></tr>
+          <tr><td>עריכת תפריטים (שמות/סדר)</td><td>B-01 Edit Controllers Panel</td><td class="matrix-check">✓ P1 — תואם</td></tr>
+          <tr><td>כפתור לקיבוע defaults hardcoded</td><td>B-01 (חלק מ-Controls Editor)</td><td class="matrix-check">✓ P1</td></tr>
+          <tr><td>Plan mode — תכנון לפני ביצוע</td><td>לא — חסר</td><td class="decision-dont">🆕 צריך להוסיף (Living Architect)</td></tr>
+          <tr><td>Context — agent מכיר את הפרויקט</td><td>לא — חסר</td><td class="decision-dont">🆕 צריך להוסיף (Persistent Brief)</td></tr>
+          <tr><td>Publish לא שומר defaults</td><td>באג — לא ב-Backlog כפריט</td><td class="decision-stop">⚠ באג קריטי שצריך tracking</td></tr>
+          <tr><td>Canvas format → crop bugs</td><td>באג — לא ב-Backlog כפריט</td><td class="decision-stop">⚠ באג קריטי</td></tr>
+          <tr><td>Canvas ריק דיפולטיבי ללא bounds</td><td>לא — חסר</td><td class="decision-dont">🆕 UX gap</td></tr>
+          <tr><td>חלונות צפים edit→publish</td><td>לא — חסר</td><td class="decision-dont">🆕 UX enhancement</td></tr>
+          <tr><td>גרירת תמונה לצ'אט</td><td>לא — חסר</td><td class="decision-dont">🆕 UX enhancement</td></tr>
+          <tr><td>פריסטים</td><td>R-18 Export Presets + BRIK Level 2</td><td class="matrix-partial">~ Roadmap → P2</td></tr>
+          <tr><td>רנדר / אקספורט וידאו איכותי</td><td>B-11 GIF + B-12 Loop</td><td class="matrix-check">✓ P2</td></tr>
+          <tr><td>זיכרון canvas size + bg</td><td>לא — חסר</td><td class="decision-dont">🆕 Aesthetic memory UI</td></tr>
+          <tr><td>Remix לא עבד הרבה פעמים</td><td>באג — Remix race condition</td><td class="decision-stop">⚠ P1 bug</td></tr>
+          <tr><td>שיתוף עמיתים לעבודה</td><td>לא — חסר</td><td class="decision-dont">🆕 Collaboration</td></tr>
+          <tr><td>סביבת עבודה — פרויקט</td><td>לא — חסר</td><td class="decision-dont">🆕 Projects entity</td></tr>
+          <tr><td>Tool Tagging System Unified</td><td>B-05 Tool Tagging</td><td class="matrix-check">✓ P1</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 12px;"><strong>מסקנה:</strong> הפער הכי גדול בין השטח ל-Backlog הוא ב-<em>Plan Mode</em> + <em>Context Persistence</em> + <em>Projects/Collaboration</em>. זה מה שמעצבים באמת רוצים כדי להרגיש ש-BRIK "יודעת מה הם עושים".</p>
+    </div>
 
     <div class="callout insight" style="border-right: 4px solid var(--accent);">
       <h4>📨 פיצ'ר-ריקווסטים חדשים (נוסף 2026-04-21)</h4>
@@ -6498,6 +7040,21 @@
     <h2>יומן עדכונים</h2>
     <div class="update-log">
       <div class="update-entry">
+        <div class="update-date">2026-04-21 · שיפוץ נאווי + Roadmap + פיצול PRDs + חזון + Team HTML</div>
+        <div>
+          <strong>7 שינויים גדולים:</strong>
+          <ol>
+            <li><strong>נאווי היררכי חדש</strong> — 6 כפתורים ראשיים (סקירה · המוצר ▾ · מחקרים ▾ · אסטרטגיה ▾ · תכנון ▾ · נספחים) עם sub-tabs דינמיים. פתר את עומס ה-16 tabs הקודם.</li>
+            <li><strong>PRDs פוצלו לשני עמודים:</strong> "PRD · עבר" (רטרוספקטיבי, יציב) + "PRD · עתיד" (living document, מתעדכן כל הזמן).</li>
+            <li><strong>עמוד Roadmap חדש</strong> — User-first: 3 פרסונות ראשיות (P1/P2/P3) עם blockers מזוהים, 4 parallel streams (Security · User-Facing BRIKS · Agent Quality · Platform Extension) + Stream E (Growth קבוע), dependency graph, competitive pacing table, Vibe-Coding velocity adjustments (hours/days/weeks במקום weeks/months), 6 milestones עם "Done" criteria.</li>
+            <li><strong>חזון אסטרטגי חדש נוסף:</strong> "BRIK ל-replace-or-pipeline" — להחליף תוכנת עיצוב או להיות ב-pipeline של כל פרויקט. משפיע על כל Stream D (AE plugin, Figma, .brik open format).</li>
+            <li><strong>Backlog × Field Feedback cross-reference</strong> — 17 פריטי צוות ממופים מול Backlog, 5 gaps חדשים זוהו (Plan Mode, Context, Projects, Collaboration, Canvas memory).</li>
+            <li><strong>קובץ team-feedback.html נפרד</strong> לפגישה עם הצוות — 17 פריטים מהשטח + 13 תוספות מאותה מוטיבציה. יש print button.</li>
+            <li><strong>User-First עקרון מנחה חדש:</strong> קצב פיצ'רים נגזר מיוזר-מטרה-בלוקר, לא מנוחות פיתוח. תשתית תומכת בפיצ'רים user-facing.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="update-entry">
         <div class="update-date">2026-04-21 · תרגום לעברית + השוואות מתחרים + פיצ'רים חדשים + עדכון R3 Tech + PRD #2</div>
         <div>
           <strong>4 שינויים גדולים במקביל:</strong>
@@ -6578,28 +7135,120 @@
 <button class="scroll-top" id="scrollTop" aria-label="חזרה לראש">↑</button>
 
 <script>
-  // Tab switching
-  const tabs = document.querySelectorAll('.tab');
+  // Hierarchical navigation — primary groups + secondary tabs
+  const navGroups = {
+    product: {
+      label: 'המוצר',
+      pages: [
+        {id:'architecture', label:'ארכיטקטורה'},
+        {id:'agent', label:'סוכן ו-Skills'},
+        {id:'briks', label:'BRIKS'},
+        {id:'users', label:'פרסונות'},
+        {id:'stories', label:'207 תרחישים'},
+        {id:'terminology', label:'שפת מוצר'},
+      ],
+    },
+    research: {
+      label: 'מחקרים',
+      pages: [
+        {id:'research-agents', label:'R1 · סוכנים'},
+        {id:'research-competitors', label:'R2 · מתחרים'},
+        {id:'research-tech', label:'R3 · טכנולוגיות'},
+      ],
+    },
+    strategy: {
+      label: 'אסטרטגיה',
+      pages: [
+        {id:'moat', label:'בידול ו-Moat'},
+        {id:'risks', label:'סיכונים'},
+        {id:'questions', label:'שאלות פתוחות'},
+      ],
+    },
+    planning: {
+      label: 'תכנון',
+      pages: [
+        {id:'roadmap', label:'🗺️ Roadmap'},
+        {id:'prd-future', label:'PRD · עתיד'},
+        {id:'prd-past', label:'PRD · עבר'},
+        {id:'recommendations', label:'המלצות'},
+        {id:'backlog', label:'Backlog'},
+      ],
+    },
+  };
+
+  const primaryTabs = document.querySelectorAll('.subnav-primary .tab');
+  const secondaryNav = document.getElementById('subnav-secondary');
   const pages = document.querySelectorAll('.page');
+
+  // Map: pageId → groupId
+  const pageToGroup = {};
+  Object.entries(navGroups).forEach(([gid, g]) => {
+    g.pages.forEach(p => pageToGroup[p.id] = gid);
+  });
 
   function showPage(pageId) {
     pages.forEach(p => p.classList.remove('active'));
-    tabs.forEach(t => t.classList.remove('active'));
     const page = document.getElementById('page-' + pageId);
-    const tab = document.querySelector(`.tab[data-page="${pageId}"]`);
     if (page) page.classList.add('active');
-    if (tab) tab.classList.add('active');
+
+    // Mark secondary tab active if present
+    const secondaryTabs = secondaryNav.querySelectorAll('.tab-sub');
+    secondaryTabs.forEach(t => t.classList.toggle('active', t.dataset.page === pageId));
+
     window.scrollTo({ top: 0, behavior: 'instant' });
     history.replaceState(null, '', '#' + pageId);
   }
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => showPage(tab.dataset.page));
+  function renderSecondary(groupId) {
+    const group = navGroups[groupId];
+    if (!group) {
+      secondaryNav.classList.remove('visible');
+      document.body.classList.remove('has-secondary');
+      secondaryNav.innerHTML = '';
+      return;
+    }
+    const html = `<span class="subnav-secondary-label">${group.label}</span>` +
+      group.pages.map(p => `<button class="tab-sub" data-page="${p.id}">${p.label}</button>`).join('');
+    secondaryNav.innerHTML = html;
+    secondaryNav.classList.add('visible');
+    document.body.classList.add('has-secondary');
+
+    // Wire secondary clicks
+    secondaryNav.querySelectorAll('.tab-sub').forEach(btn => {
+      btn.addEventListener('click', () => showPage(btn.dataset.page));
+    });
+  }
+
+  function activateGroup(groupId) {
+    primaryTabs.forEach(t => t.classList.toggle('active', t.dataset.group === groupId));
+    renderSecondary(groupId);
+  }
+
+  primaryTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const groupId = tab.dataset.group;
+      const directPage = tab.dataset.page;
+      activateGroup(groupId);
+      if (directPage) {
+        showPage(directPage);
+      } else {
+        // Open first page of group
+        const firstPage = navGroups[groupId].pages[0].id;
+        showPage(firstPage);
+      }
+    });
   });
 
   // Open tab from URL hash
   const initialHash = window.location.hash.replace('#', '');
   if (initialHash && document.getElementById('page-' + initialHash)) {
+    const gid = pageToGroup[initialHash];
+    if (gid) {
+      activateGroup(gid);
+    } else {
+      // It's a direct page (overview or appendix)
+      primaryTabs.forEach(t => t.classList.toggle('active', t.dataset.page === initialHash));
+    }
     showPage(initialHash);
   }
 
