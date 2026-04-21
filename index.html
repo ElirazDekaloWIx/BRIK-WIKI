@@ -990,6 +990,65 @@
   }
   .explainer-section p { margin: 4px 0; font-size: 14px; }
 
+  /* Story compact (for 200+ use cases) */
+  .story-line {
+    background: var(--surface);
+    border-right: 2px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 14px;
+    margin: 5px 0;
+    font-size: 13px;
+    line-height: 1.55;
+    transition: border-right-color 0.2s;
+  }
+  .story-line:hover { border-right-color: var(--accent); background: var(--surface-2); }
+  .story-line .num {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 12px;
+    margin-left: 8px;
+    opacity: 0.85;
+    display: inline-block;
+    min-width: 42px;
+  }
+  .story-line strong { color: var(--text); font-weight: 600; }
+  .story-line em {
+    color: var(--text-dim);
+    font-style: normal;
+    font-size: 11px;
+    font-family: var(--mono);
+  }
+
+  .cluster-header {
+    background: linear-gradient(90deg, var(--accent-dim), transparent);
+    border-right: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 14px 20px;
+    margin: 36px 0 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .cluster-header h3 {
+    margin: 0;
+    color: var(--accent-soft);
+    font-size: 18px;
+  }
+  .cluster-header .cluster-meta {
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .cluster-header .cluster-desc {
+    flex: 1 1 100%;
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
   /* Glossary */
   .glossary-term {
     background: var(--surface);
@@ -1036,6 +1095,7 @@
   <button class="tab" data-page="agent">סוכן<span class="tab-num">03</span></button>
   <button class="tab" data-page="briks">BRIKS<span class="tab-num">04</span></button>
   <button class="tab" data-page="users">משתמשים<span class="tab-num">05</span></button>
+  <button class="tab" data-page="stories">תרחישים<span class="tab-num">5+</span></button>
   <button class="tab" data-page="moat">בידול<span class="tab-num">06</span></button>
   <button class="tab" data-page="risks">סיכונים<span class="tab-num">07</span></button>
   <div class="tab-group-sep"></div>
@@ -2005,6 +2065,486 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PAGE 5+: STORIES — 200+ USE CASES FOR DESIGNERS                 -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-stories">
+  <div class="page-header">
+    <div class="kicker">5+ · תרחישי יוצרים</div>
+    <h1>200+ תרחישי שימוש — מעצבים ויוצרים</h1>
+    <p class="lede">הגדרת קהל יעד חדשה: <strong>מעצבים ויוצרים מכל הדיסציפלינות</strong> — ממעצב אופנה עד VJ, מסטודנט לעיצוב עד אדריכל, מ-TikToker עד creative director בסוכנות. כל תרחיש מראה שימוש קונקרטי ב-BRIK.</p>
+  </div>
+
+  <div class="verdict">
+    <h3>הגדרת קהל היעד — עדכון אסטרטגי</h3>
+    <p>קהל היעד של BRIK מוגדר עכשיו כ-<strong>"יוצרים ומעצבים מכל הדיסציפלינות"</strong>. זה מחליף את ההתלבטות בין פרסונה B ל-C ברמת הגדרה: הכיסוי הוא רחב — כל מי שמייצר תוכן ויזואלי, אינטראקטיבי או חווייתי. ה-UX עדיין יצטרך לשרת את מי שיש לו יכולת פרמטרית (slider logic), אבל ה-<em>שפה השיווקית</em> חוצה דיסציפלינות.</p>
+    <p>14 קלאסטרים של יוצרים, 207 תרחישים — מפה לחשיבה על קהל, פיצ'רים, ו-onboarding.</p>
+  </div>
+
+  <div class="insights-block">
+    <div class="block-header">
+      <h2>מפת הקלאסטרים</h2>
+      <span class="kicker-inline">14 designer disciplines</span>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Designer constellation — who uses BRIK</div>
+      <svg viewBox="0 0 820 420" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .node { fill: #17171a; stroke-width: 2; }
+          .n1 { stroke: #ff7a45; } .n2 { stroke: #ffb48f; }
+          .n3 { stroke: #8de0e0; } .n4 { stroke: #70a070; }
+          .n-lbl { fill: #e8e8ea; font-family: -apple-system, sans-serif; font-size: 11px; font-weight: 600; text-anchor: middle; }
+          .n-count { fill: #9a9aa2; font-family: ui-monospace, monospace; font-size: 10px; text-anchor: middle; }
+          .center-lbl { fill: #ff7a45; font-family: -apple-system, sans-serif; font-size: 16px; font-weight: 800; text-anchor: middle; }
+        </style>
+        <circle class="node n1" cx="410" cy="210" r="50" fill="#1f1f23"/>
+        <text class="center-lbl" x="410" y="206">BRIK</text>
+        <text class="n-count" x="410" y="222">207 stories</text>
+
+        <circle class="node n1" cx="180" cy="80" r="36"/>
+        <text class="n-lbl" x="180" y="77">Graphic &amp;</text>
+        <text class="n-lbl" x="180" y="91">Brand</text>
+        <text class="n-count" x="180" y="105">20</text>
+
+        <circle class="node n1" cx="410" cy="50" r="36"/>
+        <text class="n-lbl" x="410" y="50">Web / UI</text>
+        <text class="n-count" x="410" y="64">18</text>
+
+        <circle class="node n1" cx="640" cy="80" r="36"/>
+        <text class="n-lbl" x="640" y="77">Motion &amp;</text>
+        <text class="n-lbl" x="640" y="91">Animation</text>
+        <text class="n-count" x="640" y="105">16</text>
+
+        <circle class="node n2" cx="720" cy="190" r="34"/>
+        <text class="n-lbl" x="720" y="190">Industrial</text>
+        <text class="n-count" x="720" y="204">13</text>
+
+        <circle class="node n2" cx="720" cy="300" r="34"/>
+        <text class="n-lbl" x="720" y="300">Fashion</text>
+        <text class="n-count" x="720" y="314">15</text>
+
+        <circle class="node n2" cx="620" cy="360" r="34"/>
+        <text class="n-lbl" x="620" y="357">Type /</text>
+        <text class="n-lbl" x="620" y="371">Editorial</text>
+        <text class="n-count" x="620" y="385">15</text>
+
+        <circle class="node n3" cx="410" cy="380" r="36"/>
+        <text class="n-lbl" x="410" y="378">Generative</text>
+        <text class="n-lbl" x="410" y="392">/ Code</text>
+        <text class="n-count" x="410" y="406">15</text>
+
+        <circle class="node n3" cx="200" cy="360" r="34"/>
+        <text class="n-lbl" x="200" y="357">Social /</text>
+        <text class="n-lbl" x="200" y="371">TikTok</text>
+        <text class="n-count" x="200" y="385">20</text>
+
+        <circle class="node n3" cx="100" cy="290" r="34"/>
+        <text class="n-lbl" x="100" y="290">VJs / Live</text>
+        <text class="n-count" x="100" y="304">15</text>
+
+        <circle class="node n3" cx="80" cy="180" r="30"/>
+        <text class="n-lbl" x="80" y="180">Game / XR</text>
+        <text class="n-count" x="80" y="194">10</text>
+
+        <circle class="node n4" cx="555" cy="295" r="28"/>
+        <text class="n-lbl" x="555" y="295">Spatial</text>
+        <text class="n-count" x="555" y="309">10</text>
+
+        <circle class="node n4" cx="295" cy="150" r="28"/>
+        <text class="n-lbl" x="295" y="147">Education</text>
+        <text class="n-count" x="295" y="161">15</text>
+
+        <circle class="node n4" cx="530" cy="140" r="26"/>
+        <text class="n-lbl" x="530" y="137">Art/Creative</text>
+        <text class="n-lbl" x="530" y="151">Directors</text>
+        <text class="n-count" x="530" y="165">10</text>
+
+        <circle class="node n4" cx="290" cy="300" r="26"/>
+        <text class="n-lbl" x="290" y="297">Freelance /</text>
+        <text class="n-lbl" x="290" y="311">Hobbyist</text>
+        <text class="n-count" x="290" y="325">15</text>
+      </svg>
+    </div>
+
+    <div class="callout insight">
+      <h4>מה הקלאסטרים מלמדים</h4>
+      <ul>
+        <li><strong>"מעצב" זה מטוס-על.</strong> 14 קלאסטרים שונים — 207 תרחישים — UX לא יכול להיות אחיד. Onboarding צריך להבין את הדיסציפלינה כבר בשלב הרישום.</li>
+        <li><strong>ה-Art Director methodology</strong> ב-BRIK מתאים להרבה מהתחומים — צריך <em>prompts מותאמי-דיסציפלינה</em> כדי לכוון את הסוכן נכון למעצב אופנה לעומת VJ.</li>
+        <li><strong>שיווק ממוקד-קלאסטר יעיל יותר</strong> מ"כלי ל-designers". כל קלאסטר = landing page, case study, community.</li>
+      </ul>
+    </div>
+
+    <div class="cluster-header">
+      <h3>1. מעצבים גרפיים ומיתוג (Graphic &amp; Brand Designers)</h3>
+      <span class="cluster-meta">20 stories · #1-20</span>
+      <p class="cluster-desc">מעצבים שעובדים עם מותגים, לוגואים, ספרי מותג, שיווק, אריזות ושילוט. הצורך: מערכות ויזואליות מדויקות ועקביות, שמאפשרות וריאציות מבלי לשבור את השפה.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#1</span> <strong>Brand Guidelines Visualizer</strong> <em>· Brand Designer</em> — דף אינטראקטיבי שמציג ערכות צבעים, טיפוגרפיה, ולוגו של מותג לשותפים/ספקים. פרמטרים: palette, typeface scale, logo size.</p>
+    <p class="story-line"><span class="num">#2</span> <strong>Logo Motion Explorer</strong> <em>· Brand Designer</em> — וריאציות של reveal ל-logo: fade / stagger / scale / rotation. מייצא MP4 לסושיאל.</p>
+    <p class="story-line"><span class="num">#3</span> <strong>Color Palette Generator</strong> <em>· Graphic Designer</em> — יוצר 5-10 פלטות harmonic מבוססות seed צבע. שומר פלטות לפרויקט.</p>
+    <p class="story-line"><span class="num">#4</span> <strong>Pattern Generator for Merch</strong> <em>· Brand Designer</em> — pattern חוזר מבוסס motif של המותג ל-t-shirt / tote. Repeat controls + scale.</p>
+    <p class="story-line"><span class="num">#5</span> <strong>Business Card Designer</strong> <em>· Graphic Designer</em> — layout פרמטרי עם typography + logo + accent. מייצא PNG ל-print.</p>
+    <p class="story-line"><span class="num">#6</span> <strong>Brand Mood Board</strong> <em>· Brand Strategist</em> — קולאז' אינטראקטיבי של צבעים/טקסטורות/type — מתעדכן עם slider "energy".</p>
+    <p class="story-line"><span class="num">#7</span> <strong>Letterhead Ornament</strong> <em>· Graphic Designer</em> — pattern עדין לראש מסמך — adjustable density + accent color.</p>
+    <p class="story-line"><span class="num">#8</span> <strong>Social Media Template Kit</strong> <em>· Brand Designer</em> — קיט של 10 templates ל-Instagram/Twitter/LinkedIn. שומר את ה-brand colors.</p>
+    <p class="story-line"><span class="num">#9</span> <strong>Presentation Backgrounds</strong> <em>· Graphic Designer</em> — רקעים דינמיים ל-keynote/Google Slides. exports לכל slide גודל.</p>
+    <p class="story-line"><span class="num">#10</span> <strong>Brochure / Flyer Ornament</strong> <em>· Print Designer</em> — gradient / pattern / abstract shape כ-background element ל-print.</p>
+    <p class="story-line"><span class="num">#11</span> <strong>Gift Card Visual</strong> <em>· Brand Designer</em> — אסתטיקה fluid / metallic שמשתנה לפי denomination.</p>
+    <p class="story-line"><span class="num">#12</span> <strong>Event Branding Color Scheme</strong> <em>· Brand Designer</em> — פלטה + pattern לאירוע — מייצרת variations לכל touchpoint (invite, signage, merch).</p>
+    <p class="story-line"><span class="num">#13</span> <strong>Loyalty Card Animation</strong> <em>· Brand Designer</em> — NFT-style קלף מונפש עם personalized accent.</p>
+    <p class="story-line"><span class="num">#14</span> <strong>Signage Generator</strong> <em>· Brand Designer</em> — type + icon + accent ל-signs של חנות/משרד. פורמט adjustable.</p>
+    <p class="story-line"><span class="num">#15</span> <strong>Brand Guideline Quick Demo</strong> <em>· Brand Strategist</em> — mini-site שמציג "Do/Don't" עם דוגמאות חיות.</p>
+    <p class="story-line"><span class="num">#16</span> <strong>Rebrand Concept Explorer</strong> <em>· Creative Director</em> — שלוש variations של rebrand בזמן אמת, לבחירה בפגישת פיץ'.</p>
+    <p class="story-line"><span class="num">#17</span> <strong>Logo Lockup Variations</strong> <em>· Brand Designer</em> — horizontal / vertical / symbol-only — מצייר ישיר. מייצא SVG.</p>
+    <p class="story-line"><span class="num">#18</span> <strong>Icon Set Generator</strong> <em>· UI/Brand Designer</em> — 12-20 icons לפי grid + stroke weight אחיד.</p>
+    <p class="story-line"><span class="num">#19</span> <strong>Visual Identity Pitch Deck</strong> <em>· Creative Director</em> — כלי אחד שמציג את כל השכבות: palette, type, logo, pattern, application.</p>
+    <p class="story-line"><span class="num">#20</span> <strong>Brand Anniversary Animation</strong> <em>· Brand Designer</em> — "25 years" reveal עם motif ייחודי של המותג.</p>
+
+    <div class="cluster-header">
+      <h3>2. מעצבי Web / UI / UX</h3>
+      <span class="cluster-meta">18 stories · #21-38</span>
+      <p class="cluster-desc">מעצבי ממשקים, מוצר דיגיטלי, ו-interaction. הצורך: מיקרו-אינטראקציות, ויז'ואל assets, states, ו-prototypes שאפשר לשבץ בפרויקטים.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#21</span> <strong>Loading Spinner Explorer</strong> <em>· UI Designer</em> — 10+ spinners מונפשים עם speed/color controls. SVG export.</p>
+    <p class="story-line"><span class="num">#22</span> <strong>Animated Hero Section</strong> <em>· Web Designer</em> — gradient mesh / particle hero עם scroll-parallax. embed ב-web.</p>
+    <p class="story-line"><span class="num">#23</span> <strong>Mouse-Follow Effect</strong> <em>· Interaction Designer</em> — gooey blob / trail שעוקב אחרי cursor. adjustable elasticity.</p>
+    <p class="story-line"><span class="num">#24</span> <strong>Scroll-Triggered Animation</strong> <em>· Web Designer</em> — section reveal עם easing curves.</p>
+    <p class="story-line"><span class="num">#25</span> <strong>Button Micro-interaction</strong> <em>· UI Designer</em> — hover/press/success animations.</p>
+    <p class="story-line"><span class="num">#26</span> <strong>Empty-State Illustration</strong> <em>· Product Designer</em> — generative illustration למצב ריק — משנה לפי context (no tasks / no results).</p>
+    <p class="story-line"><span class="num">#27</span> <strong>404 Page Generator</strong> <em>· Web Designer</em> — interactive "lost" visual — מבוסס noise / scatter.</p>
+    <p class="story-line"><span class="num">#28</span> <strong>Animated Chart for Dashboard</strong> <em>· Product Designer</em> — chart מונפש עם data mock.</p>
+    <p class="story-line"><span class="num">#29</span> <strong>Toast Notification Animation</strong> <em>· UI Designer</em> — slide-in styles — 5 וריאציות.</p>
+    <p class="story-line"><span class="num">#30</span> <strong>Skeleton Loader</strong> <em>· UI Designer</em> — pulse pattern לקונטייר מידע — אורך/רוחב/speed.</p>
+    <p class="story-line"><span class="num">#31</span> <strong>Progress Bar Animator</strong> <em>· UI Designer</em> — linear / radial / stepped — עם "near-complete" tease.</p>
+    <p class="story-line"><span class="num">#32</span> <strong>Gradient Background</strong> <em>· Web Designer</em> — mesh gradient דינמי — רקע landing pages.</p>
+    <p class="story-line"><span class="num">#33</span> <strong>SVG Illustration Style Explorer</strong> <em>· Product Designer</em> — 5 סגנונות (flat / grainy / isometric) על אותו concept.</p>
+    <p class="story-line"><span class="num">#34</span> <strong>Accent Pattern for Card Grid</strong> <em>· Product Designer</em> — subtle pattern שמעשיר card layouts.</p>
+    <p class="story-line"><span class="num">#35</span> <strong>Cursor / Selection Effect</strong> <em>· Web Designer</em> — custom cursor + text-selection highlight.</p>
+    <p class="story-line"><span class="num">#36</span> <strong>Dark/Light Mode Transition</strong> <em>· UI Designer</em> — morph animation בין מצבים.</p>
+    <p class="story-line"><span class="num">#37</span> <strong>Interactive "About" Page Visual</strong> <em>· Web Designer</em> — team constellation / narrative flow.</p>
+    <p class="story-line"><span class="num">#38</span> <strong>A11y Motion Study</strong> <em>· UX Designer</em> — בוחן motion עם prefers-reduced-motion compliance.</p>
+
+    <div class="cluster-header">
+      <h3>3. מעצבי Motion ו-Animation</h3>
+      <span class="cluster-meta">16 stories · #39-54</span>
+      <p class="cluster-desc">מעצבי motion graphics, animators, ו-creators של video content. הצורך: assets מונפשים שמשתלבים ב-After Effects / Premiere / DaVinci, או רצים ישירות ב-web.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#39</span> <strong>Title Card Animator</strong> <em>· Motion Designer</em> — כרטיסיית כותרת מונפשת עם custom type + accent.</p>
+    <p class="story-line"><span class="num">#40</span> <strong>Intro / Outro for Videos</strong> <em>· YouTuber</em> — 3-5 שניות intro מיתוגי — חוזר בכל פרק.</p>
+    <p class="story-line"><span class="num">#41</span> <strong>Lower Third Generator</strong> <em>· Motion Designer</em> — name-plate מונפש (שם + תפקיד) עם brand styling.</p>
+    <p class="story-line"><span class="num">#42</span> <strong>Kinetic Typography</strong> <em>· Motion Designer</em> — טקסט פועם לקצב — ל-quotes / lyrics / statements.</p>
+    <p class="story-line"><span class="num">#43</span> <strong>Logo Reveal</strong> <em>· Motion Designer</em> — sting של 2 שניות ל-end-card.</p>
+    <p class="story-line"><span class="num">#44</span> <strong>Credit Roll Designer</strong> <em>· Motion Designer</em> — gradient credit sequence — length adjustable.</p>
+    <p class="story-line"><span class="num">#45</span> <strong>Countdown Timer</strong> <em>· Motion Designer</em> — 5-0 עם משחק טיפוגרפי / shape morph.</p>
+    <p class="story-line"><span class="num">#46</span> <strong>Glitch Effect Explorer</strong> <em>· VFX Artist</em> — RGB split / scanline / displace — parametrized.</p>
+    <p class="story-line"><span class="num">#47</span> <strong>Particle Transition</strong> <em>· Motion Designer</em> — cut transition עם dissolve-to-particles.</p>
+    <p class="story-line"><span class="num">#48</span> <strong>Music-Reactive Overlay</strong> <em>· Motion Designer</em> — overlay שפועם עם bass/treble — לחיתוך על וידאו.</p>
+    <p class="story-line"><span class="num">#49</span> <strong>Easing Curve Reference</strong> <em>· Animator</em> — ויזואליזציה של 20 easing curves — לבחירה.</p>
+    <p class="story-line"><span class="num">#50</span> <strong>Morphing Shape Library</strong> <em>· Motion Designer</em> — SVG morphs (circle→square→star).</p>
+    <p class="story-line"><span class="num">#51</span> <strong>Text-to-Motion</strong> <em>· Motion Designer</em> — מקבל text והופך ל-kinetic type באוטומציה.</p>
+    <p class="story-line"><span class="num">#52</span> <strong>Scene Transition Generator</strong> <em>· Video Editor</em> — wipes / irises / zooms — מוכנים ל-Premiere import.</p>
+    <p class="story-line"><span class="num">#53</span> <strong>Abstract Loops for Backgrounds</strong> <em>· Motion Designer</em> — seamless loops 10s — ל-background של videos.</p>
+    <p class="story-line"><span class="num">#54</span> <strong>Broadcast Bug</strong> <em>· TV/Streaming Designer</em> — corner logo animation פעמי.</p>
+
+    <div class="cluster-header">
+      <h3>4. מעצבים תעשייתיים / מוצר / 3D</h3>
+      <span class="cluster-meta">13 stories · #55-67</span>
+      <p class="cluster-desc">מעצבים שעובדים עם product design, industrial design, ו-3D visualization. הצורך: הדמיות, פרמטרים חומריים, ויז'ואליזציה ל-pitch.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#55</span> <strong>Product Surface Texture Explorer</strong> <em>· Industrial Designer</em> — texture samples (rough/smooth/brushed) על surface של מוצר.</p>
+    <p class="story-line"><span class="num">#56</span> <strong>Material Preview</strong> <em>· Product Designer</em> — מבחר חומרים (אלומיניום / פלסטיק / עץ) עם lighting studies.</p>
+    <p class="story-line"><span class="num">#57</span> <strong>Lighting Study</strong> <em>· Product Designer</em> — ambient / directional / rim lighting על אותו מוצר.</p>
+    <p class="story-line"><span class="num">#58</span> <strong>Color-on-Product</strong> <em>· Industrial Designer</em> — החלפת צבעים חיה על surface של מוצר.</p>
+    <p class="story-line"><span class="num">#59</span> <strong>Packaging Variation</strong> <em>· Packaging Designer</em> — 6 variations של unboxing visual.</p>
+    <p class="story-line"><span class="num">#60</span> <strong>3D-Print Pattern</strong> <em>· Industrial Designer</em> — lattice / voronoi ל-print — adjustable cell size.</p>
+    <p class="story-line"><span class="num">#61</span> <strong>Ergonomic Pattern Study</strong> <em>· Product Designer</em> — grip / handle / contact surface study.</p>
+    <p class="story-line"><span class="num">#62</span> <strong>Product Lineup Visualizer</strong> <em>· Industrial Designer</em> — 5 מוצרים בסדרה עם accent color scheme אחיד.</p>
+    <p class="story-line"><span class="num">#63</span> <strong>Shape Study Tool</strong> <em>· Industrial Designer</em> — blob / sharp / organic morph — לאבחון direction.</p>
+    <p class="story-line"><span class="num">#64</span> <strong>Silhouette Explorer</strong> <em>· Industrial Designer</em> — 10 סילואטים שונים של אותו מוצר (furniture / lamp).</p>
+    <p class="story-line"><span class="num">#65</span> <strong>Grid for Catalog</strong> <em>· Product Designer</em> — catalog layout עם תמונות parametric.</p>
+    <p class="story-line"><span class="num">#66</span> <strong>3D Product Showcase</strong> <em>· Industrial Designer</em> — rotation + zoom של CAD-exported model.</p>
+    <p class="story-line"><span class="num">#67</span> <strong>Material Swatch Library</strong> <em>· Industrial Designer</em> — ספריית חומרים פנימית שמקושרת ל-tool של presentation.</p>
+
+    <div class="cluster-header">
+      <h3>5. אופנה, טקסטיל ו-wearables</h3>
+      <span class="cluster-meta">15 stories · #68-82</span>
+      <p class="cluster-desc">מעצבי אופנה, טקסטיל, אקססוריז — מחפשים patterns, palettes, silhouettes לקולקציה, runway, lookbook.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#68</span> <strong>Fabric Pattern Generator</strong> <em>· Textile Designer</em> — pattern חוזר עם motif מותאם — אופנה עכשווית או vintage.</p>
+    <p class="story-line"><span class="num">#69</span> <strong>Textile Weave Study</strong> <em>· Textile Designer</em> — ויזואליזציה של warp/weft עם color yarns שונים.</p>
+    <p class="story-line"><span class="num">#70</span> <strong>Collection Color Palette</strong> <em>· Fashion Designer</em> — 5 צבעים בסיס + 10 accents לקולקציית seasonal.</p>
+    <p class="story-line"><span class="num">#71</span> <strong>Print Placement on Garment</strong> <em>· Fashion Designer</em> — placement של print על T-shirt / dress / hoodie mockup.</p>
+    <p class="story-line"><span class="num">#72</span> <strong>Runway Backdrop Visual</strong> <em>· Fashion Art Director</em> — visual ל-background של runway — mood-driven.</p>
+    <p class="story-line"><span class="num">#73</span> <strong>Lookbook Mood Visual</strong> <em>· Fashion Designer</em> — visual divider בין fashion editorials של lookbook.</p>
+    <p class="story-line"><span class="num">#74</span> <strong>Fashion Show Invite Animation</strong> <em>· Fashion Marketer</em> — digital invite עם brand DNA + date reveal.</p>
+    <p class="story-line"><span class="num">#75</span> <strong>Seasonal Palette Explorer</strong> <em>· Fashion Designer</em> — חקירת 4 עונות × 5 moods = 20 פלטות.</p>
+    <p class="story-line"><span class="num">#76</span> <strong>Embroidery Pattern Study</strong> <em>· Textile Designer</em> — motif אמבוס לרקמה — עם color-count control.</p>
+    <p class="story-line"><span class="num">#77</span> <strong>Knit Pattern Generator</strong> <em>· Textile Designer</em> — cable / fair-isle / jacquard — stitch grid.</p>
+    <p class="story-line"><span class="num">#78</span> <strong>Repeat Pattern Tile</strong> <em>· Textile Designer</em> — seamless tile שמתאים ל-fabric printing.</p>
+    <p class="story-line"><span class="num">#79</span> <strong>Accessory Motif</strong> <em>· Accessory Designer</em> — motif לתיקים / צעיפים / כובעים — scale variations.</p>
+    <p class="story-line"><span class="num">#80</span> <strong>Fashion Sketch Silhouette</strong> <em>· Fashion Designer</em> — generative silhouette של גזרה — adjustable volume, length, drape.</p>
+    <p class="story-line"><span class="num">#81</span> <strong>Color Blocking Explorer</strong> <em>· Fashion Designer</em> — geometric color blocks על garment layout.</p>
+    <p class="story-line"><span class="num">#82</span> <strong>Seam / Stitch Visualization</strong> <em>· Fashion Designer</em> — סגנונות תפר (chain / lockstitch / decorative) על קצוות.</p>
+
+    <div class="cluster-header">
+      <h3>6. טיפוגרפיה, editorial ו-print</h3>
+      <span class="cluster-meta">15 stories · #83-97</span>
+      <p class="cluster-desc">מעצבי טיפוגרפיה, editorial, print, poster, book covers. הצורך: experimentation מהיר עם טיפוגרפיה כמושא יצירתי בזכות עצמה.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#83</span> <strong>Kinetic Poster Type</strong> <em>· Graphic Designer</em> — poster עם טקסט שמתחלף בלולאה — ל-digital display.</p>
+    <p class="story-line"><span class="num">#84</span> <strong>Variable Font Explorer</strong> <em>· Type Designer</em> — חקירת axes של variable font (weight, width, slant).</p>
+    <p class="story-line"><span class="num">#85</span> <strong>Type Specimen Sheet</strong> <em>· Type Designer</em> — specimen אוטומטי לכל glyph + pangram + samples.</p>
+    <p class="story-line"><span class="num">#86</span> <strong>Editorial Layout Generator</strong> <em>· Editorial Designer</em> — 3 columns / 5 columns / asymmetric — עם dummy text.</p>
+    <p class="story-line"><span class="num">#87</span> <strong>Magazine Cover Variations</strong> <em>· Editorial Designer</em> — 5 variations של cover — headlines, accent, image placement.</p>
+    <p class="story-line"><span class="num">#88</span> <strong>Newspaper Ornament</strong> <em>· Editorial Designer</em> — אלמנטים ויזואליים עדינים לעיתון — section dividers, hairlines.</p>
+    <p class="story-line"><span class="num">#89</span> <strong>Poster Type Treatment</strong> <em>· Poster Designer</em> — typography-as-image — distortion / stack / overlap.</p>
+    <p class="story-line"><span class="num">#90</span> <strong>Book Cover Explorer</strong> <em>· Book Designer</em> — 10 variations של cover לכתב-יד — סגנונות שונים.</p>
+    <p class="story-line"><span class="num">#91</span> <strong>Album Art Generator</strong> <em>· Album Cover Designer</em> — visual שמייצג mood של album — mood-slider + palette.</p>
+    <p class="story-line"><span class="num">#92</span> <strong>Zine Layout</strong> <em>· Zine Maker</em> — DIY zine עם מקומות לתוכן + ornaments.</p>
+    <p class="story-line"><span class="num">#93</span> <strong>Typographic Illustration</strong> <em>· Graphic Designer</em> — text as shape — letters כ-building-blocks של image.</p>
+    <p class="story-line"><span class="num">#94</span> <strong>Letterform Study</strong> <em>· Type Designer</em> — anatomy של אות — ascender/descender/x-height — interactive.</p>
+    <p class="story-line"><span class="num">#95</span> <strong>Drop Cap Generator</strong> <em>· Editorial Designer</em> — ornamental drop cap לפרקים — historical / modern / playful.</p>
+    <p class="story-line"><span class="num">#96</span> <strong>Column Grid Visualizer</strong> <em>· Editorial Designer</em> — גריד עם baseline / gutter / margin adjustments.</p>
+    <p class="story-line"><span class="num">#97</span> <strong>Endpaper Pattern</strong> <em>· Book Designer</em> — pattern ל-endpapers של ספר — marbled / geometric / floral.</p>
+
+    <div class="cluster-header">
+      <h3>7. Generative art ו-creative coders</h3>
+      <span class="cluster-meta">15 stories · #98-112</span>
+      <p class="cluster-desc">אמני generative, creative coders, מתמטיקאים-חובבים. הצורך: playground ל-ideas אלגוריתמיים, פרסום ב-gallery, סביבה בלי setup.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#98</span> <strong>Perlin Noise Terrain</strong> <em>· Generative Artist</em> — landscape גנרטיבי — seed / octaves / elevation.</p>
+    <p class="story-line"><span class="num">#99</span> <strong>Flocking / Boids Simulation</strong> <em>· Creative Coder</em> — swarm behavior — separation/alignment/cohesion controls.</p>
+    <p class="story-line"><span class="num">#100</span> <strong>Cellular Automata</strong> <em>· Creative Coder</em> — Conway's Game of Life עם custom rules.</p>
+    <p class="story-line"><span class="num">#101</span> <strong>Reaction-Diffusion Pattern</strong> <em>· Generative Artist</em> — patterns אורגניים — feed / kill rates.</p>
+    <p class="story-line"><span class="num">#102</span> <strong>Fractal Explorer</strong> <em>· Creative Coder</em> — Mandelbrot / Julia עם zoom + palette.</p>
+    <p class="story-line"><span class="num">#103</span> <strong>L-System Growth</strong> <em>· Generative Artist</em> — plant-like growth מבוסס grammar rules.</p>
+    <p class="story-line"><span class="num">#104</span> <strong>Voronoi Tessellation</strong> <em>· Generative Artist</em> — cells + colors אדפטיביים.</p>
+    <p class="story-line"><span class="num">#105</span> <strong>SDF Raymarching Playground</strong> <em>· Shader Artist</em> — sphere / box / torus combinations עם smooth union.</p>
+    <p class="story-line"><span class="num">#106</span> <strong>Shader Study</strong> <em>· Shader Artist</em> — משחקים עם GLSL uniforms + textures.</p>
+    <p class="story-line"><span class="num">#107</span> <strong>Generative Wallpaper</strong> <em>· Generative Artist</em> — seamless wallpaper לפי parameters — endless variations.</p>
+    <p class="story-line"><span class="num">#108</span> <strong>ASCII Art Generator</strong> <em>· Digital Artist</em> — image → ASCII עם charset + contrast adjust.</p>
+    <p class="story-line"><span class="num">#109</span> <strong>Pixel Art Generator</strong> <em>· Pixel Artist</em> — generative pixel scenes — limit palette / resolution.</p>
+    <p class="story-line"><span class="num">#110</span> <strong>Procedural Geometry</strong> <em>· 3D Artist</em> — non-destructive geometry (parametric chairs / vases).</p>
+    <p class="story-line"><span class="num">#111</span> <strong>Math Visualizer</strong> <em>· Educator / Artist</em> — harmonic motion / waves / spirals.</p>
+    <p class="story-line"><span class="num">#112</span> <strong>Physics Playground</strong> <em>· Creative Coder</em> — spring/gravity/collision playground — Matter.js-backed.</p>
+
+    <div class="cluster-header">
+      <h3>8. יוצרי סושיאל / TikTok / YouTube</h3>
+      <span class="cluster-meta">20 stories · #113-132</span>
+      <p class="cluster-desc">TikTokers, YouTubers, Instagrammers, podcasters. הצורך: assets ויז'ואליים מהירים לפידים, thumbnails, teasers, effects — שנראים "מותאם אישית" ולא generic.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#113</span> <strong>Animated YouTube Thumbnail</strong> <em>· YouTuber</em> — thumbnail עם variation של accent — לבדיקות A/B.</p>
+    <p class="story-line"><span class="num">#114</span> <strong>TikTok Effect / Sticker</strong> <em>· TikToker</em> — asset מונפש לשימוש חוזר בסרטונים.</p>
+    <p class="story-line"><span class="num">#115</span> <strong>Channel Intro Animator</strong> <em>· YouTuber</em> — 3s intro — ייחודי לערוץ.</p>
+    <p class="story-line"><span class="num">#116</span> <strong>End Screen Designer</strong> <em>· YouTuber</em> — "Subscribe + next video" layout מונפש.</p>
+    <p class="story-line"><span class="num">#117</span> <strong>Chapter Markers Visual</strong> <em>· YouTuber</em> — markers ויז'ואליים לצילום ארוך.</p>
+    <p class="story-line"><span class="num">#118</span> <strong>Subscribe Button Animator</strong> <em>· YouTuber</em> — pulse / wave / bounce — חלל לניצול אסתטי.</p>
+    <p class="story-line"><span class="num">#119</span> <strong>Quote Card Generator</strong> <em>· Content Creator</em> — quote מותג עם background אסתטי לסושיאל.</p>
+    <p class="story-line"><span class="num">#120</span> <strong>Launch Countdown</strong> <em>· Social Manager</em> — 5-day countdown עם daily visual different.</p>
+    <p class="story-line"><span class="num">#121</span> <strong>"New Video" Announcement Card</strong> <em>· YouTuber</em> — teaser card לפוסט בסושיאל.</p>
+    <p class="story-line"><span class="num">#122</span> <strong>Reaction Sticker Generator</strong> <em>· TikToker</em> — stickers מונפשים לסרטונים.</p>
+    <p class="story-line"><span class="num">#123</span> <strong>Podcast Cover Art</strong> <em>· Podcaster</em> — art עם episode-specific hint.</p>
+    <p class="story-line"><span class="num">#124</span> <strong>Podcast Waveform Visualizer</strong> <em>· Podcaster</em> — audio-reactive visual ל-episode clips.</p>
+    <p class="story-line"><span class="num">#125</span> <strong>Instagram Story Highlight Covers</strong> <em>· Social Manager</em> — סדרה עקבית של highlight icons.</p>
+    <p class="story-line"><span class="num">#126</span> <strong>Reel Transition Effect</strong> <em>· Instagram Creator</em> — transition לפני/אחרי — ממותג.</p>
+    <p class="story-line"><span class="num">#127</span> <strong>LUT / Filter Preview</strong> <em>· Content Creator</em> — before/after בזמן אמת של צבעונות.</p>
+    <p class="story-line"><span class="num">#128</span> <strong>Teaser Trailer Background</strong> <em>· YouTuber</em> — background לגרסת teaser של video.</p>
+    <p class="story-line"><span class="num">#129</span> <strong>Caption Background Card</strong> <em>· TikToker</em> — רקע מונפש מאחורי סאב-טייטלים.</p>
+    <p class="story-line"><span class="num">#130</span> <strong>Meme Template Generator</strong> <em>· Content Creator</em> — templates ל-trending formats.</p>
+    <p class="story-line"><span class="num">#131</span> <strong>Community Post Visual</strong> <em>· YouTuber</em> — visual ל-community tab update.</p>
+    <p class="story-line"><span class="num">#132</span> <strong>Live Stream Overlay</strong> <em>· Streamer</em> — overlay עם branding + alerts placeholders.</p>
+
+    <div class="cluster-header">
+      <h3>9. VJs, live performance, installations</h3>
+      <span class="cluster-meta">15 stories · #133-147</span>
+      <p class="cluster-desc">VJs, stage designers, installation artists. הצורך: visuals בזמן אמת, audio-reactive, projection-mapped, אינטראקטיביים. שונה לגמרי מיוצרי video static.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#133</span> <strong>Beat-Reactive Visual</strong> <em>· VJ</em> — shapes שמפעמות לפי BPM — ל-club set.</p>
+    <p class="story-line"><span class="num">#134</span> <strong>Concert Backdrop</strong> <em>· Stage Designer</em> — abstract visual שרץ ב-LED wall.</p>
+    <p class="story-line"><span class="num">#135</span> <strong>DJ Set Visualizer</strong> <em>· VJ</em> — track-specific visual sequence.</p>
+    <p class="story-line"><span class="num">#136</span> <strong>Club Wall Projection</strong> <em>· Installation Artist</em> — projection-mapped visual לפינה של מועדון.</p>
+    <p class="story-line"><span class="num">#137</span> <strong>Festival Stage Graphics</strong> <em>· Stage Designer</em> — graphics למסך ראשי של פסטיבל.</p>
+    <p class="story-line"><span class="num">#138</span> <strong>Art Installation Visual</strong> <em>· Installation Artist</em> — visual לחלל גלריה — interactive with motion.</p>
+    <p class="story-line"><span class="num">#139</span> <strong>Interactive Installation</strong> <em>· Installation Artist</em> — visual שמגיב לפרמטרים מ-sensors / cameras.</p>
+    <p class="story-line"><span class="num">#140</span> <strong>Audience-Reactive Visual</strong> <em>· Live Designer</em> — visual שמגיב ל-crowd noise.</p>
+    <p class="story-line"><span class="num">#141</span> <strong>Rhythm Game Visual</strong> <em>· Game/Music Designer</em> — visual במשחק קצב — synced with music.</p>
+    <p class="story-line"><span class="num">#142</span> <strong>Ambient Visual for Lounge</strong> <em>· Interior / Stage Designer</em> — loop איטי וחלומי לבר / lounge.</p>
+    <p class="story-line"><span class="num">#143</span> <strong>Real-Time Generative Show</strong> <em>· VJ</em> — sequence של generative scenes שמתחלפות לפי מוד.</p>
+    <p class="story-line"><span class="num">#144</span> <strong>Feedback / Delay Visual</strong> <em>· VJ</em> — classic video feedback loop — layered.</p>
+    <p class="story-line"><span class="num">#145</span> <strong>Multi-Screen Sync</strong> <em>· Stage Designer</em> — visual שחולק על 3 screens.</p>
+    <p class="story-line"><span class="num">#146</span> <strong>Laser Show Visualizer</strong> <em>· Show Designer</em> — planning של laser choreography.</p>
+    <p class="story-line"><span class="num">#147</span> <strong>Kaleidoscope Live</strong> <em>· VJ</em> — kaleid של live camera input — אינטראקטיבי עם הקהל.</p>
+
+    <div class="cluster-header">
+      <h3>10. Game, interactive ו-XR designers</h3>
+      <span class="cluster-meta">10 stories · #148-157</span>
+      <p class="cluster-desc">מעצבי משחקים, AR filter creators, VR/XR. הצורך: assets, prototypes, ו-mood visuals ל-pitch.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#148</span> <strong>Game Title Screen Animator</strong> <em>· Game Designer</em> — title screen מונפש עם menu reveals.</p>
+    <p class="story-line"><span class="num">#149</span> <strong>Game UI Element</strong> <em>· Game UI Designer</em> — health bar / mana bar / cooldown indicators — מונפשים.</p>
+    <p class="story-line"><span class="num">#150</span> <strong>Loading Screen Visual</strong> <em>· Game Designer</em> — visual שמחזיק לקוח בזמן טעינה.</p>
+    <p class="story-line"><span class="num">#151</span> <strong>Game Logo Explorer</strong> <em>· Game Brand Designer</em> — 10 וריאציות של game logo — אסתטיקות שונות.</p>
+    <p class="story-line"><span class="num">#152</span> <strong>Particle Effect for Game</strong> <em>· VFX Artist</em> — fire / smoke / magic — לייצוא ל-Unity.</p>
+    <p class="story-line"><span class="num">#153</span> <strong>AR Face Filter Concept</strong> <em>· AR Creator</em> — concept ל-filter — בוחן color + position בלי להעלות ל-Spark.</p>
+    <p class="story-line"><span class="num">#154</span> <strong>Snap Lens Concept</strong> <em>· AR Designer</em> — ויז'ואלים ל-lens ideas — לבחירה לפני production.</p>
+    <p class="story-line"><span class="num">#155</span> <strong>VR Environment Mood</strong> <em>· VR Designer</em> — mood visual ל-VR scene — לפני 3D build.</p>
+    <p class="story-line"><span class="num">#156</span> <strong>Mini-Game Concept</strong> <em>· Game Designer</em> — prototype מהיר של mechanic — לפי controls.</p>
+    <p class="story-line"><span class="num">#157</span> <strong>Interactive Prototype for Pitch</strong> <em>· Game Designer</em> — demo ניתן-לשליטה ל-investor deck.</p>
+
+    <div class="cluster-header">
+      <h3>11. אדריכלות, עיצוב פנים ומרחב</h3>
+      <span class="cluster-meta">10 stories · #158-167</span>
+      <p class="cluster-desc">אדריכלים, מעצבי פנים, מעצבי תערוכה. הצורך: mood, material, light studies — ל-client meetings ו-concept approval.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#158</span> <strong>Architectural Pattern Study</strong> <em>· Architect</em> — facade pattern — parametric grid.</p>
+    <p class="story-line"><span class="num">#159</span> <strong>Interior Color Palette</strong> <em>· Interior Designer</em> — palette לחדר עם accent variations.</p>
+    <p class="story-line"><span class="num">#160</span> <strong>Light Study Visual</strong> <em>· Interior / Set Designer</em> — light direction + warmth study.</p>
+    <p class="story-line"><span class="num">#161</span> <strong>Texture / Material Explorer</strong> <em>· Interior Designer</em> — wood / concrete / metal על surface בחדר.</p>
+    <p class="story-line"><span class="num">#162</span> <strong>Facade Pattern Generator</strong> <em>· Architect</em> — brick / slats / lattice — variations.</p>
+    <p class="story-line"><span class="num">#163</span> <strong>Floor Plan Ornament</strong> <em>· Architect</em> — tile pattern לרצפה — symmetry / color controls.</p>
+    <p class="story-line"><span class="num">#164</span> <strong>Landscape Plan Visual</strong> <em>· Landscape Designer</em> — planting pattern / flow.</p>
+    <p class="story-line"><span class="num">#165</span> <strong>Exhibition Wayfinding</strong> <em>· Exhibition Designer</em> — signage system לתערוכה.</p>
+    <p class="story-line"><span class="num">#166</span> <strong>Retail Environment Visual</strong> <em>· Retail Designer</em> — color + texture + lighting לחנות.</p>
+    <p class="story-line"><span class="num">#167</span> <strong>Spatial Mood Board</strong> <em>· Interior Designer</em> — mood board אינטראקטיבי — texture swap by slider.</p>
+
+    <div class="cluster-header">
+      <h3>12. חינוך עיצובי — סטודנטים ומורים</h3>
+      <span class="cluster-meta">15 stories · #168-182</span>
+      <p class="cluster-desc">סטודנטים לעיצוב (תואר ראשון + שני), מרצים, מורים לאמנות. הצורך: כלי לימוד, demonstration, תרגיל, תיק עבודות.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#168</span> <strong>Color Theory Teaching Tool</strong> <em>· Design Lecturer</em> — complementary / triadic / analogous — interactive.</p>
+    <p class="story-line"><span class="num">#169</span> <strong>Grid System Explainer</strong> <em>· Design Lecturer</em> — baseline / modular / asymmetric — illustrates best practices.</p>
+    <p class="story-line"><span class="num">#170</span> <strong>Typography Anatomy Demo</strong> <em>· Type Lecturer</em> — ascender/descender/counter labeled + interactive.</p>
+    <p class="story-line"><span class="num">#171</span> <strong>Bauhaus Principles Visualizer</strong> <em>· Design Historian</em> — form follows function — interactive.</p>
+    <p class="story-line"><span class="num">#172</span> <strong>Gestalt Demonstration</strong> <em>· Design Lecturer</em> — proximity / similarity / closure — בזמן אמת.</p>
+    <p class="story-line"><span class="num">#173</span> <strong>12 Animation Principles Tool</strong> <em>· Animation Teacher</em> — squash/stretch/anticipation — one slider each.</p>
+    <p class="story-line"><span class="num">#174</span> <strong>Design History Timeline</strong> <em>· Design Lecturer</em> — timeline עם עידנים + דוגמאות מונפשות.</p>
+    <p class="story-line"><span class="num">#175</span> <strong>Student Assignment Remix</strong> <em>· Design Student</em> — student לוקח כלי של חבר ומתאים משלו.</p>
+    <p class="story-line"><span class="num">#176</span> <strong>Critique Tool — Side-by-Side</strong> <em>· Design Lecturer</em> — 2 כלים של סטודנטים — לביקורת השוואתית.</p>
+    <p class="story-line"><span class="num">#177</span> <strong>Portfolio Piece Generator</strong> <em>· Design Student</em> — כלי ייחודי שבולט ב-portfolio.</p>
+    <p class="story-line"><span class="num">#178</span> <strong>Thesis Project Tool</strong> <em>· Grad Student</em> — חקירה פרמטרית של theme של תזה.</p>
+    <p class="story-line"><span class="num">#179</span> <strong>Classroom Exercise Tool</strong> <em>· Design Teacher</em> — תרגיל בן 20 דקות — שילדים מריצים בכיתה.</p>
+    <p class="story-line"><span class="num">#180</span> <strong>Rapid Sketch Tool</strong> <em>· Design Teacher</em> — כלי ל-thumbnailing fast ideas.</p>
+    <p class="story-line"><span class="num">#181</span> <strong>"Try it Yourself" Lecture Slide</strong> <em>· Design Lecturer</em> — interactive slide מוטמע ב-keynote.</p>
+    <p class="story-line"><span class="num">#182</span> <strong>Lab Exercise</strong> <em>· Design Student</em> — exercise ל-intro to design — reusable.</p>
+
+    <div class="cluster-header">
+      <h3>13. Art directors ו-creative directors</h3>
+      <span class="cluster-meta">10 stories · #183-192</span>
+      <p class="cluster-desc">מנהלי יצירה בסוכנויות, studios, חברות. הצורך: רעיונות מהירים ל-pitch, mood, ייצוג visual של concept אסטרטגי.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#183</span> <strong>Concept Prototyping</strong> <em>· Creative Director</em> — 3 concepts ב-15 דקות לפני pitch.</p>
+    <p class="story-line"><span class="num">#184</span> <strong>Client Pitch Visualizer</strong> <em>· Art Director</em> — interactive centerpiece ל-presentation.</p>
+    <p class="story-line"><span class="num">#185</span> <strong>Mood Board with Motion</strong> <em>· Art Director</em> — mood board נע — עשיר יותר מ-static.</p>
+    <p class="story-line"><span class="num">#186</span> <strong>Competitive Brand Analysis</strong> <em>· Strategist</em> — ויז'ואל השוואה של brand DNA — side-by-side.</p>
+    <p class="story-line"><span class="num">#187</span> <strong>Creative Brief Translator</strong> <em>· Creative Director</em> — brief text → visual exploration.</p>
+    <p class="story-line"><span class="num">#188</span> <strong>Agency Portfolio Piece</strong> <em>· Creative Director</em> — כלי ייחודי ל-homepage של סוכנות.</p>
+    <p class="story-line"><span class="num">#189</span> <strong>Stylescape Tool</strong> <em>· Art Director</em> — תמציות visual של direction — pre-comp.</p>
+    <p class="story-line"><span class="num">#190</span> <strong>Project Kickoff Visual</strong> <em>· Creative Director</em> — visual לפתיחת פרויקט פנימי — מייצג ambition.</p>
+    <p class="story-line"><span class="num">#191</span> <strong>Client Presentation Centerpiece</strong> <em>· Art Director</em> — hero visual ל-deck.</p>
+    <p class="story-line"><span class="num">#192</span> <strong>Award Submission Visual</strong> <em>· Creative Director</em> — visual שמסביר את הפרויקט — ל-awards.</p>
+
+    <div class="cluster-header">
+      <h3>14. Freelancers, makers, hobbyists</h3>
+      <span class="cluster-meta">15 stories · #193-207</span>
+      <p class="cluster-desc">יצרנים עצמאיים, makers, hobbyists, יוצרי crafts. הצורך: visuals לפרויקטים אישיים / מתנות / Etsy / חוויות משפחתיות.</p>
+    </div>
+
+    <p class="story-line"><span class="num">#193</span> <strong>Etsy Product Mockup</strong> <em>· Etsy Seller</em> — mockup של product שעוד לא צולם.</p>
+    <p class="story-line"><span class="num">#194</span> <strong>Craft Pattern Generator</strong> <em>· Crafter</em> — pattern ל-scrapbooking / cardmaking.</p>
+    <p class="story-line"><span class="num">#195</span> <strong>Kids' Activity Tool</strong> <em>· Parent / Teacher</em> — visual interactive שילדים משנים — ללמידה.</p>
+    <p class="story-line"><span class="num">#196</span> <strong>Greeting Card Animator</strong> <em>· Hobbyist</em> — כרטיס ברכה דיגיטלי עם personalization.</p>
+    <p class="story-line"><span class="num">#197</span> <strong>Wedding Invite Animator</strong> <em>· Wedding Designer</em> — invite עם מוטיב ייחודי לזוג.</p>
+    <p class="story-line"><span class="num">#198</span> <strong>Birthday Animation</strong> <em>· Hobbyist</em> — digital "happy birthday" מותאם אישית.</p>
+    <p class="story-line"><span class="num">#199</span> <strong>Anniversary Visual</strong> <em>· Hobbyist</em> — visual ל-anniversary של זוג / עמית / מפעל.</p>
+    <p class="story-line"><span class="num">#200</span> <strong>Memorial / Tribute Animation</strong> <em>· Hobbyist</em> — tribute visual לאדם שאבד — להקרנה ב-event.</p>
+    <p class="story-line"><span class="num">#201</span> <strong>Gift Wrap Pattern</strong> <em>· Crafter</em> — pattern ל-print ונייר עטיפה.</p>
+    <p class="story-line"><span class="num">#202</span> <strong>Stamp / Sticker Design</strong> <em>· Hobbyist / Etsy Seller</em> — asset ל-print ולאיסוף.</p>
+    <p class="story-line"><span class="num">#203</span> <strong>Knitting / Crochet Pattern</strong> <em>· Hobbyist Crafter</em> — grid pattern לספירת עצות.</p>
+    <p class="story-line"><span class="num">#204</span> <strong>Embroidery Chart</strong> <em>· Embroidery Maker</em> — chart עם stitch count automatic.</p>
+    <p class="story-line"><span class="num">#205</span> <strong>Scrapbook Element</strong> <em>· Scrapbooker</em> — decorative element מונפש — לשילוב ב-ליום אלבום.</p>
+    <p class="story-line"><span class="num">#206</span> <strong>Calendar / Planner Pattern</strong> <em>· Hobbyist / Seller</em> — patterns לעמודי יומן / planner.</p>
+    <p class="story-line"><span class="num">#207</span> <strong>Journaling Aesthetic Tool</strong> <em>· Journaler</em> — visual accent לכתיבה ביומן דיגיטלי.</p>
+  </div>
+
+  <div class="actions-block">
+    <div class="block-header">
+      <h2>סינתזה — מה 207 התרחישים מלמדים</h2>
+    </div>
+
+    <h3>1. 4 דפוסי-על של שימוש</h3>
+    <div class="finding strength">
+      <h3>Pattern A — "כלי שהמעצב משתמש בו שוב ושוב"</h3>
+      <p>מעצב בונה כלי פעם אחת, משתמש בו עשרות פעמים ב-deliverables (thumbnail generator, brand palette, lower third). <strong>Retention driver</strong>. נדרש: saved tools, brand kit, quick-access.</p>
+    </div>
+    <div class="finding strength">
+      <h3>Pattern B — "כלי שהמעצב יוצר לצד-שלישי"</h3>
+      <p>מעצב בונה כלי ל-client / קהל (wedding invite, kid activity, game demo). <strong>Embed + share</strong> קריטיים. נדרש: ToolEmbed עם access control + branded shell.</p>
+    </div>
+    <div class="finding strength">
+      <h3>Pattern C — "כלי ל-one-time event / פיץ'"</h3>
+      <p>כלי לאירוע ספציפי (pitch, launch, presentation). <strong>Speed-to-quality</strong> חשוב יותר מ-retention. נדרש: presets, templates, fast iteration.</p>
+    </div>
+    <div class="finding strength">
+      <h3>Pattern D — "כלי explorative / play / learning"</h3>
+      <p>יוצר בונה כלי כדי ללמוד / לחקור / לשחק. <strong>Community + remix</strong> מזינים את זה. נדרש: gallery robust, remix smooth, credits למקור.</p>
+    </div>
+
+    <h3>2. 5 יכולות שחזרו ברוב הקלאסטרים</h3>
+    <ul>
+      <li><strong>Brand Kit / Palette persistence</strong> — 8 מתוך 14 קלאסטרים ציינו שימוש חוזר ב-colors/fonts. <em>BRIK רמה 1 — חיוני.</em></li>
+      <li><strong>Export קיט שלם</strong> — לא רק PNG אחד, אלא סדרה: 10 variations של thumbnail, 5 platforms (IG/TikTok/Twitter). <em>BRIK: Export Presets.</em></li>
+      <li><strong>Presets "dogmatic"</strong> — כל קלאסטר רוצה "התחל מזה, אל תמציא מאפס". <em>BRIK רמה 2 — Preset library per tool type.</em></li>
+      <li><strong>Brand-safe / client-safe outputs</strong> — B2B crowd רוצה watermark, attribution, white-label. <em>ToolEmbed features.</em></li>
+      <li><strong>Quick iteration + pin version</strong> — "נסה 5 variations, אני אחזור למס' 3". <em>Version UI — כבר ב-roadmap.</em></li>
+    </ul>
+
+    <h3>3. 3 גאפים שרק עכשיו התבררו</h3>
+    <div class="callout warning">
+      <h4>Gap 1 — Video export איכותי לא-דיסקרטי</h4>
+      <p>הרבה מהקלאסטרים (motion, social, VJ, installation) דורשים <strong>video quality-first</strong>. 60fps, 4K, lossless codec. <code>ChatoolyCanvas</code> היום תומך — אבל לא ברור אם quality מספיק ל-broadcast / festival. <strong>אימות דרוש.</strong></p>
+    </div>
+    <div class="callout warning">
+      <h4>Gap 2 — Professional-grade type handling</h4>
+      <p>Typography, Editorial, Type designers — דורשים variable fonts, OpenType features, kerning control. BRIK היום בסיסי. <strong>דורש BRIK חדש: Professional Typography Engine.</strong></p>
+    </div>
+    <div class="callout warning">
+      <h4>Gap 3 — Physical output / print-ready</h4>
+      <p>Fashion, Industrial, Architecture, Print — דורשים CMYK, high-DPI, vector export, print marks. <strong>דורש Print Export Pipeline.</strong></p>
+    </div>
+
+    <h3>4. המלצות שיווק — landing page per cluster</h3>
+    <p>207 תרחישים ב-14 קלאסטרים = <strong>14 landing pages מובחנים</strong>. כל אחד:</p>
+    <ul>
+      <li>Hero שמראה כלי טיפוסי לקלאסטר (brand visualizer / VJ set / thesis tool)</li>
+      <li>3 case studies מה-cluster</li>
+      <li>Gallery filter לפי cluster</li>
+      <li>Testimonials מ-creators בתחום</li>
+      <li>SEO-optimized ל-key phrases (brand designer tool, VJ visuals, design student prototype)</li>
+    </ul>
+
+    <div class="callout insight">
+      <h4>שורה תחתונה — איך 207 סיפורים משנים את המוצר</h4>
+      <p>BRIK לא "creative coding platform" ולא "AI app generator". <strong>BRIK הוא "parametric tool workshop for designers"</strong> — משרת 14 דיסציפלינות של designers עם thesis אחת (parametric output) ו-stack אחד. העתיד של המוצר: <em>onboarding מודע-דיסציפלינה</em>, <em>presets לכל קלאסטר</em>, ו-<em>community filterable לפי דיסציפלינה</em>. זה לא "feature" — זה <strong>אסטרטגיית product-market fit</strong>.</p>
+    </div>
   </div>
 </section>
 
@@ -4190,6 +4730,10 @@
 
     <h2>יומן עדכונים</h2>
     <div class="update-log">
+      <div class="update-entry">
+        <div class="update-date">2026-04-21 · 207 תרחישי יוצרים</div>
+        <div>הגדרת <strong>קהל יעד חדשה — "מעצבים ויוצרים מכל הדיסציפלינות"</strong>. נוסף עמוד חדש <strong>"תרחישים"</strong> עם <strong>207 סיפורי משתמש</strong> מסודרים ב-14 קלאסטרים: Graphic/Brand, Web/UI, Motion, Industrial, Fashion/Textile, Type/Editorial, Generative/Code, Social/TikTok/YouTube, VJs/Live, Game/XR, Architecture/Spatial, Education (students+lecturers), Art/Creative Directors, Freelance/Hobbyist. נוסף SVG diagram עם 14 קלאסטרים + synthesis של 4 דפוסי-על (repeat tool / client tool / event tool / exploration tool), 5 יכולות חוצות-קלאסטרים, 3 גאפים חדשים שהתבררו (video quality, pro typography, print-ready), והמלצה שיווקית ל-14 landing pages מובחנים.</div>
+      </div>
       <div class="update-entry">
         <div class="update-date">2026-04-21 · מחקרים + פידבק צוות + backlog</div>
         <div>נוספו שני עמודי <strong>מחקר עומק</strong>: (R1) ארכיטקטורת סוכנים מבוססת מאמרים אקדמיים מובילים (Anthropic, Stanford, Princeton, NeurIPS/ICLR), עם 24 תבניות, טבלת trade-offs, 5 המלצות מדורגות ל-BRIK, ו-29 הפניות. (R2) מפת מתחרים עם 25 שחקנים מדורגים ל-Tier 1/2/3, כולל מימון/traction/mobile/pricing, והבחנות אסטרטגיות (top 5 threats, top 5 sleeping giants, moat map, mobile gap, Chinese market, B2B angles). נוסף עמוד <strong>Backlog</strong> עם ניתוח 17 פריטי פידבק מצוות BRIK, validation של 12 מתוכם מול המסמך, 5 תובנות חדשות (Projects, Collaboration, Aesthetic Memory UI, Canvas bounds, Popup flows), ו-sprint-by-sprint roadmap. נוספו deep explainers להמלצות וגם לשאלות. ה-Google Sheets הרשמי פרטי ודורש גישה ציבורית להשלמה.</div>
