@@ -1,0 +1,58 @@
+ID,Feature,Description,Category,Size,Priority,,Est,Notes,Type,Premium?
+🔴  P1 — WEEK 1-2  |  Post-Launch Critical,,,,,,,,,,
+,BI,GA + BI events + GSC,,,P1,,,,,
+,Subscription,Complite the subscriprion and billing flow ,,,P1,,,,,
+,Tests ,,,,,,,,,
+B-02,Hide Iframe from DevTools,Prevent users from inspecting the iframe source to bypass export restrictions. Basic DRM measure.,Security,S,P1,,,,Infrastructure,
+R-05,Asset Galleries,"Curated libraries of images, vectors, UI elements, 3D models, textures, and shaders available within the tool editor.",Discovery & Gallery,L,Roadmap,,,,New Feature,
+B-03,Keep Tool Active During AI Processing,"Show the current working tool while the agent processes a new prompt, swap only when ready. Prevents blank/broken state.",Agent & AI,M,P1,,,,Improvement,
+B-05,Tool Tagging System (Unified),"Consolidate 3 competing tag taxonomies into single source of truth. Compute on publish, not on render.",Discovery & Gallery,M,P1,,,,Infrastructure,
+B-08,Published-but-Not-Public Tool Type,"New visibility level: tool is published and shareable via link, but not listed in the public gallery. Key for agency/client workflows.",Infrastructure,M,P2,,,,New Feature,Premium
+B-06,System Stabilization & Performance,"Address known performance issues: Gallery.tsx 130+ regex on render, general stability hardening post-launch.",Infrastructure,M,P1,,,,Infrastructure,
+B-24,Tool Versioning,"Version history for tools — allow reverting to previous versions, viewing change history.",Infrastructure,L,P3,,,,New Feature,Freemium
+B-01,Edit Controllers Panel,"Allow users to edit, delete, and reorder controllers on published tools. Top user request.",Controllers & UX,M,P1,,,,Improvement,
+🟠  P2 — WEEKS 2-3  |  Core Feature Expansion,,,,,,,,,,
+B-07,Move Tool Rendering Out of Iframe,Separate the canvas (rendering) from the controllers UI. Currently both live inside a single iframe — need architectural split.,Infrastructure,M,P2,,,,Infrastructure,
+B-09,Store All Exports Server-Side,"Save every export on Brik's backend for analytics, usage patterns, and future features (re-download, sharing).",Infrastructure,M,P2,,,,Infrastructure,
+B-11,Render to GIF,Add GIF as an export format. Common request for social media and messaging use cases.,Export & Rendering,M,P2,,,,New Feature,
+B-12,Render to Loop,"Export seamless looping video/animation. Essential for motion design outputs (backgrounds, social content).",Export & Rendering,S,P2,,,,New Feature,Premium
+B-13,Generated Tool Name & Description,AI-generated names and descriptions for tools — currently deterministic/template-based. Make them creative and contextual.,Agent & AI,S,P2,,,,Improvement,
+B-28,User Feedback Loop (In-App),"Thumbs up/down on generated tools, 'Report broken tool' button. Feedback entity exists in Base44 — needs UI.",Controllers & UX,S,P1,,,,Improvement,
+H-01,Full Mobile Version + Micro Editor,Complete mobile experience including a lightweight tool editor (Hub). Not just responsive — native mobile creation flow.,Growth & Platform,L,Horizon,,,,New Feature,
+B-14,Color Combinations for Art Director,Expand the Art Director agent's color palette system with curated combinations and harmony rules.,Agent & AI,S,P2,,,,Improvement,
+B-20,Tool Settings & Thumbnail Flow,"Let users control gallery thumbnail, tool metadata, and display settings before/after publishing.",Controllers & UX,M,P3,,,,Improvement,
+B-15,Chat History Loader,Allow users to load and continue previous chat sessions with the agent in Tool Editor.,Agent & AI,M,P2,,,,New Feature,
+B-33,Agent Quality Pipeline,"Two components: (1) Automated quality scoring of generated tools — renders without error? Controllers functional? Visual complexity score? (2) CI regression testing — fixed prompt set through agent, compared to quality baselines. Catches regressions before they ship.",Analytics,M,P2,,,,Infrastructure,
+🟡  P3 — WEEKS 4-5  |  Capability Push + Foundation,,,,,,,,,,
+R-02,Code Editor for Tools,Side-by-side code editor parallel to the canvas. Allows advanced users to directly edit tool code and push boundaries.,Controllers & UX,L,Roadmap,,,,New Feature,Premium
+B-40,Error Recovery & Auto-Fix Pipeline,"Phase 1: Error boundaries, fallback states, user-friendly errors, auto-retry. Phase 2: Agent detects rendering errors and auto-repairs code before presenting to user.",Infrastructure,M,P3,,,,Infrastructure,
+B-16,WebGPU Support (WGSL + Canvas),Enable WebGPU rendering in generated tools. Requires system prompt updates to teach the agent WGSL shader authoring.,Agent & AI,L,P3,,,,New Feature,Premium
+B-17,Diffusion Model Controller — Image,"Add input fields that connect to existing image generation models (e.g., NanoBanana). Integration, not model training.",Agent & AI,M,P3,,,,New Feature,Premium
+B-18,Diffusion Model Controller — Vector,"Input fields connecting to vector generation models (e.g., Vectorize). Parametric vector output from text prompts.",Agent & AI,M,P3,,,,New Feature,Premium
+B-04,Save & Manage User Exports,"Persist export history in the user's workspace page. Include auto-save toggle for all exports. Users can revisit, manage, and re-download past exports.",Export & Rendering,M,P1,,,,New Feature,
+B-31,Report Tool / Report User,"Community moderation: flag tools, report users. Links to content moderation pipeline (B-26). Trust signal for users.",Trust & Safety,S,P1,,,,New Feature,
+B-19,Diffusion Model Controller — 3D,Input fields connecting to 3D generation models. Enables 3D object generation within motion tools.,Agent & AI,M,P3,,,,New Feature,Premium
+B-21,Onboarding Flow,"Guided first-run experience for new users — explain Brik's value, prompt patterns, and key features.",Growth & Platform,L,P3,,,,New Feature,
+B-22,Admin Pages — CMS,"Internal admin dashboard for content management, user management, and operational oversight.",Infrastructure,M,P3,,,,New Feature,
+R-18,Export Presets,"Named export presets: 'Instagram Story 1080x1920', 'Twitter Header 1500x500'. Common platform dimensions built-in.",Export & Rendering,S,Roadmap,,,,New Feature,
+B-23,Style Reference Attachments,Allow attaching multiple reference images/videos/code to a prompt. Train the agent to interpret and apply them.,Agent & AI,L,P3,,,,Improvement,Premium
+B-25,Additional Agent Skills (Phased Rollout),Evaluate and implement from ~15 identified skills. Phase 1 (Month 1): top 5 by coverage gap. Phase 2-3 (Q2-Q3): continue rollout based on Phase 1 learnings.,Agent & AI,M,P3,,,,Improvement,
+R-09,Agent Framework Evaluation,"Research initiative: evaluate alternative agent frameworks, benchmark against current Mastra setup.",Research,L,Roadmap,,,,Infrastructure,
+B-38,Prompt-to-Quality Research,"Analyze 200 existing tools: which prompts produced best results? Patterns in length, specificity, domain keywords. Deliverable: prompt cookbook.",Research,S,P3,,,,Research,
+R-16,Collections / Curated Lists,"User-created themed collections: 'Best Logo Generators', 'Party Backgrounds'. Staff picks by Brik team. Pinterest boards for motion tools.",Community,M,Roadmap,,,,New Feature,
+B-44,Email & Notification System,"Transactional: welcome, export complete, password reset. Engagement: 'Your tool was remixed', weekly digest. Re-engagement lever.",Growth & Platform,M,P3,,,,Infrastructure,
+🟣  ROADMAP  |  Q3 2026,,,,,,,,,,
+R-14,Tool Composition & Chaining,"Can tools connect — output of one feeds another? Technical research: data passing between sandboxed iframes, composition UI, agent understanding.",Research,M,Roadmap,,,,Research,
+R-19,Similar Tools Recommendations,"4-6 related tools on each tool page. Tag-overlap based initially, embedding-based later with semantic search.",Discovery & Gallery,M,Roadmap,,,,New Feature,
+R-21,Embed SDK & Widget System,"Proper embed infrastructure: responsive sizing, lazy loading, host-to-tool communication, parameter passing via URL. How tools spread virally.",Infrastructure,L,Roadmap,,,,New Feature,Premium
+R-01,Skins for Tool Viewer,Allow users to customize the Tool Viewer appearance. Phase 1: predefined skins. Phase 2: vibe-coded custom skins.,Controllers & UX,L,Roadmap,,,,New Feature,Premium
+R-03,Art Director & Styling System,"Expand Art Director agent capabilities: richer style language, design tokens, cross-tool style consistency.",Agent & AI,L,Roadmap,,,,Improvement,
+H-03,Timeline Animation Editor,"Full timeline-based animation editor — keyframes, easing curves, multi-track composition. Beyond the controller (R-04).",Controllers & UX,XL,Horizon,,,,New Feature,Premium
+R-04,Timeline Animation Controller,Dedicated timeline UI for keyframe-based animation control within motion tools.,Controllers & UX,L,Roadmap,,,,New Feature,Premium
+R-15,Batch Export,"Export multiple variations at once — different colors, text, sizes. CSV input → ZIP of assets. Production workflow for agencies.",Export & Rendering,L,Roadmap,,,,New Feature,Premium
+R-06,SEO Infrastructure,Deep integration with Base44 for crawlable page content. Currently SPA content is invisible to search engines.,Growth & Platform,L,Roadmap,,,,Infrastructure,
+R-07,Semantic Search,"Replace keyword-based tool search with embedding-based semantic search across tool names, descriptions, and tags.",Discovery & Gallery,L,Roadmap,,,,New Feature,
+⚪  HORIZON  |  H2 2026+,,,,,,,,,,
+H-05,Marketplace for Users,"Enable tool creators to sell/license their tools. Includes pricing, payments, licensing, and creator analytics.",Growth & Platform,XL,Horizon,,,,New Feature,Premium
+H-07,Intent Separation: Creators vs. Users,Separate the creator experience (build tools) from the consumer experience (use/export). Potential Rosetta Stone integration.,Growth & Platform,XL,Horizon,,,,Infrastructure,Free
+H-08,Motion Accessibility Standards,"Generated tools respect prefers-reduced-motion, keyboard-navigable controllers, ARIA labels. Accessible motion by default.",Research,M,Horizon,,,,Research,Free

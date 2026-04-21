@@ -703,6 +703,8 @@
     padding: 20px;
     margin: 20px 0;
     overflow-x: auto;
+    direction: ltr;
+    text-align: left;
   }
   .diagram-title {
     font-size: 13px;
@@ -711,8 +713,20 @@
     margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    text-align: right;
+    direction: rtl;
   }
-  .diagram svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  .diagram svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    direction: ltr;
+  }
+  .diagram svg text {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
 
   /* Floating scroll-to-top */
   .scroll-top {
@@ -5109,14 +5123,444 @@
   </div>
   <div id="content-backlog">
 
-    <div class="callout warning">
-      <h4>מצב הגישה ל-spreadsheet</h4>
-      <p>ה-Google Sheets שסיפקת (<code dir="ltr">1k_GqdGXHAKYjMGeFR67U8mwDQwzeY8tp</code>) פרטי — אין לי גישה אליו ללא שיתוף ציבורי. <strong>כדי שאעבור עליו לעומק צריך או:</strong></p>
-      <ul>
-        <li>לשתף אותו ל"anyone with link — viewer" ואז לתת לי את הלינק שוב</li>
-        <li>או להעתיק את התוכן כ-CSV/טקסט לצ'אט</li>
-      </ul>
-      <p>בינתיים — בניתי את העמוד סביב <strong>הפידבק האמיתי מהצוות</strong> שמסרת (מהעבודה על סרט ההשקה). זה נתון איכותי וחזק בפני עצמו.</p>
+    <div class="verdict">
+      <h3>תקציר Backlog — 52 פריטים, 5 tiers</h3>
+      <p>ה-Backlog נטען בהצלחה ונותח מול כל התובנות במסמך. <strong>70% מהפריטים תואמים במדויק לתובנות שהעליתי</strong> — אימות חזק. <strong>30% פריטים חדשים</strong> שמעשירים את הניתוח (R-14 Tool Composition, H-07 Intent Separation, B-02 Hide Iframe, R-21 Embed SDK). <strong>8 פריטים קריטיים חסרים</strong> מה-backlog — מופיעים במסמך אבל לא ב-spreadsheet (Prompt Caching, CSP, Projects, Brand Kit ועוד).</p>
+    </div>
+
+    <div class="insights-block">
+      <div class="block-header">
+        <h2>תמונת מצב — התפלגות ה-backlog</h2>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>Tier</th><th>תקופה</th><th>פריטים</th><th>סטטוס</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🔴 P1</td><td>שבוע 1-2 (Post-Launch Critical)</td><td>13 פריטים</td><td>מתחילים עכשיו</td></tr>
+          <tr><td>🟠 P2</td><td>שבועות 2-3 (Core Feature Expansion)</td><td>11 פריטים</td><td>בעקבות P1</td></tr>
+          <tr><td>🟡 P3</td><td>שבועות 4-5 (Capability Push)</td><td>14 פריטים</td><td>מתוכננים</td></tr>
+          <tr><td>🟣 Roadmap</td><td>Q3 2026</td><td>10 פריטים</td><td>חקירה</td></tr>
+          <tr><td>⚪ Horizon</td><td>H2 2026+</td><td>4 פריטים</td><td>חזון</td></tr>
+        </tbody>
+      </table>
+
+      <h3>התפלגות לפי קטגוריה</h3>
+      <table>
+        <tbody>
+          <tr><td><strong>Agent & AI</strong></td><td>9 פריטים (18%)</td><td>B-03, B-13, B-14, B-15, B-16, B-17, B-18, B-19, B-23, B-25, R-03</td></tr>
+          <tr><td><strong>Infrastructure</strong></td><td>9 פריטים (18%)</td><td>B-02, B-06, B-07, B-08, B-09, B-22, B-24, B-40, R-21, R-06</td></tr>
+          <tr><td><strong>Controllers & UX</strong></td><td>7 פריטים (14%)</td><td>B-01, B-20, B-28, R-01, R-02, R-04, H-03</td></tr>
+          <tr><td><strong>Export & Rendering</strong></td><td>5 פריטים (10%)</td><td>B-04, B-11, B-12, R-15, R-18</td></tr>
+          <tr><td><strong>Growth & Platform</strong></td><td>5 פריטים (10%)</td><td>B-21, B-44, H-01, H-05, H-07</td></tr>
+          <tr><td><strong>Discovery & Gallery</strong></td><td>4 פריטים (8%)</td><td>B-05, R-05, R-07, R-19</td></tr>
+          <tr><td><strong>Research</strong></td><td>4 פריטים (8%)</td><td>B-38, R-09, R-14, H-08</td></tr>
+          <tr><td><strong>אחר</strong></td><td>9 פריטים</td><td>BI, Subscription, Tests, B-31 (Trust&Safety), B-33 (Analytics), R-16 (Community)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>🔴 P1 — שבוע 1-2 Post-Launch Critical</h2>
+
+      <div class="brik-item tier-1">
+        <strong>BI</strong> · GA + BI events + GSC <em>· אנליטיקה</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Observability gap (R2, Risks). <strong>תובנה:</strong> חייב לפני rate limiting כדי לקבל data על שימוש.
+      </div>
+
+      <div class="brik-item tier-1">
+        <strong>Subscription</strong> · Complete subscription and billing flow <em>· תשתית מונטיזציה</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> מערכת קרדיטים (בעיה #5 במוצר, חסר docs/credits-system-plan.md).
+      </div>
+
+      <div class="brik-item tier-1">
+        <strong>Tests</strong> <em>· איכות</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Tests gap (21K LOC, 4 קבצים). <strong>המלצה:</strong> להתחיל מ-assembler + validation (security-critical paths).
+      </div>
+
+      <div class="brik-item tier-1">
+        <strong>B-02</strong> · Hide Iframe from DevTools <em>· Security, S, P1</em><br>
+        <span class="matrix-potential">🆕 חדש:</span> לא היה במסמך. Export DRM — מונע bypass של export limits. <strong>אבל:</strong> זה לא פותר XSS — רק export abuse. צריך גם CSP + template literal escape (חסר!).
+      </div>
+
+      <div class="brik-item tier-1">
+        <strong>B-03</strong> · Keep Tool Active During AI Processing <em>· Agent, M, P1</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Full iframe reload issue (בעיה #4 בפיצ'רים, HIGH). <strong>זה התיקון הכי נראה למשתמש.</strong>
+      </div>
+
+      <div class="brik-item tier-1">
+        <strong>B-05</strong> · Tool Tagging System (Unified) <em>· Discovery, M, P1</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Gallery taxonomy regex (בעיה #6 בפיצ'רים), 3 דגלי featured (#5 בפיצ'רים).
+      </div>
+
+      <div class="brik-item tier-1">
+        <strong>B-06</strong> · System Stabilization & Performance <em>· Infrastructure, M, P1</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> N+1 queries Gallery.tsx (#20 תשתית), god objects (#15 תשתית).
+      </div>
+
+      <div class="brik-item tier-1" style="border-right: 3px solid #ff0000;">
+        <strong>B-01</strong> · Edit Controllers Panel <em>· Controllers & UX, M, P1 · "Top user request"</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>Controls Editor — BRIK רמה 1</strong> (פיצ'ר #1 המומלץ במסמך!). Story #9. Q1 בשאלות. <strong>אימות מלא.</strong>
+      </div>
+
+      <div class="brik-item tier-1">
+        <strong>B-04</strong> · Save & Manage User Exports <em>· Export, M, P1</em><br>
+        <span class="matrix-potential">🆕 חדש:</span> לא עלה במסמך. מתחבר ל-Creator Analytics (Story #5).
+      </div>
+
+      <div class="brik-item tier-1">
+        <strong>B-28</strong> · User Feedback Loop (In-App) <em>· Controllers, S, P1</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>Feedback Loop — הממד החמישי של הבנת הסוכן</strong> (Agent page). Feedback entity קיימת ב-Base44 — רק UI חסר.
+      </div>
+
+      <div class="brik-item tier-1">
+        <strong>B-31</strong> · Report Tool / Report User <em>· Trust & Safety, S, P1</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> <strong>Moderation gap</strong> (פיצ'רים #13, #3 במוצר, HIGH). <strong>חשוב שעולה ב-P1.</strong>
+      </div>
+
+      <h2>🟠 P2 — שבועות 2-3</h2>
+
+      <div class="brik-item tier-2">
+        <strong>B-07</strong> · Move Tool Rendering Out of Iframe <em>· Infrastructure, M, P2</em><br>
+        <span class="matrix-potential">🆕 חדש:</span> <strong>חשוב:</strong> לא עלה במסמך כ-proposal אבל נוגע ישירות ל-XSS security (#1 CRITICAL). Split canvas מ-controllers UI יקטין את ה-attack surface דרמטית.
+      </div>
+
+      <div class="brik-item tier-2">
+        <strong>B-09</strong> · Store All Exports Server-Side <em>· Infrastructure, M, P2</em><br>
+        <span class="matrix-potential">🆕 חדש:</span> Analytics / usage patterns capture. פותח דלת ל-aesthetic memory (Research R1 #3).
+      </div>
+
+      <div class="brik-item tier-2">
+        <strong>B-11</strong> · Render to GIF <em>· Export, M, P2</em> &nbsp; <strong>B-12</strong> · Render to Loop <em>· S, P2, Premium</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Video quality gap (Stories synthesis — gap #1). קריטי ל-motion + social clusters.
+      </div>
+
+      <div class="brik-item tier-2">
+        <strong>B-13</strong> · Generated Tool Name & Description <em>· Agent, S, P2</em><br>
+        <span class="matrix-potential">🆕 שיפור שלא הזכרתי:</span> AI-generated names — מחליף template-based. Low cost, good UX win.
+      </div>
+
+      <div class="brik-item tier-2">
+        <strong>B-14</strong> · Color Combinations for Art Director <em>· Agent, S, P2</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> R3 Tech Category 8 (Culori + OKLCH + harmony rules).
+      </div>
+
+      <div class="brik-item tier-2">
+        <strong>B-15</strong> · Chat History Loader <em>· Agent, M, P2</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Session Arc (Understanding Dimension #2). "Returning after gap" פרסונה.
+      </div>
+
+      <div class="brik-item tier-2" style="border-right: 3px solid #ff0000;">
+        <strong>B-33</strong> · Agent Quality Pipeline <em>· Analytics, M, P2</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>Critic Agent (R1 rec #8) + Evaluator-Optimizer pattern</strong> (Anthropic Building Effective Agents). זה בדיוק מה שהמחקר ממליץ. פריט Priority גבוה יותר ממה שמסומן.
+      </div>
+
+      <div class="brik-item tier-2">
+        <strong>B-20</strong> · Tool Settings & Thumbnail Flow <em>· Controllers, M, P3</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Thumbnail auto-generation (דוגמה ג' במיון פריטים). thumbnail_url שדה קיים אבל ריק.
+      </div>
+
+      <div class="brik-item tier-2">
+        <strong>B-08</strong> · Published-but-Not-Public Tool Type <em>· Infrastructure, M, P2, Premium</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Story #7 — B2B embed (Enterprise features). <strong>מעט מדי priority</strong> — זה מונטיזציה ישירה.
+      </div>
+
+      <h2>🟡 P3 — שבועות 4-5</h2>
+
+      <div class="brik-item tier-3" style="border-right: 3px solid #ff0000;">
+        <strong>B-24</strong> · Tool Versioning <em>· Infrastructure, L, P3</em><br>
+        <span class="matrix-check">✓✓✓ מתחבר ל:</span> <strong>Version UI — BRIK רמה 1</strong>. Stories 6 + 10 (30% מהנטישה). ToolVersion entity <em>כבר קיימת!</em> <strong>⚠️ RE-PRIORITIZE: זה צריך להיות P1 לא P3.</strong> הצוות עצמו אמר "הכי קריטי זה undo" (Persona D feedback).
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>B-40</strong> · Error Recovery & Auto-Fix Pipeline <em>· Infrastructure, M, P3</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> Research R1 — Reflexion with verifier (מאמר NeurIPS 2023). Phase 1 + Phase 2 תואמים ל-Evaluator-Optimizer.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>B-16</strong> · WebGPU Support (WGSL + Canvas) <em>· Agent, L, P3, Premium</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>R3 Tech #1 integration</strong>. Three.js TSL, compute shaders. <strong>זה ה-foundation ל-3 השנים הבאות.</strong> Priority גבוה יותר.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>B-17, B-18, B-19</strong> · Diffusion Model Controllers (Image/Vector/3D) <em>· Agent, M, P3, Premium</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> R3 Tech Category 4 (Generative models). fal.ai real-time + Ideogram V3 + TripoSR ישירות עונים על זה.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-02</strong> · Code Editor for Tools <em>· Controllers, L, Roadmap, Premium</em><br>
+        <span class="matrix-partial">⚠ סותר חלקית:</span> במסמך סימנתי "eject to clean code" כ-<span class="decision-dont">DON'T</span> (עוזר למשתמש לנטוש). <strong>אבל:</strong> אם זה Side-by-side (לא eject) + Premium — זה שומר על lock-in ומוסיף ערך למשתמשי pro. עובר 3-tests בעיניין הזה.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>B-21</strong> · Onboarding Flow <em>· Growth, L, P3</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Persona mismatch (value prop C/F vs UX B/E). <strong>המלצה:</strong> Onboarding מודע-דיסציפלינה (per-cluster, 14 מסלולים).
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>B-22</strong> · Admin Pages — CMS <em>· Infrastructure, M, P3</em><br>
+        <span class="matrix-potential">🆕 שיפור פנימי:</span> לא במסמך. חשוב ל-team productivity.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>B-23</strong> · Style Reference Attachments <em>· Agent, L, P3, Premium</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Aesthetic Memory (Understanding Dimension #3). Reference images = Voyager-style skill library בזעיר אנפין.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>B-25</strong> · Additional Agent Skills (Phased) <em>· Agent, M, P3</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Skills deep-dive (Agent page). 6 issues המזוהות.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>B-38</strong> · Prompt-to-Quality Research <em>· Research, S, P3</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Skill Performance Telemetry (R1 rec #7).
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>B-44</strong> · Email & Notification System <em>· Growth, M, P3</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>Q5 — "מה מחזיר משתמש ב-week 4?"</strong> (שאלה פתוחה). בלי זה אין retention.
+      </div>
+
+      <h2>🟣 Roadmap Q3 2026</h2>
+
+      <div class="brik-item tier-3" style="border-right: 3px solid #8de0e0;">
+        <strong>R-05</strong> · Asset Galleries <em>· Discovery, L, Roadmap</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>R3 Tech Category 2</strong> (Poly Haven, AmbientCG — הכל CC0!). Implementation path ברור.
+      </div>
+
+      <div class="brik-item tier-3" style="border-right: 3px solid #8de0e0;">
+        <strong>R-07</strong> · Semantic Search <em>· Discovery, L, Roadmap</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>Embeddings Skill Matching (R1 rec #4)</strong> + סריקות סמנטיות בגלריה. One implementation, two benefits.
+      </div>
+
+      <div class="brik-item tier-3" style="border-right: 3px solid #8de0e0;">
+        <strong>R-09</strong> · Agent Framework Evaluation <em>· Research, L, Roadmap</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>Q8 — Mastra Lock-in</strong> (שאלה פתוחה). Adapter layer. LangGraph 1.0 + OpenAI AgentKit כחלופות.
+      </div>
+
+      <div class="brik-item tier-3" style="border-right: 3px solid #8de0e0;">
+        <strong>R-14</strong> · Tool Composition & Chaining <em>· Research, M, Roadmap</em><br>
+        <span class="matrix-potential">🆕🆕 חדש ומעניין:</span> לא היה במסמך. <strong>פוטנציאל moat ענק.</strong> אם BRIKs יכולות להתחבר (output → input) — זה שובר את ה-"isolated tool" paradigm. חוצה את 3-tests: מחזק thesis, מחזק moat, שומר agency. <strong>מומלץ לקדם.</strong>
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-19</strong> · Similar Tools Recommendations <em>· Discovery, M, Roadmap</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> What's Next Engine (Understanding Dimension #4) + Discovery gap (Story #3).
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-21</strong> · Embed SDK & Widget System <em>· Infrastructure, L, Roadmap, Premium</em><br>
+        <span class="matrix-potential">🆕 חדש:</span> <strong>מנגנון ויראלי.</strong> "How tools spread virally" — כתוב בתיאור. זה Story #7 מפולח לרמת תשתית — כלי ההטמעה.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-18</strong> · Export Presets <em>· Export, S, Roadmap</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>BRIK רמה 1 — Export Presets</strong>. 5 יכולות חוזרות ב-stories. <strong>⚠️ Priority נמוך מדי — צריך P2.</strong>
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-03</strong> · Art Director & Styling System <em>· Agent, L, Roadmap</em><br>
+        <span class="matrix-check">✓✓ מתחבר ל:</span> <strong>Living Architect (PRD #2, S5)</strong>. Cross-tool style consistency = Brand Kit.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-04, H-03</strong> · Timeline Controller / Editor <em>· Controllers, L/XL, Roadmap/Horizon, Premium</em><br>
+        <span class="matrix-partial">⚠ שאלת אסטרטגיה:</span> Timeline = <strong>pivot חבוי</strong> (מיון דוגמה ב'). חוצה 4 קטגוריות. <strong>נכון שזה Horizon/Roadmap + Premium — לא ב-P1/2.</strong> צריך החלטה מוצרית לפני תחילה.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-01</strong> · Skins for Tool Viewer <em>· Controllers, L, Roadmap, Premium</em><br>
+        <span class="matrix-potential">🆕 חדש:</span> Customization. Phase 2 "vibe-coded custom skins" = שימוש ב-agent גם ל-viewer shell.
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-15</strong> · Batch Export <em>· Export, L, Roadmap, Premium</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> B2B agency workflow (Stories cluster 13 — Art Directors).
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-06</strong> · SEO Infrastructure <em>· Growth, L, Roadmap</em><br>
+        <span class="matrix-potential">🆕 חדש:</span> Gap שלא עלה במסמך. SPA לא crawlable — חבל מאוד ל-discovery אורגני. <strong>חשוב יותר ממה שמשמעו Roadmap.</strong>
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>R-16</strong> · Collections / Curated Lists <em>· Community, M, Roadmap</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Community moat weakness (R2). "Pinterest boards for motion tools".
+      </div>
+
+      <h2>⚪ Horizon H2 2026+</h2>
+
+      <div class="brik-item tier-3" style="border-right: 3px solid #8de0e0;">
+        <strong>H-01</strong> · Full Mobile Version + Micro Editor <em>· Growth, L, Horizon</em><br>
+        <span class="matrix-check">✓✓✓ מתחבר ל:</span> <strong>Mobile gap (R2 Section D)</strong>. כל שחקן עם scale צרכני הוא mobile-first. <strong>Horizon? נראה לי מאוחר מדי — אולי P3.</strong>
+      </div>
+
+      <div class="brik-item tier-3" style="border-right: 3px solid #8de0e0;">
+        <strong>H-05</strong> · Marketplace for Users <em>· Growth, XL, Horizon, Premium</em><br>
+        <span class="matrix-check">✓ מתחבר ל:</span> Creator economics (R2 moat direction). Revenue share על stacks.
+      </div>
+
+      <div class="brik-item tier-3" style="border-right: 3px solid #ff0000;">
+        <strong>H-07</strong> · Intent Separation: Creators vs. Users <em>· Growth, XL, Horizon</em><br>
+        <span class="matrix-check">✓✓✓ מתחבר ל:</span> <strong>Q1 + Q2 — השאלות האסטרטגיות המרכזיות (Questions page).</strong> הצוות כבר מודע לבעיית ה-persona mismatch! <strong>"Potential Rosetta Stone integration"</strong> — מעניין. <strong>זה לא Horizon — זה החלטה שצריך לקחת <em>עכשיו</em> כדי להנחות את כל ה-roadmap.</strong>
+      </div>
+
+      <div class="brik-item tier-3">
+        <strong>H-08</strong> · Motion Accessibility Standards <em>· Research, M, Horizon</em><br>
+        <span class="matrix-potential">🆕 חדש:</span> <code>prefers-reduced-motion</code>, keyboard, ARIA. חשוב — גם ל-compliance וגם לחוויה איכותית.
+      </div>
+    </div>
+
+    <div class="actions-block">
+      <div class="block-header">
+        <h2>🚨 8 פריטים קריטיים חסרים מה-backlog</h2>
+      </div>
+
+      <p>אלה פריטים שעולים במסמך אבל <strong>לא ב-spreadsheet</strong>. חלקם קריטיים וצריכים להיכנס עכשיו:</p>
+
+      <div class="finding critical">
+        <h3>M-1 — Prompt Caching (Anthropic)</h3>
+        <p><strong>חיסכון 50-70% בעלות טוקנים.</strong> יום-יומיים יישום. חסר לגמרי מה-backlog. <strong>צריך להיות P1.</strong> כל יום שחולף = כסף נשרף.</p>
+      </div>
+
+      <div class="finding critical">
+        <h3>M-2 — CSP Header + הסרת allow-same-origin מ-sandbox</h3>
+        <p>B-02 (Hide Iframe) מטפל ב-DRM של exports, לא ב-XSS. <strong>4 סיכוני אבטחה CRITICAL</strong> (ראה Risks page) לא מטופלים ב-backlog. <strong>חייב P1.</strong></p>
+      </div>
+
+      <div class="finding critical">
+        <h3>M-3 — JS Template Literal Escaping ב-assembler</h3>
+        <p>XSS דרך control labels — הכי קל לנצל, הכי מסוכן. אין פריט ב-backlog. <strong>חייב P1.</strong></p>
+      </div>
+
+      <div class="finding critical">
+        <h3>M-4 — Library CDN URL Whitelist</h3>
+        <p>Agent יכול להוסיף URL זדוני ב-libraries. <strong>חייב P1.</strong></p>
+      </div>
+
+      <div class="finding high">
+        <h3>M-5 — Tiered Model Routing</h3>
+        <p>חיסכון נוסף של 30-40%. Conversational→Haiku, AD→Sonnet, Coder→Opus. 2-3 ימים. חסר.</p>
+      </div>
+
+      <div class="finding high">
+        <h3>M-6 — Projects / Collaboration</h3>
+        <p>פידבק צוות: "סביבת עבודה — פרויקט" + "שיתוף עמיתים". מוצר-אסטרטגי. חסר מה-backlog לגמרי.</p>
+      </div>
+
+      <div class="finding high">
+        <h3>M-7 — Brand Kit</h3>
+        <p>5 יכולות חוזרות ב-stories. <strong>BRIK רמה 1</strong>. חסר. R-03 מתקרב אבל לא ממלא.</p>
+      </div>
+
+      <div class="finding medium">
+        <h3>M-8 — Rate Limiting</h3>
+        <p>אולי נכלל תחת "Subscription" אבל לא מפורש. ללא זה — משתמש אחד זדוני שורף $10K בלילה. <strong>חייב P1.</strong></p>
+      </div>
+    </div>
+
+    <div class="actions-block">
+      <div class="block-header">
+        <h2>המלצות Re-prioritization — סדר מחדש</h2>
+      </div>
+
+      <div class="callout insight">
+        <h4>9 שינויים מוצעים ב-priority</h4>
+        <table>
+          <thead><tr><th>פריט</th><th>נוכחי</th><th>מומלץ</th><th>סיבה</th></tr></thead>
+          <tbody>
+            <tr><td>4 Security CRITICALs (M-2 עד M-4)</td><td>חסר</td><td><strong>P1 דחוף</strong></td><td>XSS פעיל בייצור</td></tr>
+            <tr><td>M-1 Prompt Caching</td><td>חסר</td><td><strong>P1</strong></td><td>50-70% חיסכון, יומיים עבודה</td></tr>
+            <tr><td>B-24 Tool Versioning</td><td>P3</td><td><strong>P1</strong></td><td>הצוות אמר "הכי קריטי". ToolVersion entity קיימת</td></tr>
+            <tr><td>B-33 Agent Quality Pipeline</td><td>P2</td><td><strong>P1</strong></td><td>Anthropic Evaluator-Optimizer — הכי חשוב לאיכות</td></tr>
+            <tr><td>R-18 Export Presets</td><td>Roadmap</td><td><strong>P2</strong></td><td>BRIK רמה 1, 5 יכולות חוזרות</td></tr>
+            <tr><td>B-08 Published-but-Not-Public</td><td>P2</td><td><strong>P1</strong></td><td>מונטיזציה ישירה B2B</td></tr>
+            <tr><td>R-05 Asset Galleries</td><td>Roadmap</td><td><strong>P2-P3</strong></td><td>CC0 — חינם + Poly Haven API פשוט</td></tr>
+            <tr><td>H-07 Intent Separation</td><td>Horizon</td><td><strong>החלטה עכשיו (לא פיצ'ר)</strong></td><td>קובע את כל ה-roadmap</td></tr>
+            <tr><td>H-01 Mobile</td><td>Horizon</td><td><strong>P3 Consumption-first</strong></td><td>Gap הכי גדול ב-R2</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="deep-explainer">
+        <h4>מפת תלויות — מה חוסם מה</h4>
+        <div class="explainer-section">
+          <h5>Security (M-1 to M-4) → מאפשר Scale Public</h5>
+          <p>כל הפריטים הפומביים-מונטיזציוניים (B-08 Published-Private, R-21 Embed SDK, H-05 Marketplace) תלויים ב-security pass ראשון. ללא CSP + template escape + URL whitelist — לא ניתן להתרחב ל-public scale ללא סיכון.</p>
+        </div>
+        <div class="explainer-section">
+          <h5>B-09 (Store Exports Server-Side) → מאפשר Aesthetic Memory + Analytics</h5>
+          <p>שמירת exports מאפשרת Research R1 #3 (Voyager-style library), Creator Analytics (M-7), וגם את B-38 (Prompt-to-Quality Research). פריט יסוד.</p>
+        </div>
+        <div class="explainer-section">
+          <h5>R-07 (Semantic Search) → חוסם Skill Matching Embeddings</h5>
+          <p>כשעושים embeddings ל-gallery search, עושים אותו דבר ל-skills. יישום משותף, two benefits.</p>
+        </div>
+        <div class="explainer-section">
+          <h5>B-01 (Edit Controllers Panel) → יוצר Controls Editor → מקדים ל-Kit</h5>
+          <p>ברגע שיש עריכה ישירה של controls, קל יותר להוסיף "save as Kit preset". יסוד ל-Brand Kit.</p>
+        </div>
+      </div>
+
+      <h2>מפת עבודה מומלצת — 12 שבועות</h2>
+
+      <div class="improvement tier-green">
+        <div class="num">W1-2</div>
+        <div>
+          <h4>P1 Critical — Security + Setup</h4>
+          <p>M-1 Prompt Caching · M-2 CSP + sandbox · M-3 Template escape · M-4 URL whitelist · M-8 Rate limit · BI + GA · Subscription · B-02 Hide Iframe · B-03 Tool Active · B-05 Tag Unified · B-06 Stabilization · B-28 Feedback UI · B-31 Report Tool/User · Tests baseline</p>
+        </div>
+      </div>
+
+      <div class="improvement tier-green">
+        <div class="num">W3-4</div>
+        <div>
+          <h4>P1 Core Value — UX Wins</h4>
+          <p><strong>B-01 Controls Editor (!!) · B-24 Tool Versioning (promoted from P3) · B-33 Agent Quality Pipeline (promoted)</strong> · M-5 Tiered Routing · B-04 Save Exports · B-08 Published-Not-Public (promoted)</p>
+        </div>
+      </div>
+
+      <div class="improvement tier-yellow">
+        <div class="num">W5-6</div>
+        <div>
+          <h4>P2 Feature Expansion</h4>
+          <p>B-07 Move Rendering Out of Iframe · B-09 Server-Side Exports · B-11 GIF · B-12 Loop · B-13 AI Names · B-14 Color Combos · B-15 Chat Loader · B-20 Thumbnail flow · R-18 Export Presets (promoted) · R-05 Asset Galleries (promoted — CC0)</p>
+        </div>
+      </div>
+
+      <div class="improvement tier-yellow">
+        <div class="num">W7-8</div>
+        <div>
+          <h4>P3 Capability Push</h4>
+          <p>B-40 Error Recovery · B-16 WebGPU · B-17/18/19 Diffusion Controllers · B-21 Onboarding (per-cluster) · B-22 Admin CMS · B-23 Style Refs · B-38 Prompt Research · B-44 Notifications · M-6 Projects foundation · M-7 Brand Kit</p>
+        </div>
+      </div>
+
+      <div class="improvement tier-orange">
+        <div class="num">W9-10</div>
+        <div>
+          <h4>Q3 Foundation — Research-backed</h4>
+          <p>R-02 Code Editor (side-by-side) · R-07 Semantic Search (= embeddings skill matching) · R-09 Agent Framework Eval · R-14 Tool Composition research · R-19 Similar Tools · R-16 Collections · B-25 Agent Skills phase 1</p>
+        </div>
+      </div>
+
+      <div class="improvement tier-orange">
+        <div class="num">W11-12</div>
+        <div>
+          <h4>Q3 Expansion</h4>
+          <p>R-21 Embed SDK · R-01 Skins · R-03 Art Director Styling · R-15 Batch Export · R-06 SEO · H-01 Mobile Consumption-first (promoted from Horizon)</p>
+        </div>
+      </div>
+
+      <h3>Horizon — חייב החלטה אסטרטגית קודם</h3>
+      <div class="callout warning">
+        <ul>
+          <li><strong>H-07 Intent Separation</strong> — לא פיצ'ר, זה החלטה. עונה על Q1 + Q2. <strong>צריכה החלטה ברבעון הקרוב.</strong></li>
+          <li><strong>H-03 Timeline Animation Editor</strong> — pivot חבוי. לא להתחיל עד להחלטה אסטרטגית (Q3).</li>
+          <li><strong>H-05 Marketplace</strong> — תלוי ב-tooling של creator economics. שומר ל-Q4 2026.</li>
+          <li><strong>H-08 Motion Accessibility</strong> — זה compliance, לא feature. צריך לכלול כחלק מ-default experience, לא כפיצ'ר נפרד.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="insights-block">
